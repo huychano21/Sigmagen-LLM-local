@@ -1,0 +1,13 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100155" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+ipconfig\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+cmd\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)/all</field>
+    <description>System Network Configuration Discovery via Ipconfig [Alert: AI-20261012_133318.310-7df2e0c4630b]</description>
+    <mitre>
+      <id>T1087</id>
+      <id>T1059.003</id>
+    </mitre>
+  </rule>
+</group>

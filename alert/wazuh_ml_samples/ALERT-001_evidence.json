@@ -1,0 +1,169 @@
+[
+  {
+    "event_id": "ALERT-001-event-001",
+    "wazuh_id": "1791813198.2247113",
+    "timestamp": "2026-10-12T13:53:18.690+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "location": "EventChannel",
+    "role": "primary",
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "13",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "providerName": "Microsoft-Windows-Sysmon",
+          "eventRecordID": "10472",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn"
+        },
+        "eventdata": {
+          "ruleName": "T1089,Tamper-Defender",
+          "eventType": "SetValue",
+          "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe",
+          "targetObject": "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring",
+          "details": "DWORD (0x00000001)",
+          "user": "NT AUTHORITY\\SYSTEM"
+        }
+      }
+    }
+  },
+  {
+    "event_id": "ALERT-001-event-002",
+    "wazuh_id": "1791813198.2247113",
+    "timestamp": "2026-10-12T13:53:18.731+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "location": "EventChannel",
+    "role": "primary",
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "1",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "providerName": "Microsoft-Windows-Sysmon",
+          "eventRecordID": "10473",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn"
+        },
+        "eventdata": {
+          "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MpCmdRun.exe",
+          "user": "NT AUTHORITY\\NETWORK SERVICE",
+          "parentImage": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.26080.4-0\\MsMpEng.exe",
+          "commandLine": "\\\"C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MpCmdRun.exe\\\" GetDeviceTicket -AccessKey 50871C33-C6BA-885F-2155-65AE2A09DAEF",
+          "parentCommandLine": "\\\"C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe\\\"",
+          "originalFileName": "MpCmdRun.exe",
+          "integrityLevel": "System"
+        }
+      }
+    }
+  },
+  {
+    "event_id": "ALERT-001-event-003",
+    "wazuh_id": "1791813198.2247113",
+    "timestamp": "2026-10-12T13:53:18.731+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "location": "EventChannel",
+    "role": "primary",
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "13",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "providerName": "Microsoft-Windows-Sysmon",
+          "eventRecordID": "10474",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn"
+        },
+        "eventdata": {
+          "ruleName": "T1031,T1050",
+          "eventType": "SetValue",
+          "image": "C:\\Windows\\system32\\services.exe",
+          "targetObject": "HKLM\\System\\CurrentControlSet\\Services\\WdNisDrv\\Start",
+          "details": "DWORD (0x00000003)",
+          "user": "NT AUTHORITY\\SYSTEM"
+        }
+      }
+    }
+  },
+  {
+    "event_id": "ALERT-001-event-004",
+    "wazuh_id": "1791813198.2247113",
+    "timestamp": "2026-10-12T13:53:18.959+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "location": "EventChannel",
+    "role": "primary",
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "7036",
+          "channel": "System",
+          "providerName": "Service Control Manager",
+          "eventRecordID": "4405",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn"
+        },
+        "eventdata": {
+          "param1": "Microsoft Defender Antivirus Network Inspection Service",
+          "param2": "stopped"
+        }
+      }
+    }
+  },
+  {
+    "event_id": "ALERT-001-event-005",
+    "wazuh_id": "1791813219.2247113",
+    "timestamp": "2026-10-12T13:53:39.175+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "location": "EventChannel",
+    "role": "primary",
+    "data": {
+      "win": {
+        "system": {
+          "eventID": "13",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "providerName": "Microsoft-Windows-Sysmon",
+          "eventRecordID": "10475",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn"
+        },
+        "eventdata": {
+          "ruleName": "T1089,Tamper-Defender",
+          "eventType": "SetValue",
+          "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe",
+          "targetObject": "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring",
+          "details": "DWORD (0x00000001)",
+          "user": "NT AUTHORITY\\SYSTEM"
+        }
+      }
+    }
+  }
+]

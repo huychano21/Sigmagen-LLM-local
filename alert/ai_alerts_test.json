@@ -1,0 +1,1129 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-04T10:11:26.804897+00:00",
+  "source_scores": "reports\\test_scores.csv",
+  "source_events": "data\\split_dataset\\test.csv",
+  "alert_count": 14,
+  "alerts": [
+    {
+      "alert_id": "AI-20241213T115335Z-2bbc3bff36f8",
+      "evidence_id": "EVID-2bbc3bff36f8",
+      "timestamp": "2024-12-13 11:53:35.422000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9994000003789552,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734090815-76749",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4105510413646698
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.1281467229127884
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12185075134038925
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07501238584518433
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05147276446223259
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734090815-76749",
+        "timestamp": "2024-12-13T11:53:35.422000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_ppxmlyog.xwz.ps1",
+        "process_guid": "{15959494-203e-675c-4505-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T140447Z-23ae063c8345",
+      "evidence_id": "EVID-23ae063c8345",
+      "timestamp": "2024-12-13 14:04:47.931000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.999397131963633,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734098687-83885",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.41189679503440857
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.12707021832466125
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12213482707738876
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07481488585472107
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05119366943836212
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734098687-83885",
+        "timestamp": "2024-12-13T14:04:47.931000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_thef5c3q.cck.ps1",
+        "process_guid": "{15959494-3efe-675c-3018-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T142313Z-eaf4b0793f8d",
+      "evidence_id": "EVID-eaf4b0793f8d",
+      "timestamp": "2024-12-13 14:23:13.776000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.99939878762234,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734099793-77375",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.41352203488349915
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.1256287693977356
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12296665459871292
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.0747053250670433
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05074024200439453
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734099793-77375",
+        "timestamp": "2024-12-13T14:23:13.776000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_5lhihykl.rss.ps1",
+        "process_guid": "{15959494-434e-675c-111d-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T142318Z-cb43fa91a8a7",
+      "evidence_id": "EVID-cb43fa91a8a7",
+      "timestamp": "2024-12-13 14:23:18.727000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.999401658133138,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734099798-80661",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4101594388484955
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.1284874528646469
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12180837988853455
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.0750477984547615
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05149568244814873
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734099798-80661",
+        "timestamp": "2024-12-13T14:23:18.727000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_daxhup35.st3.ps1",
+        "process_guid": "{15959494-4355-675c-241d-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T142324Z-c751d9b59787",
+      "evidence_id": "EVID-c751d9b59787",
+      "timestamp": "2024-12-13 14:23:24.566000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9994020772282964,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734099804-77376",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.407814621925354
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.130325585603714
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12109149247407913
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07525147497653961
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.0520002543926239
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734099804-77376",
+        "timestamp": "2024-12-13T14:23:24.566000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_13apuwhh.khn.ps1",
+        "process_guid": "{15959494-435b-675c-431d-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T151156Z-d2e5107dd739",
+      "evidence_id": "EVID-d2e5107dd739",
+      "timestamp": "2024-12-13 15:11:56.713000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9993981299339794,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734102716-84133",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4127962291240692
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.12634174525737762
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12255720049142838
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07477643340826035
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05101427063345909
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734102716-84133",
+        "timestamp": "2024-12-13T15:11:56.713000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_43vvdkgc.js3.ps1",
+        "process_guid": "{15959494-4ebb-675c-4428-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T151506Z-cfaf955b9ead",
+      "evidence_id": "EVID-cfaf955b9ead",
+      "timestamp": "2024-12-13 15:15:06.953000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.999400429369416,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734102906-84140",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4100896716117859
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.1285485327243805
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12169324606657028
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07505006343126297
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05155663564801216
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734102906-84140",
+        "timestamp": "2024-12-13T15:15:06.953000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_lupfc0dl.ywo.ps1",
+        "process_guid": "{15959494-4f79-675c-5229-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T151515Z-32192ad5df3e",
+      "evidence_id": "EVID-32192ad5df3e",
+      "timestamp": "2024-12-13 15:15:15.979000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.99940044071991,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734102915-84157",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.40778079628944397
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.13032707571983337
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12098640203475952
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07524918019771576
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05205361545085907
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734102915-84157",
+        "timestamp": "2024-12-13T15:15:15.979000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_fldysb2f.awm.ps1",
+        "process_guid": "{15959494-4f80-675c-6c29-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T151520Z-a043ebe46825",
+      "evidence_id": "EVID-a043ebe46825",
+      "timestamp": "2024-12-13 15:15:20.631000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9994000337319447,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734102920-80846",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4063156247138977
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.13131412863731384
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12066444009542465
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07536277174949646
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05230684578418732
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734102920-80846",
+        "timestamp": "2024-12-13T15:15:20.631000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_11xpcbvm.j0w.ps1",
+        "process_guid": "{15959494-4f86-675c-7c29-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T152655Z-b74f14cd8948",
+      "evidence_id": "EVID-b74f14cd8948",
+      "timestamp": "2024-12-13 15:26:55.818000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9993970008799806,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734103615-84188",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4092606008052826
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.1290690302848816
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12128466367721558
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07507595419883728
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05175613984465599
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734103615-84188",
+        "timestamp": "2024-12-13T15:26:55.818000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_ldkwyxwk.ovz.ps1",
+        "process_guid": "{15959494-523e-675c-802c-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241213T152918Z-2913be603258",
+      "evidence_id": "EVID-2913be603258",
+      "timestamp": "2024-12-13 15:29:18.358000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.999397868581582,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734103758-80886",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.41296660900115967
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.126180037856102
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12261971831321716
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07471413165330887
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.050927888602018356
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92205,
+        "rule_level": 9,
+        "rule_description": "Powershell process created an executable file in Windows root folder"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734103758-80886",
+        "timestamp": "2024-12-13T15:29:18.358000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Windows\\\\Temp\\\\debug.exe",
+        "process_guid": "{15959494-52c4-675c-032d-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92205",
+        "wazuh_rule_level": "9",
+        "wazuh_rule_description": "Powershell process created an executable file in Windows root folder",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241214T081601Z-fa9d2ab974b1",
+      "evidence_id": "EVID-fa9d2ab974b1",
+      "timestamp": "2024-12-14 08:16:01.261000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9993979116552508,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734164162-85093",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.41120481491088867
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.12761013209819794
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12192362546920776
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07490622997283936
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.051330000162124634
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734164162-85093",
+        "timestamp": "2024-12-14T08:16:01.261000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_okfsyowx.2ms.ps1",
+        "process_guid": "{15959494-3ec0-675d-8c3f-000000000c00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241215T070245Z-d61d3f85f5cb",
+      "evidence_id": "EVID-d61d3f85f5cb",
+      "timestamp": "2024-12-15 07:02:45.333000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9993985063047148,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734246165-89483",
+      "observed_token": "sysmon|11|file_create|powershell|temp|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.41281476616859436
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.12627291679382324
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.12260493636131287
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07476738840341568
+        },
+        {
+          "token_id": 31,
+          "token": "sysmon|1|process_create|net1|system32|other",
+          "probability": 0.05095032602548599
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 92213,
+        "rule_level": 15,
+        "rule_description": "Executable file dropped in folder commonly used by malware"
+      },
+      "mitre_context": {
+        "tactic": "[\"Command and Control\"]",
+        "technique": "[\"T1105\"]"
+      },
+      "target_event": {
+        "event_uid": "1734246165-89483",
+        "timestamp": "2024-12-15T07:02:45.333000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "sysmon",
+        "event_id": "11",
+        "action": "file_create",
+        "process_role": "powershell",
+        "path_class": "temp",
+        "event_token": "sysmon|11|file_create|powershell|temp|other",
+        "image": "C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": "C:\\\\Users\\\\mari\\\\AppData\\\\Local\\\\Temp\\\\__PSScriptPolicyTest_uxtgbiy4.axj.ps1",
+        "process_guid": "{15959494-7f0f-675e-4804-000000000d00}",
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": "DESKTOP-QGB4EQH\\\\mari",
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "92213",
+        "wazuh_rule_level": "15",
+        "wazuh_rule_description": "Executable file dropped in folder commonly used by malware",
+        "mitre_tactic": "[\"Command and Control\"]",
+        "mitre_technique": "[\"T1105\"]",
+        "weak_label": null
+      }
+    },
+    {
+      "alert_id": "AI-20241222T110737Z-f770c91f6772",
+      "evidence_id": "EVID-f770c91f6772",
+      "timestamp": "2024-12-22 11:07:37.714000+00:00",
+      "host": "window-agent3",
+      "detection_type": "sequence_anomaly",
+      "anomaly_score": 0.9995304856274744,
+      "threshold": 0.9993968650477474,
+      "threshold_exceeded": true,
+      "severity": "UNCLASSIFIED",
+      "status": "PENDING_REVIEW",
+      "observed_event_uid": "1734865657-90392",
+      "observed_token": "service_control|7031|event_7031|unknown|other|other",
+      "top_predictions": [
+        {
+          "token_id": 53,
+          "token": "windows_network|1014|event_1014|unknown|other|other",
+          "probability": 0.4300130307674408
+        },
+        {
+          "token_id": 8,
+          "token": "service_control|7040|service_config_change|unknown|other|other",
+          "probability": 0.1266232579946518
+        },
+        {
+          "token_id": 14,
+          "token": "sysmon|11|file_create|mscorsvw|temp|other",
+          "probability": 0.10859183222055435
+        },
+        {
+          "token_id": 1,
+          "token": "service_control|7009|event_7009|unknown|other|other",
+          "probability": 0.07167240977287292
+        },
+        {
+          "token_id": 0,
+          "token": "service_control|7000|event_7000|unknown|other|other",
+          "probability": 0.04972362890839577
+        }
+      ],
+      "wazuh_context": {
+        "rule_id": 61107,
+        "rule_level": 5,
+        "rule_description": "Windows Audio terminated unexpectedly"
+      },
+      "mitre_context": {
+        "tactic": null,
+        "technique": null
+      },
+      "target_event": {
+        "event_uid": "1734865657-90392",
+        "timestamp": "2024-12-22T11:07:37.714000+00:00",
+        "agent_name": "window-agent3",
+        "event_family": "service_control",
+        "event_id": "7031",
+        "action": "event_7031",
+        "process_role": "unknown",
+        "path_class": "other",
+        "event_token": "service_control|7031|event_7031|unknown|other|other",
+        "image": null,
+        "parent_image": null,
+        "command_line": null,
+        "target_filename": null,
+        "process_guid": null,
+        "parent_process_guid": null,
+        "source_ip": null,
+        "source_port": null,
+        "destination_ip": null,
+        "destination_port": null,
+        "user": null,
+        "target_user": null,
+        "target_domain": null,
+        "wazuh_rule_id": "61107",
+        "wazuh_rule_level": "5",
+        "wazuh_rule_description": "Windows Audio terminated unexpectedly",
+        "mitre_tactic": null,
+        "mitre_technique": null,
+        "weak_label": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+title: Test Security 4688 CommandLine
+id: 4d8e5b62-9e9d-4a6f-9d13-8a8c6b100102
+status: experimental
+description: Test the CommandLine field in Security process creation events.
+author: SigmaGen
+date: '2026-10-14'
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        Channel: Security
+        EventID: 4688
+        CommandLine|contains: cscript.exe
+    condition: selection
+falsepositives:
+    - Test rule
+level: informational
+ruletype: Hayabusa

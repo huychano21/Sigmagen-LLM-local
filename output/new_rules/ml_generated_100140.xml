@@ -1,0 +1,8 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100140" level="12">
+    <if_group>sysmon_event_13</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+LogonUI\.exe$</field>
+    <field name="win.eventdata.targetObject" type="pcre2">(?i)LastLoggedOnUser</field>
+    <description>Suspicious Activity Detected (AI-20261012_134838.822-7db7c3128395) [Alert: AI-20261012_134838.822-7db7c3128395]</description>
+  </rule>
+</group>

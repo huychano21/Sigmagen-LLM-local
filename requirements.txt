@@ -1,0 +1,28 @@
+# SigmaGen Local — Hệ thống Tự động Sinh & Kiểm chứng Sigma Rules / Wazuh XML
+# Cài đặt: pip install -r requirements.txt && pip install -e .
+
+# 1. Core CLI, YAML & HTTP Client (Tương thích Ollama REST API)
+click>=8.1.7
+python-dotenv>=1.0.1
+PyYAML>=6.0.2
+requests>=2.32.3
+rich>=13.7.1
+
+# 2. Web SOC Dashboard & FastAPI Server (`sigmagen serve`)
+fastapi>=0.111.1
+uvicorn[standard]>=0.30.3
+pydantic>=2.8.2
+pydantic-settings>=2.4.0
+python-multipart>=0.0.9
+
+# 3. Vector Store & RAG Embeddings (MITRE ATT&CK + SigmaHQ Knowledge Base)
+chromadb>=0.5.3
+sentence-transformers>=3.1.1
+
+# 4. Optional Cloud LLM Providers (Khi chuyển đổi từ Ollama sang OpenAI/Anthropic)
+anthropic>=0.34.0
+openai>=1.40.0
+
+# 5. Testing & Evaluation
+pytest>=8.3.2
+httpx>=0.27.0

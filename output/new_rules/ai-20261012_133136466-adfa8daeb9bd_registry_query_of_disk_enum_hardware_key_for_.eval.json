@@ -1,0 +1,185 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_133136.466-adfa8daeb9bd",
+    "rule_title": "Registry Query of Disk Enum Hardware Key for VM Discovery",
+    "rule_id": "399c13e9-65b4-4449-83ac-504715ac6ac2",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:acf88a61ea1eb267b9696a29",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\cmd.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe')",
+          "[selection] matched 'CommandLine' (actual='\"cmd.exe\" /c systeminfo & reg query HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Disk\\\\Enum')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100143,
+  "wazuh_xml_file": "ml_generated_100143.xml",
+  "sigma_yaml_file": "ai-20261012_133136466-adfa8daeb9bd_registry_query_of_disk_enum_hardware_key_for_.yml",
+  "repair_attempts": 3,
+  "dashboard_item": {
+    "wazuh_rule_id": 100143,
+    "alert_id": "AI-20261012_133136.466-adfa8daeb9bd",
+    "evidence_id": "EVID-9d51cb9d30e6",
+    "source_format": "logdeep_v2",
+    "title": "Registry Query of Disk Enum Hardware Key for VM Discovery",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|1|process_create|powershell.exe>cmd.exe|system32|short_many', score=0.9298): Image=cmd.exe, ParentImage=powershell.exe, CommandLine=\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum, MITRE=T1059.003.",
+    "severity": "high",
+    "mitre_techniques": [
+      "T1059.003"
+    ],
+    "event_family": "sysmon",
+    "event_code": 1,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "process_creation"
+    },
+    "expected_wazuh_group": "sysmon_event1",
+    "sigma_fields": {
+      "Image": "C:\\Windows\\System32\\cmd.exe",
+      "Description": "Windows Command Processor",
+      "Product": "Microsoft® Windows® Operating System",
+      "Company": "Microsoft Corporation",
+      "OriginalFileName": "Cmd.Exe",
+      "CommandLine": "\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum",
+      "CurrentDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+      "User": "HVAN\\Administrator",
+      "IntegrityLevel": "High",
+      "Hashes": "MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "ParentCommandLine": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+      "ParentUser": "HVAN\\Administrator",
+      "UtcTime": "2026-10-12 13:31:36.466",
+      "ProcessGuid": "{7e4a5fee-e138-6acc-3402-000000001100}",
+      "ProcessId": "4600",
+      "FileVersion": "10.0.17763.1697 (WinBuild.160101.0800)",
+      "LogonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+      "LogonId": "0x9f3e4",
+      "TerminalSessionId": "1",
+      "ParentProcessGuid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+      "ParentProcessId": "4788",
+      "EventID": "1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [
+      {
+        "uid": "sysmon:aedc4c9937d4f390dfe10a6c",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\servicing\\TrustedInstaller.exe, CommandLine=C:\\Windows\\servicing\\TrustedInstaller.exe, CurrentDirectory=C:\\Windows\\system32\\, IntegrityLevel=System"
+      },
+      {
+        "uid": "sysmon:28d8913a4420f6b45a52a869",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe, CommandLine=C:\\Windows\\winsxs\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe -Embedding, CurrentDirectory=C:\\Windows\\system32\\, IntegrityLevel=System"
+      },
+      {
+        "uid": "sysmon:5d12b9d8762dd8590d706f70",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:29469a0bd4035b4f4bdcc47c",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:284133d259a5ef3927dfdd47",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, CommandLine=\"powershell.exe\" & {Start-Process \\\"\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1059.003_script.bat\\\"\"}, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:1c2873b7a6a70a4bc5a41047",
+        "ecode": 11,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, TargetFilename=C:\\Users\\Administrator\\AppData\\Local\\Temp\\__PSScriptPolicyTest_0pocb0lt.lvn.ps1, User=HVAN\\Administrator, EventID=11"
+      },
+      {
+        "uid": "sysmon:7985ea8511353bbe56280dd9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:684021410360a1564a2ae2c9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      }
+    ],
+    "raw_yaml": "title: Registry Query of Disk Enum Hardware Key for VM Discovery\nid: 399c13e9-65b4-4449-83ac-504715ac6ac2\nstatus: experimental\ndescription: 'Suspicious powershell.exe Spawning cmd.exe (Windows command prompt started\n  by an abnormal process) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly\n  (token=''sysmon|1|process_create|powershell.exe>cmd.exe|system32|short_many'', score=0.9298):\n  Image=cmd.exe, ParentImage=powe'\nreferences:\n- https://attack.mitre.org/techniques/T1059/003/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1059.003\nlogsource:\n  product: windows\n  category: process_creation\ndetection:\n  selection:\n    Image|endswith: \\cmd.exe\n    ParentImage|endswith: \\powershell.exe\n    CommandLine|contains|all:\n    - query\n    - Services\\Disk\\Enum\n  condition: selection\nfalsepositives:\n- Legitimate administrative activity\nlevel: high\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100143\" level=\"12\">\n    <if_group>sysmon_event1</if_group>\n    <field name=\"win.eventdata.image\" type=\"pcre2\">(?i)\\\\+cmd\\.exe$</field>\n    <field name=\"win.eventdata.parentImage\" type=\"pcre2\">(?i)\\\\+powershell\\.exe$</field>\n    <field name=\"win.eventdata.commandLine\" type=\"pcre2\">(?i)query</field>\n    <field name=\"win.eventdata.commandLine\" type=\"pcre2\">(?i)Services\\\\+Disk\\\\+Enum</field>\n    <description>Registry Query of Disk Enum Hardware Key for VM Discovery [Alert: AI-20261012_133136.466-adfa8daeb9bd]</description>\n    <mitre>\n      <id>T1059.003</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_133136466-adfa8daeb9bd_registry_query_of_disk_enum_hardware_key_for_.yml",
+    "wazuh_file": "ml_generated_100143.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q1_warnings": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": true,
+      "q3_behavior_score": 100.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.0,
+      "confidence_score": 100.0,
+      "quality_gate": "PASS - RECOMMEND_ADD",
+      "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0)."
+    }
+  }
+}

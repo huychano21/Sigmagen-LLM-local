@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "alert": {
+    "alert_id": "ML-000002",
+    "timestamp": "2026-10-07T11:00:00Z",
+    "agent_id": "002",
+    "agent_name": "WIN-002",
+    "anomaly_score": 0.61,
+    "description": "Unusual maintenance task runtime"
+  },
+  "evidence": [
+    {
+      "event_id": "event-2001",
+      "timestamp": "2026-10-07T10:59:58Z",
+      "sysmon_event_id": 1,
+      "image": "C:\\Windows\\System32\\taskhostw.exe"
+    }
+  ]
+}

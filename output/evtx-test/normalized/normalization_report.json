@@ -1,0 +1,102 @@
+{
+  "input_file": "D:\\CodeProject\\GSAT\\sigmagen\\output\\evtx-test\\timeline.jsonl",
+  "output_file": "D:\\CodeProject\\GSAT\\sigmagen\\output\\evtx-test\\normalized\\alerts.normalized.jsonl",
+  "records_normalized": 32385,
+  "invalid_records": 0,
+  "missing_fields": {
+    "record_id": 3
+  },
+  "severity_counts": {
+    "high": 5610,
+    "medium": 2112,
+    "informational": 18420,
+    "low": 6202,
+    "critical": 41
+  },
+  "unique_titles": 607,
+  "top_10_titles": [
+    [
+      "Proc Exec",
+      11173
+    ],
+    [
+      "Logon Failure (Wrong Password)",
+      3580
+    ],
+    [
+      "Metasploit SMB Authentication",
+      3562
+    ],
+    [
+      "NetShare File Access",
+      2558
+    ],
+    [
+      "Possible LOLBIN",
+      1418
+    ],
+    [
+      "PwSh Scriptblock",
+      789
+    ],
+    [
+      "PwSh Pipeline Exec",
+      680
+    ],
+    [
+      "NetShare Access",
+      403
+    ],
+    [
+      "Svc Installed",
+      331
+    ],
+    [
+      "Non Interactive PowerShell Process Spawned",
+      326
+    ]
+  ],
+  "top_10_event_ids": [
+    [
+      "4688",
+      12397
+    ],
+    [
+      "4625",
+      7152
+    ],
+    [
+      "5145",
+      2566
+    ],
+    [
+      "1",
+      2377
+    ],
+    [
+      "7045",
+      1222
+    ],
+    [
+      "4104",
+      1143
+    ],
+    [
+      "4103",
+      753
+    ],
+    [
+      "5140",
+      403
+    ],
+    [
+      "4624",
+      376
+    ],
+    [
+      "11",
+      313
+    ]
+  ],
+  "invalid_examples": []
+}

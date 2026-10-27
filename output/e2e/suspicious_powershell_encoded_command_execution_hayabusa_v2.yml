@@ -1,0 +1,24 @@
+title: Suspicious PowerShell Encoded Command Execution
+id: 3b96f8a1-7a2d-4a3f-9c61-2e5a8f7b1046
+status: experimental
+description: Detects encoded PowerShell command indicators in Windows Security process creation events.
+author: SigmaGen
+date: '2026-10-14'
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    process_creation:
+        Channel: Security
+        EventID: 4688
+    selection:
+        CommandLine|contains|all:
+            - powershell
+            - -enc
+    condition: process_creation and selection
+falsepositives:
+    - Legitimate administrative use of encoded PowerShell commands
+level: high
+tags:
+    - attack.t1059.001
+ruletype: Hayabusa

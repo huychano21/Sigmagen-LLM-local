@@ -1,0 +1,22 @@
+title: Suspicious Activity Detected (AI-20261012_133212.914-eba85bba0333)
+id: 63c04b43-6169-4e63-a7b0-0e8d4519cecb
+status: experimental
+description: 'Suspicious powershell.exe spawning whoami.exe (Suspicious Windows activity
+  detected by LogDeep) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single'',
+  score=0.9868): Wazuh context rule : Suspiciou'
+references:
+- https://attack.mitre.org/
+author: SigmaGen
+date: '2026-10-27'
+tags: []
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \whoami.exe
+    ParentImage|endswith: \powershell.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

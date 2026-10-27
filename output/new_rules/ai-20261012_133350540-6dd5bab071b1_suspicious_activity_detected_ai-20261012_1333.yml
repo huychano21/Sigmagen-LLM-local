@@ -1,0 +1,26 @@
+title: Suspicious Activity Detected (AI-20261012_133350.540-6dd5bab071b1)
+id: 5e82e7f4-6d29-4a48-b17a-a3f86e4377db
+status: experimental
+description: 'Suspicious cmd.exe spawning NETSTAT.EXE (Suspicious Windows cmd shell
+  execution) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|cmd.exe>netstat.exe|system32|tiny_few'',
+  score=0.6466): Wazuh context rule 92032: Suspicious Windows cmd shell'
+references:
+- https://attack.mitre.org/techniques/T1087/
+- https://attack.mitre.org/techniques/T1059/003/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+- attack.t1059.003
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \NETSTAT.EXE
+    ParentImage|endswith: \cmd.exe
+    CommandLine|contains: -ano
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

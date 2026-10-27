@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_141011.028-eb81524e255f",
+  "evidence_id": "EVID-bed79c23ba23",
+  "timestamp": "2026-10-12T14:10:11.028Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:77250d495135a3c6891a3e63",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|svchost.exe>lpremove.exe|system32|tiny_single",
+  "anomaly_score": 0.384122371673584,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.615877628326416,
+  "observed_probability": 0.615877628326416,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 2920,
+    "guid": "{7e4a5fee-ea43-6acc-cc02-000000001100}",
+    "image": "C:\\Windows\\System32\\lpremove.exe",
+    "command_line": "C:\\Windows\\system32\\lpremove.exe",
+    "current_directory": "C:\\Windows\\system32\\",
+    "integrity_level": "System",
+    "hashes": {
+      "md5": "C1C6A67FA093B4218E20D7339039F09C",
+      "sha256": "148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF",
+      "imphash": "BC8B53A40E2042348C46E384FDE1F769"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "MUI Language pack cleanup",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "lpremove.exe",
+    "logon_id": "0x3e7",
+    "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+    "terminal_session_id": "0"
+  },
+  "parent_process": {
+    "pid": 344,
+    "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+    "image": "C:\\Windows\\System32\\svchost.exe",
+    "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+    "user": "NT AUTHORITY\\SYSTEM"
+  },
+  "user": "NT AUTHORITY\\SYSTEM",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.615877628326416
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.1389334499835968
+    },
+    {
+      "token_id": 119,
+      "token": "sysmon|22|dns_query|svchost.exe",
+      "probability": 0.03037690930068493
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.026671672239899635
+    },
+    {
+      "token_id": 41,
+      "token": "sysmon|1|process_create|iexplore.exe>iexplore.exe|program_files_x86|short_few",
+      "probability": 0.016897909343242645
+    }
+  ],
+  "incident_id": "INC-0027",
+  "incident_role": "root",
+  "use_for_rule_generation": true
+}

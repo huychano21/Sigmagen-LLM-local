@@ -1,0 +1,23 @@
+title: Suspicious Activity Detected (AI-20261012_134832.630-351a0e73f25a)
+id: ac0d8fc6-106e-484c-8572-1949dd14f5e3
+status: experimental
+description: 'LogDeep Sequence Anomaly: Suspicious Windows activity detected by LogDeep
+  (sysmon|13|registry_value|logonui.exe|registry) - Host WIN-5J23U7CAV7V.hvan.vn triggered
+  sequence anomaly (token=''sysmon|13|registry_value|logonui.exe|registry'', score=0.9971):
+  Wazuh context rule : Suspicio'
+references:
+- https://attack.mitre.org/
+author: SigmaGen
+date: '2026-10-27'
+tags: []
+logsource:
+  product: windows
+  category: registry_set
+detection:
+  selection:
+    Image|endswith: \LogonUI.exe
+    TargetObject|contains: '1'
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

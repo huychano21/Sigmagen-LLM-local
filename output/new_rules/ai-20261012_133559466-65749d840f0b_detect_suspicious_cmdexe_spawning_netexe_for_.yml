@@ -1,0 +1,24 @@
+title: Detect suspicious cmd.exe spawning net.exe for domain discovery
+id: 08b9e2a6-5d3f-4e2b-8c9a-7f8b4d5c3e2f
+status: experimental
+description: Detects the execution of 'net view /domain' by 'cmd.exe' which is indicative
+  of domain discovery.
+references:
+- https://attack.mitre.org/techniques/T1135/
+- https://attack.mitre.org/techniques/T1059/003/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1135
+- attack.t1059.003
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains: net view /domain
+    ParentImage|endswith: \cmd.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative script execution
+level: medium

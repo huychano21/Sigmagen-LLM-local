@@ -1,0 +1,528 @@
+[
+  {
+    "timestamp": "2026-10-12T13:33:18.392+0000",
+    "rule": {
+      "level": 4,
+      "description": "Windows command prompt started by an abnormal process",
+      "id": "92052",
+      "mitre": {
+        "id": [
+          "T1059.003"
+        ],
+        "tactic": [
+          "Execution"
+        ],
+        "technique": [
+          "Windows Command Shell"
+        ]
+      },
+      "firedtimes": 4,
+      "mail": false,
+      "groups": [
+        "sysmon",
+        "sysmon_eid1_detections",
+        "windows"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791811998.1728267",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:33:18.278213600Z\",\"eventRecordID\":\"10416\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:33:18.261\\r\\nProcessGuid: {7e4a5fee-e19e-6acc-4702-000000001100}\\r\\nProcessId: 308\\r\\nImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nFileVersion: 10.0.17763.1697 (WinBuild.160101.0800)\\r\\nDescription: Windows Command Processor\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: Cmd.Exe\\r\\nCommandLine: \\\"cmd.exe\\\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\\r\\nParentProcessGuid: {7e4a5fee-fdea-6ac5-0601-000000001100}\\r\\nParentProcessId: 4788\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\r\\nParentCommandLine: \\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\" \\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:33:18.261\",\"processGuid\":\"{7e4a5fee-e19e-6acc-4702-000000001100}\",\"processId\":\"308\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"fileVersion\":\"10.0.17763.1697 (WinBuild.160101.0800)\",\"description\":\"Windows Command Processor\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"Cmd.Exe\",\"commandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\",\"parentProcessGuid\":\"{7e4a5fee-fdea-6ac5-0601-000000001100}\",\"parentProcessId\":\"4788\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\WindowsPowerShell\\\\\\\\v1.0\\\\\\\\powershell.exe\",\"parentCommandLine\":\"\\\\\\\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\WindowsPowerShell\\\\\\\\v1.0\\\\\\\\powershell.exe\\\\\\\"\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Microsoft-Windows-Sysmon",
+          "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+          "eventID": "1",
+          "version": "5",
+          "level": "4",
+          "task": "1",
+          "opcode": "0",
+          "keywords": "0x8000000000000000",
+          "systemTime": "2026-10-12T13:33:18.278213600Z",
+          "eventRecordID": "10416",
+          "processID": "2832",
+          "threadID": "4936",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 13:33:18.261\r\nProcessGuid: {7e4a5fee-e19e-6acc-4702-000000001100}\r\nProcessId: 308\r\nImage: C:\\Windows\\System32\\cmd.exe\r\nFileVersion: 10.0.17763.1697 (WinBuild.160101.0800)\r\nDescription: Windows Command Processor\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: Cmd.Exe\r\nCommandLine: \"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\r\nCurrentDirectory: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\\r\nUser: HVAN\\Administrator\r\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\r\nLogonId: 0x9F3E4\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\r\nParentProcessGuid: {7e4a5fee-fdea-6ac5-0601-000000001100}\r\nParentProcessId: 4788\r\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nParentCommandLine: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" \r\nParentUser: HVAN\\Administrator\""
+        },
+        "eventdata": {
+          "utcTime": "2026-10-12 13:33:18.261",
+          "processGuid": "{7e4a5fee-e19e-6acc-4702-000000001100}",
+          "processId": "308",
+          "image": "C:\\\\Windows\\\\System32\\\\cmd.exe",
+          "fileVersion": "10.0.17763.1697 (WinBuild.160101.0800)",
+          "description": "Windows Command Processor",
+          "product": "Microsoft® Windows® Operating System",
+          "company": "Microsoft Corporation",
+          "originalFileName": "Cmd.Exe",
+          "commandLine": "\\\"cmd.exe\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config",
+          "currentDirectory": "C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\",
+          "user": "HVAN\\\\Administrator",
+          "logonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+          "logonId": "0x9f3e4",
+          "terminalSessionId": "1",
+          "integrityLevel": "High",
+          "hashes": "MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18",
+          "parentProcessGuid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+          "parentProcessId": "4788",
+          "parentImage": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+          "parentCommandLine": "\\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\"",
+          "parentUser": "HVAN\\\\Administrator"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": true,
+      "atomic_run": 1
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:33:18.453+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791811998.1734377",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:33:18.350684900Z\",\"eventRecordID\":\"10418\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:33:18.342\\r\\nProcessGuid: {7e4a5fee-e19e-6acc-4a02-000000001100}\\r\\nProcessId: 432\\r\\nImage: C:\\\\Windows\\\\System32\\\\netsh.exe\\r\\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\\r\\nDescription: Network Command Shell\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: netsh.exe\\r\\nCommandLine: netsh  interface show interface \\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\\r\\nParentProcessGuid: {7e4a5fee-e19e-6acc-4702-000000001100}\\r\\nParentProcessId: 308\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nParentCommandLine: \\\"cmd.exe\\\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:33:18.342\",\"processGuid\":\"{7e4a5fee-e19e-6acc-4a02-000000001100}\",\"processId\":\"432\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\netsh.exe\",\"fileVersion\":\"10.0.17763.1 (WinBuild.160101.0800)\",\"description\":\"Network Command Shell\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"netsh.exe\",\"commandLine\":\"netsh  interface show interface\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\",\"parentProcessGuid\":\"{7e4a5fee-e19e-6acc-4702-000000001100}\",\"parentProcessId\":\"308\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"parentCommandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Microsoft-Windows-Sysmon",
+          "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+          "eventID": "1",
+          "version": "5",
+          "level": "4",
+          "task": "1",
+          "opcode": "0",
+          "keywords": "0x8000000000000000",
+          "systemTime": "2026-10-12T13:33:18.350684900Z",
+          "eventRecordID": "10418",
+          "processID": "2832",
+          "threadID": "4936",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 13:33:18.342\r\nProcessGuid: {7e4a5fee-e19e-6acc-4a02-000000001100}\r\nProcessId: 432\r\nImage: C:\\Windows\\System32\\netsh.exe\r\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\r\nDescription: Network Command Shell\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: netsh.exe\r\nCommandLine: netsh  interface show interface \r\nCurrentDirectory: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\\r\nUser: HVAN\\Administrator\r\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\r\nLogonId: 0x9F3E4\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\r\nParentProcessGuid: {7e4a5fee-e19e-6acc-4702-000000001100}\r\nParentProcessId: 308\r\nParentImage: C:\\Windows\\System32\\cmd.exe\r\nParentCommandLine: \"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\r\nParentUser: HVAN\\Administrator\""
+        },
+        "eventdata": {
+          "utcTime": "2026-10-12 13:33:18.342",
+          "processGuid": "{7e4a5fee-e19e-6acc-4a02-000000001100}",
+          "processId": "432",
+          "image": "C:\\\\Windows\\\\System32\\\\netsh.exe",
+          "fileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "description": "Network Command Shell",
+          "product": "Microsoft® Windows® Operating System",
+          "company": "Microsoft Corporation",
+          "originalFileName": "netsh.exe",
+          "commandLine": "netsh  interface show interface",
+          "currentDirectory": "C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\",
+          "user": "HVAN\\\\Administrator",
+          "logonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+          "logonId": "0x9f3e4",
+          "terminalSessionId": "1",
+          "integrityLevel": "High",
+          "hashes": "MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC",
+          "parentProcessGuid": "{7e4a5fee-e19e-6acc-4702-000000001100}",
+          "parentProcessId": "308",
+          "parentImage": "C:\\\\Windows\\\\System32\\\\cmd.exe",
+          "parentCommandLine": "\\\"cmd.exe\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config",
+          "parentUser": "HVAN\\\\Administrator"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "primary",
+      "wazuh_alerted": false,
+      "atomic_run": 1
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:33:18.873+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791811998.1757299",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Service Control Manager\",\"providerGuid\":\"{555908d1-a6d7-4695-8e1e-26931d2012f4}\",\"eventSourceName\":\"Service Control Manager\",\"eventID\":\"7036\",\"version\":\"0\",\"level\":\"4\",\"task\":\"0\",\"opcode\":\"0\",\"keywords\":\"0x8080000000000000\",\"systemTime\":\"2026-10-12T13:33:18.505618800Z\",\"eventRecordID\":\"4395\",\"processID\":\"660\",\"threadID\":\"6060\",\"channel\":\"System\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"The Network Setup Service service entered the running state.\\\"\"},\"eventdata\":{\"param1\":\"Network Setup Service\",\"param2\":\"running\",\"binary\":\"4E0065007400530065007400750070005300760063002F0034000000\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Service Control Manager",
+          "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+          "eventSourceName": "Service Control Manager",
+          "eventID": "7036",
+          "version": "0",
+          "level": "4",
+          "task": "0",
+          "opcode": "0",
+          "keywords": "0x8080000000000000",
+          "systemTime": "2026-10-12T13:33:18.505618800Z",
+          "eventRecordID": "4395",
+          "processID": "660",
+          "threadID": "6060",
+          "channel": "System",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"The Network Setup Service service entered the running state.\""
+        },
+        "eventdata": {
+          "param1": "Network Setup Service",
+          "param2": "running",
+          "binary": "4E0065007400530065007400750070005300760063002F0034000000"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": false,
+      "atomic_run": 1
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:33:21.936+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791812001.1757299",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Service Control Manager\",\"providerGuid\":\"{555908d1-a6d7-4695-8e1e-26931d2012f4}\",\"eventSourceName\":\"Service Control Manager\",\"eventID\":\"7036\",\"version\":\"0\",\"level\":\"4\",\"task\":\"0\",\"opcode\":\"0\",\"keywords\":\"0x8080000000000000\",\"systemTime\":\"2026-10-12T13:33:21.553106800Z\",\"eventRecordID\":\"4396\",\"processID\":\"660\",\"threadID\":\"6060\",\"channel\":\"System\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"The Network Setup Service service entered the stopped state.\\\"\"},\"eventdata\":{\"param1\":\"Network Setup Service\",\"param2\":\"stopped\",\"binary\":\"4E0065007400530065007400750070005300760063002F0031000000\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Service Control Manager",
+          "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+          "eventSourceName": "Service Control Manager",
+          "eventID": "7036",
+          "version": "0",
+          "level": "4",
+          "task": "0",
+          "opcode": "0",
+          "keywords": "0x8080000000000000",
+          "systemTime": "2026-10-12T13:33:21.553106800Z",
+          "eventRecordID": "4396",
+          "processID": "660",
+          "threadID": "6060",
+          "channel": "System",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"The Network Setup Service service entered the stopped state.\""
+        },
+        "eventdata": {
+          "param1": "Network Setup Service",
+          "param2": "stopped",
+          "binary": "4E0065007400530065007400750070005300760063002F0031000000"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": false,
+      "atomic_run": 1
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:57:37.272+0000",
+    "rule": {
+      "level": 4,
+      "description": "Windows command prompt started by an abnormal process",
+      "id": "92052",
+      "mitre": {
+        "id": [
+          "T1059.003"
+        ],
+        "tactic": [
+          "Execution"
+        ],
+        "technique": [
+          "Windows Command Shell"
+        ]
+      },
+      "firedtimes": 13,
+      "mail": false,
+      "groups": [
+        "sysmon",
+        "sysmon_eid1_detections",
+        "windows"
+      ]
+    },
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791813457.2357536",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:57:36.947445400Z\",\"eventRecordID\":\"10499\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:57:36.946\\r\\nProcessGuid: {7e4a5fee-e750-6acc-9902-000000001100}\\r\\nProcessId: 4232\\r\\nImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nFileVersion: 10.0.17763.1697 (WinBuild.160101.0800)\\r\\nDescription: Windows Command Processor\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: Cmd.Exe\\r\\nCommandLine: \\\"cmd.exe\\\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\\r\\nParentProcessGuid: {7e4a5fee-fdea-6ac5-0601-000000001100}\\r\\nParentProcessId: 4788\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\r\\nParentCommandLine: \\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\" \\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:57:36.946\",\"processGuid\":\"{7e4a5fee-e750-6acc-9902-000000001100}\",\"processId\":\"4232\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"fileVersion\":\"10.0.17763.1697 (WinBuild.160101.0800)\",\"description\":\"Windows Command Processor\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"Cmd.Exe\",\"commandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\",\"parentProcessGuid\":\"{7e4a5fee-fdea-6ac5-0601-000000001100}\",\"parentProcessId\":\"4788\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\WindowsPowerShell\\\\\\\\v1.0\\\\\\\\powershell.exe\",\"parentCommandLine\":\"\\\\\\\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\WindowsPowerShell\\\\\\\\v1.0\\\\\\\\powershell.exe\\\\\\\"\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Microsoft-Windows-Sysmon",
+          "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+          "eventID": "1",
+          "version": "5",
+          "level": "4",
+          "task": "1",
+          "opcode": "0",
+          "keywords": "0x8000000000000000",
+          "systemTime": "2026-10-12T13:57:36.947445400Z",
+          "eventRecordID": "10499",
+          "processID": "2832",
+          "threadID": "4936",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 13:57:36.946\r\nProcessGuid: {7e4a5fee-e750-6acc-9902-000000001100}\r\nProcessId: 4232\r\nImage: C:\\Windows\\System32\\cmd.exe\r\nFileVersion: 10.0.17763.1697 (WinBuild.160101.0800)\r\nDescription: Windows Command Processor\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: Cmd.Exe\r\nCommandLine: \"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\r\nCurrentDirectory: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\\r\nUser: HVAN\\Administrator\r\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\r\nLogonId: 0x9F3E4\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18\r\nParentProcessGuid: {7e4a5fee-fdea-6ac5-0601-000000001100}\r\nParentProcessId: 4788\r\nParentImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\nParentCommandLine: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" \r\nParentUser: HVAN\\Administrator\""
+        },
+        "eventdata": {
+          "utcTime": "2026-10-12 13:57:36.946",
+          "processGuid": "{7e4a5fee-e750-6acc-9902-000000001100}",
+          "processId": "4232",
+          "image": "C:\\\\Windows\\\\System32\\\\cmd.exe",
+          "fileVersion": "10.0.17763.1697 (WinBuild.160101.0800)",
+          "description": "Windows Command Processor",
+          "product": "Microsoft® Windows® Operating System",
+          "company": "Microsoft Corporation",
+          "originalFileName": "Cmd.Exe",
+          "commandLine": "\\\"cmd.exe\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config",
+          "currentDirectory": "C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\",
+          "user": "HVAN\\\\Administrator",
+          "logonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+          "logonId": "0x9f3e4",
+          "terminalSessionId": "1",
+          "integrityLevel": "High",
+          "hashes": "MD5=911D039E71583A07320B32BDE22F8E22,SHA256=BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527,IMPHASH=272245E2988E1E430500B852C4FB5E18",
+          "parentProcessGuid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+          "parentProcessId": "4788",
+          "parentImage": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+          "parentCommandLine": "\\\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\\\"",
+          "parentUser": "HVAN\\\\Administrator"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": true,
+      "atomic_run": 2
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:57:37.334+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791813457.2363650",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:57:36.999790400Z\",\"eventRecordID\":\"10501\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:57:36.998\\r\\nProcessGuid: {7e4a5fee-e750-6acc-9c02-000000001100}\\r\\nProcessId: 3888\\r\\nImage: C:\\\\Windows\\\\System32\\\\netsh.exe\\r\\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\\r\\nDescription: Network Command Shell\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: netsh.exe\\r\\nCommandLine: netsh  interface show interface \\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\\r\\nParentProcessGuid: {7e4a5fee-e750-6acc-9902-000000001100}\\r\\nParentProcessId: 4232\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nParentCommandLine: \\\"cmd.exe\\\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:57:36.998\",\"processGuid\":\"{7e4a5fee-e750-6acc-9c02-000000001100}\",\"processId\":\"3888\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\netsh.exe\",\"fileVersion\":\"10.0.17763.1 (WinBuild.160101.0800)\",\"description\":\"Network Command Shell\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"netsh.exe\",\"commandLine\":\"netsh  interface show interface\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\",\"parentProcessGuid\":\"{7e4a5fee-e750-6acc-9902-000000001100}\",\"parentProcessId\":\"4232\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"parentCommandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Microsoft-Windows-Sysmon",
+          "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+          "eventID": "1",
+          "version": "5",
+          "level": "4",
+          "task": "1",
+          "opcode": "0",
+          "keywords": "0x8000000000000000",
+          "systemTime": "2026-10-12T13:57:36.999790400Z",
+          "eventRecordID": "10501",
+          "processID": "2832",
+          "threadID": "4936",
+          "channel": "Microsoft-Windows-Sysmon/Operational",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 13:57:36.998\r\nProcessGuid: {7e4a5fee-e750-6acc-9c02-000000001100}\r\nProcessId: 3888\r\nImage: C:\\Windows\\System32\\netsh.exe\r\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\r\nDescription: Network Command Shell\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: netsh.exe\r\nCommandLine: netsh  interface show interface \r\nCurrentDirectory: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\\r\nUser: HVAN\\Administrator\r\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\r\nLogonId: 0x9F3E4\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC\r\nParentProcessGuid: {7e4a5fee-e750-6acc-9902-000000001100}\r\nParentProcessId: 4232\r\nParentImage: C:\\Windows\\System32\\cmd.exe\r\nParentCommandLine: \"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config\r\nParentUser: HVAN\\Administrator\""
+        },
+        "eventdata": {
+          "utcTime": "2026-10-12 13:57:36.998",
+          "processGuid": "{7e4a5fee-e750-6acc-9c02-000000001100}",
+          "processId": "3888",
+          "image": "C:\\\\Windows\\\\System32\\\\netsh.exe",
+          "fileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+          "description": "Network Command Shell",
+          "product": "Microsoft® Windows® Operating System",
+          "company": "Microsoft Corporation",
+          "originalFileName": "netsh.exe",
+          "commandLine": "netsh  interface show interface",
+          "currentDirectory": "C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\",
+          "user": "HVAN\\\\Administrator",
+          "logonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+          "logonId": "0x9f3e4",
+          "terminalSessionId": "1",
+          "integrityLevel": "High",
+          "hashes": "MD5=758B8449357017A158163ECC0E5E52B2,SHA256=D70D165B6706C61C56F2CA91307F4BBDB9846ACAE1DA3CFD84BF978FFB21AF23,IMPHASH=90B4317BE51850B8EF9F14EB56FB7DDC",
+          "parentProcessGuid": "{7e4a5fee-e750-6acc-9902-000000001100}",
+          "parentProcessId": "4232",
+          "parentImage": "C:\\\\Windows\\\\System32\\\\cmd.exe",
+          "parentCommandLine": "\\\"cmd.exe\\\" /c ipconfig /all &amp; netsh interface show interface &amp; arp -a &amp; nbtstat -n &amp; net config",
+          "parentUser": "HVAN\\\\Administrator"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "primary",
+      "wazuh_alerted": false,
+      "atomic_run": 2
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:57:37.501+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791813457.2386588",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Service Control Manager\",\"providerGuid\":\"{555908d1-a6d7-4695-8e1e-26931d2012f4}\",\"eventSourceName\":\"Service Control Manager\",\"eventID\":\"7036\",\"version\":\"0\",\"level\":\"4\",\"task\":\"0\",\"opcode\":\"0\",\"keywords\":\"0x8080000000000000\",\"systemTime\":\"2026-10-12T13:57:37.124143100Z\",\"eventRecordID\":\"4410\",\"processID\":\"660\",\"threadID\":\"4404\",\"channel\":\"System\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"The Network Setup Service service entered the running state.\\\"\"},\"eventdata\":{\"param1\":\"Network Setup Service\",\"param2\":\"running\",\"binary\":\"4E0065007400530065007400750070005300760063002F0034000000\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Service Control Manager",
+          "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+          "eventSourceName": "Service Control Manager",
+          "eventID": "7036",
+          "version": "0",
+          "level": "4",
+          "task": "0",
+          "opcode": "0",
+          "keywords": "0x8080000000000000",
+          "systemTime": "2026-10-12T13:57:37.124143100Z",
+          "eventRecordID": "4410",
+          "processID": "660",
+          "threadID": "4404",
+          "channel": "System",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"The Network Setup Service service entered the running state.\""
+        },
+        "eventdata": {
+          "param1": "Network Setup Service",
+          "param2": "running",
+          "binary": "4E0065007400530065007400750070005300760063002F0034000000"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": false,
+      "atomic_run": 2
+    }
+  },
+  {
+    "timestamp": "2026-10-12T13:57:40.544+0000",
+    "agent": {
+      "id": "001",
+      "name": "DC-01",
+      "ip": "10.212.106.167"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1791813460.2394349",
+    "full_log": "{\"win\":{\"system\":{\"providerName\":\"Service Control Manager\",\"providerGuid\":\"{555908d1-a6d7-4695-8e1e-26931d2012f4}\",\"eventSourceName\":\"Service Control Manager\",\"eventID\":\"7036\",\"version\":\"0\",\"level\":\"4\",\"task\":\"0\",\"opcode\":\"0\",\"keywords\":\"0x8080000000000000\",\"systemTime\":\"2026-10-12T13:57:40.145830500Z\",\"eventRecordID\":\"4411\",\"processID\":\"660\",\"threadID\":\"4404\",\"channel\":\"System\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"The Network Setup Service service entered the stopped state.\\\"\"},\"eventdata\":{\"param1\":\"Network Setup Service\",\"param2\":\"stopped\",\"binary\":\"4E0065007400530065007400750070005300760063002F0031000000\"}}}",
+    "decoder": {
+      "name": "windows_eventchannel"
+    },
+    "data": {
+      "win": {
+        "system": {
+          "providerName": "Service Control Manager",
+          "providerGuid": "{555908d1-a6d7-4695-8e1e-26931d2012f4}",
+          "eventSourceName": "Service Control Manager",
+          "eventID": "7036",
+          "version": "0",
+          "level": "4",
+          "task": "0",
+          "opcode": "0",
+          "keywords": "0x8080000000000000",
+          "systemTime": "2026-10-12T13:57:40.145830500Z",
+          "eventRecordID": "4411",
+          "processID": "660",
+          "threadID": "4404",
+          "channel": "System",
+          "computer": "WIN-5J23U7CAV7V.hvan.vn",
+          "severityValue": "INFORMATION",
+          "message": "\"The Network Setup Service service entered the stopped state.\""
+        },
+        "eventdata": {
+          "param1": "Network Setup Service",
+          "param2": "stopped",
+          "binary": "4E0065007400530065007400750070005300760063002F0031000000"
+        }
+      }
+    },
+    "location": "EventChannel",
+    "_evidence": {
+      "alert_id": "ALERT-005",
+      "role": "context",
+      "wazuh_alerted": false,
+      "atomic_run": 2
+    }
+  }
+]

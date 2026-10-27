@@ -1,0 +1,21 @@
+title: Suspicious svchost.exe spawning taskhostw.exe
+id: aa63dffb-2087-485f-8f3c-dd0546bbec25
+status: experimental
+description: Detects the spawning of taskhostw.exe by svchost.exe, which may indicate
+  suspicious activity.
+references: https://attack.mitre.org/techniques/T1059/001/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1059.001
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \taskhostw.exe
+    ParentImage|endswith: \svchost.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative tasks
+level: medium

@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SigmaGen SOC Dashboard — Tự động Nhận Alert &amp; Evidence, Sinh &amp; Kiểm chứng Sigma / Wazuh Rules</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    code, pre, textarea.code-editor { font-family: 'JetBrains Mono', monospace; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(71, 85, 105, 0.8); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 1); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-md w-full pointer-events-none"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 font-bold text-white text-lg">
+          &Sigma;
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-base sm:text-lg tracking-tight text-white">SigmaGen Local SOC Dashboard</h1>
+            <span id="modeBadge" class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+              Auto-Pipeline v3.0
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Sysmon &rarr; Wazuh &rarr; LogDeep AI Alert &rarr; Local LLM (Qwen 2.5 7B) &rarr; Kiểm chứng Vòng A/B &rarr; Wazuh XML</p>
+        </div>
+      </div>
+
+      <!-- Status & Auto-ID Counter -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <div class="bg-slate-800/90 border border-slate-700 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
+          <span class="text-slate-400">Dải ID Wazuh:</span>
+          <span class="font-mono font-semibold text-amber-300">100100–109999</span>
+          <span class="text-slate-600">|</span>
+          <span class="text-slate-400">ID tự động kế tiếp:</span>
+          <span id="nextRuleIdBadge" class="font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">100100</span>
+        </div>
+
+        <button id="btnToggleAutoWatch" type="button" class="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-300 text-xs font-medium flex items-center gap-2 transition">
+          <span id="autoWatchDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+          <span id="autoWatchLabel">Auto-Watch: TẮT</span>
+        </button>
+
+        <button id="btnScanFolder" type="button" class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Quét Tự Động ./alert</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl w-full mx-auto px-4 py-4 flex-1 flex flex-col gap-4">
+
+    <!-- 5-Stage Closed-Loop Pipeline Visualizer & KPI Bar -->
+    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>1. Nhận Alert &amp; Evidence</span>
+          <span class="px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 font-mono text-[10px]">Đối chiếu ID</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="kpiTotalAlerts" class="text-xl font-bold text-white">0</span>
+          <span class="text-[11px] text-slate-400">khớp <code class="text-cyan-300">alert_id / evidence_id</code></span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>2. Sinh Sigma Rule (.yml)</span>
+          <span class="px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-300 font-mono text-[10px]">Qwen 2.5 7B</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="kpiTotalRules" class="text-xl font-bold text-white">0</span>
+          <span class="text-[11px] text-slate-400">Self-Repair + Fallback</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>3. Kiểm chứng 3 Câu hỏi</span>
+          <span class="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono text-[10px]">Vòng A + B</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="kpiPassCount" class="text-xl font-bold text-emerald-400">0 / 0 PASS</span>
+          <span id="kpiAvgScore" class="text-[11px] font-mono text-emerald-300">TB: 0.0%</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>4. Cấp ID &amp; Biên dịch XML</span>
+          <span class="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 font-mono text-[10px]">Auto-ID</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="kpiXmlValid" class="text-xl font-bold text-amber-300">0 XML</span>
+          <span class="text-[11px] text-slate-400"><code class="text-amber-200">ml_generated,sysmon,</code></span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 flex flex-col justify-between col-span-2 sm:col-span-1">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span>5. Chống Dương tính Giả</span>
+          <span class="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-mono text-[10px]">Benign Corpus</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span id="kpiZeroFp" class="text-xl font-bold text-cyan-300">FP = 0</span>
+          <span class="text-[11px] text-slate-400">10+ sự kiện nền sạch</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ingestion & Correspondence Control Bar -->
+    <section class="bg-slate-900/95 border border-slate-800 rounded-xl p-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800">
+        <div>
+          <h2 class="text-sm font-semibold text-white flex items-center gap-2">
+            <span>Nhận Alert &amp; Evidence Tự Động (Kiểm tra bắt buộc <code class="text-cyan-300">alert_id</code> &amp; <code class="text-purple-300">evidence_id</code>)</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Chọn cặp file <code class="text-cyan-300">ALERT-xxx.json</code> và <code class="text-purple-300">ALERT-xxx_evidence.json</code>. Hệ thống tự động kiểm tra khớp <code class="text-cyan-300">alert_id</code> / <code class="text-purple-300">evidence_id</code> ở đầu mỗi file trước khi sinh Rule và cấp ID tự động.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 text-xs">
+          <label class="flex items-center gap-1.5 cursor-pointer select-none text-slate-300">
+            <input id="chkDeduplicate" type="checkbox" checked class="rounded bg-slate-800 border-slate-600 text-cyan-500 focus:ring-0" />
+            <span>Gộp các Alert trùng mẫu hành vi (Deduplicate)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-3 items-stretch">
+        <!-- File Upload Inputs -->
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-3 flex flex-col justify-between">
+            <div>
+              <label for="fileAlertInput" class="block text-xs font-medium text-slate-200 mb-1.5">
+                1. Chọn file Alert JSON (<code class="text-cyan-400">ALERT-*.json</code> / <code class="text-cyan-400">ai_alerts_test.json</code>)
+              </label>
+              <input id="fileAlertInput" type="file" accept=".json,.jsonl" class="block w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-cyan-500/15 file:text-cyan-300 hover:file:bg-cyan-500/25 cursor-pointer" />
+            </div>
+            <div id="alertFileStatus" class="text-[11px] font-mono text-slate-500 mt-2 break-all">Chưa chọn file Alert</div>
+          </div>
+
+          <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-3 flex flex-col justify-between">
+            <div>
+              <label for="fileEvidenceInput" class="block text-xs font-medium text-slate-200 mb-1.5">
+                2. Chọn file Evidence JSON (<code class="text-purple-400">*_evidence.json</code>)
+              </label>
+              <input id="fileEvidenceInput" type="file" accept=".json,.jsonl" class="block w-full text-xs text-slate-400 file:mr-2 file:py-1.5 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-purple-500/15 file:text-purple-300 hover:file:bg-purple-500/25 cursor-pointer" />
+            </div>
+            <div id="evidenceFileStatus" class="text-[11px] font-mono text-slate-500 mt-2 break-all">Chưa chọn file Evidence</div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="lg:col-span-4 flex flex-col justify-between gap-2">
+          <button id="btnProcessUploaded" type="button" class="w-full h-full min-h-[54px] px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold shadow-lg shadow-cyan-600/20 flex items-center justify-center gap-2 transition">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span>Tự Động Sinh &amp; Kiểm Chứng Rule Ngay</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Correspondence Validation Banner -->
+      <div id="correspondenceBanner" class="mt-3 px-3 py-2 rounded-lg border border-slate-800 bg-slate-950/70 text-xs font-mono text-slate-400 flex items-center justify-between gap-2">
+        <span id="correspondenceText">Trạng thái đối chiếu Alert &harr; Evidence: Đang chờ chọn cặp file Alert (.json) và Evidence (.json)...</span>
+        <span id="correspondenceBadge" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[11px] font-bold shrink-0">CHỜ DỮ LIỆU</span>
+      </div>
+    </section>
+
+    <!-- Main Workspace Grid: Left Sidebar (Generated Rules Queue) + Right Panel (Rule & Verification Inspector) -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1">
+
+      <!-- Left Column: Processed Alerts & Generated Rules List (4 cols) -->
+      <div class="lg:col-span-4 bg-slate-900/95 border border-slate-800 rounded-xl flex flex-col overflow-hidden max-h-[780px]">
+        <div class="p-3 border-b border-slate-800 flex items-center justify-between gap-2 bg-slate-900">
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-300">Danh Sách Rule Đã Sinh &amp; Kiểm Chứng</h3>
+            <p class="text-[11px] text-slate-400">Click vào từng mục để xem Sigma YAML, Wazuh XML &amp; Điểm</p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span id="ruleListCountBadge" class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">0 rules</span>
+            <button id="btnClearRules" type="button" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-rose-950/80 text-slate-400 hover:text-rose-300 border border-slate-700 text-[11px] transition" title="Xóa danh sách hiển thị (vẫn giữ nguyên bộ đếm ID tự động kế tiếp)">
+              Xóa DS
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter / Search bar -->
+        <div class="p-2.5 border-b border-slate-800/80 bg-slate-950/40 flex items-center gap-2">
+          <input id="searchRuleInput" type="text" placeholder="Tìm theo Alert ID, Rule ID (1001xx), MITRE, tên rule..." class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500" />
+          <select id="filterGateSelect" class="bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-cyan-500">
+            <option value="ALL">Tất cả</option>
+            <option value="PASS">PASS</option>
+            <option value="WARN">WARN</option>
+            <option value="FAIL">FAIL</option>
+          </select>
+        </div>
+
+        <!-- Scrollable List of Rules -->
+        <div id="rulesListContainer" class="flex-1 overflow-y-auto divide-y divide-slate-800/70"></div>
+      </div>
+
+      <!-- Right Column: Detailed Inspector (8 cols) -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+
+        <!-- Empty State Banner (shown when 0 rules exist) -->
+        <div id="emptyInspectorState" class="bg-slate-900/95 border border-slate-800 rounded-xl p-10 text-center flex flex-col items-center justify-center gap-3 flex-1 min-h-[420px]">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl font-bold">
+            &Sigma;
+          </div>
+          <h3 class="text-base font-bold text-white">Chưa có Rule nào trong danh sách hiển thị</h3>
+          <p class="text-xs text-slate-400 max-w-lg leading-relaxed">
+            Hãy chọn cặp file <code class="text-cyan-300">ALERT-xxx.json</code> và <code class="text-purple-300">ALERT-xxx_evidence.json</code> ở thanh công cụ phía trên rồi bấm <strong>"Tự Động Sinh &amp; Kiểm Chứng Rule Ngay"</strong>, hoặc bấm <strong>"Quét Tự Động ./alert"</strong> để hệ thống tự động xử lý và cấp ID tiếp theo.
+          </p>
+        </div>
+
+        <!-- Active Rule Inspector Container (hidden when 0 rules exist) -->
+        <div id="activeInspectorContainer" class="hidden flex-col gap-4 flex-1">
+          <!-- Selected Rule Header Banner -->
+          <div class="bg-slate-900/95 border border-slate-800 rounded-xl p-4">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div class="flex-1 min-w-[240px]">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <span id="detailWazuhIdBadge" class="font-mono text-xs font-bold px-2.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    Wazuh ID: #100100
+                  </span>
+                  <span id="detailAlertIdBadge" class="font-mono text-xs px-2 py-0.5 rounded bg-slate-800 text-cyan-300 border border-slate-700">
+                    Alert: N/A
+                  </span>
+                  <span id="detailSourceSchemaBadge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                    Evidence: N/A
+                  </span>
+                  <span id="detailMitreBadge" class="font-mono text-[11px] px-2 py-0.5 rounded bg-blue-500/15 text-blue-300 border border-blue-500/30">
+                    MITRE: T1059
+                  </span>
+                </div>
+                <h2 id="detailRuleTitle" class="text-base sm:text-lg font-bold text-white leading-snug">
+                  Chưa chọn rule
+                </h2>
+                <p id="detailRuleDesc" class="text-xs text-slate-400 mt-1"></p>
+              </div>
+
+              <!-- Quality Gate & Confidence Score Box -->
+              <div class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-right flex flex-col items-end justify-center min-w-[170px]">
+                <div class="text-[11px] uppercase tracking-wider text-slate-400">Điểm Tin Cậy (Confidence)</div>
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span id="detailConfidenceScore" class="text-2xl font-extrabold font-mono text-emerald-400">100.0%</span>
+                </div>
+                <span id="detailQualityGateBadge" class="mt-1 inline-block text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                  PASS - RECOMMEND_ADD
+                </span>
+              </div>
+            </div>
+
+            <!-- 3-Question Verification Scorecard Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4 pt-3 border-t border-slate-800">
+              <!-- Q1 -->
+              <div class="bg-slate-950/90 border border-slate-800/90 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-200">Câu 1: Cú pháp &amp; Schema (20%)</span>
+                  <span id="q1Badge" class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300">PASS</span>
+                </div>
+                <div class="mt-1.5 flex items-baseline justify-between">
+                  <span id="q1ScoreText" class="text-lg font-bold font-mono text-cyan-300">100.0 / 100</span>
+                  <span class="text-[11px] text-slate-400">Đóng góp: <strong id="q1WeightedText" class="text-slate-200">20.0%</strong></span>
+                </div>
+                <p id="q1DetailText" class="text-[11px] text-slate-400 mt-1.5 leading-relaxed"></p>
+              </div>
+
+              <!-- Q2 -->
+              <div class="bg-slate-950/90 border border-slate-800/90 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-200">Câu 2: Khớp Dữ liệu Alert (30%)</span>
+                  <span id="q2Badge" class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300">PASS</span>
+                </div>
+                <div class="mt-1.5 flex items-baseline justify-between">
+                  <span id="q2ScoreText" class="text-lg font-bold font-mono text-cyan-300">100.0 / 100</span>
+                  <span class="text-[11px] text-slate-400">Đóng góp: <strong id="q2WeightedText" class="text-slate-200">30.0%</strong></span>
+                </div>
+                <p id="q2DetailText" class="text-[11px] text-slate-400 mt-1.5 leading-relaxed"></p>
+              </div>
+
+              <!-- Q3 -->
+              <div class="bg-slate-950/90 border border-slate-800/90 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-200">Câu 3: Hành vi Vòng A &amp; B (50%)</span>
+                  <span id="q3Badge" class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300">PASS</span>
+                </div>
+                <div class="mt-1.5 flex items-baseline justify-between">
+                  <span id="q3ScoreText" class="text-lg font-bold font-mono text-cyan-300">100.0 / 100</span>
+                  <span class="text-[11px] text-slate-400">Đóng góp: <strong id="q3WeightedText" class="text-slate-200">50.0%</strong></span>
+                </div>
+                <div id="q3MetricsPills" class="mt-1.5 flex flex-wrap gap-1 text-[10px] font-mono"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive View Tabs -->
+          <div class="bg-slate-900/95 border border-slate-800 rounded-xl flex-1 flex flex-col overflow-hidden">
+            <div class="border-b border-slate-800 px-3 pt-2 flex flex-wrap items-center justify-between gap-2 bg-slate-900">
+              <div class="flex flex-wrap gap-1">
+                <button type="button" data-tab="tabCode" class="tab-btn px-3 py-2 text-xs font-semibold rounded-t-lg border-b-2 border-cyan-400 text-cyan-300 bg-slate-800/70">
+                  1. Hiển thị Sigma Rule (.yml) &amp; Wazuh Rule (.xml)
+                </button>
+                <button type="button" data-tab="tabVerification" class="tab-btn px-3 py-2 text-xs font-medium rounded-t-lg border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+                  2. Chỉ số Kiểm chứng Vòng A &amp; Vòng B
+                </button>
+                <button type="button" data-tab="tabTelemetry" class="tab-btn px-3 py-2 text-xs font-medium rounded-t-lg border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+                  3. Telemetry Alert &amp; Cửa sổ trượt Evidence
+                </button>
+                <button type="button" data-tab="tabArchitecture" class="tab-btn px-3 py-2 text-xs font-medium rounded-t-lg border-b-2 border-transparent text-slate-400 hover:text-slate-200">
+                  4. Cơ chế Tự động &amp; Kiểm chứng
+                </button>
+              </div>
+
+              <div class="flex items-center gap-2 pb-1.5">
+                <label class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-medium cursor-pointer transition" title="Tải một file Sigma Rule (.yml) có sẵn để kiểm chứng với cặp Alert & Evidence đang chọn">
+                  <span>Nạp file Rule (.yml)</span>
+                  <input id="fileRuleYamlInput" type="file" accept=".yml,.yaml" class="hidden" />
+                </label>
+                <button id="btnReverifyLive" type="button" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium flex items-center gap-1 transition" title="Kiểm chứng lại nội dung Sigma YAML với Alert/Evidence và cập nhật Wazuh XML">
+                  <span>Kiểm chứng lại &amp; Cập nhật XML</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB 1: Side-by-Side Sigma YAML (.yml) & Wazuh XML (.xml) Display + Live Editor -->
+            <div id="tabCode" class="tab-pane p-4 grid grid-cols-1 xl:grid-cols-2 gap-4 flex-1">
+              <!-- Left: Sigma YAML (.yml) -->
+              <div class="flex flex-col bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                <div class="px-3 py-2 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                    <span class="text-xs font-semibold text-white">Sigma Rule (<code id="sigmaFileNameLabel" class="text-cyan-300">rule.yml</code>)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button id="btnCopySigma" type="button" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium border border-slate-700">
+                      Copy .yml
+                    </button>
+                    <button id="btnDownloadSigma" type="button" class="px-2 py-1 rounded bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 text-[11px] font-medium border border-cyan-500/30">
+                      Tải .yml
+                    </button>
+                  </div>
+                </div>
+                <div class="px-3 py-1 bg-slate-900/40 border-b border-slate-800/60 text-[11px] text-slate-400 flex items-center justify-between">
+                  <span>Chỉnh sửa YAML hoặc nạp file <code class="text-cyan-300">.yml</code> rồi bấm <strong>"Kiểm chứng lại &amp; Cập nhật XML"</strong></span>
+                  <span class="font-mono text-cyan-400">YAML Editor</span>
+                </div>
+                <textarea id="sigmaYamlEditor" spellcheck="false" class="code-editor w-full flex-1 min-h-[340px] p-3 bg-slate-950 text-cyan-100 text-xs leading-relaxed focus:outline-none resize-y"></textarea>
+              </div>
+
+              <!-- Right: Compiled Wazuh XML (.xml) -->
+              <div class="flex flex-col bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                <div class="px-3 py-2 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                    <span class="text-xs font-semibold text-white">Wazuh XML Rule (<code id="wazuhFileNameLabel" class="text-amber-300">ml_generated_100100.xml</code>)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button id="btnCopyWazuh" type="button" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium border border-slate-700">
+                      Copy .xml
+                    </button>
+                    <button id="btnDownloadWazuh" type="button" class="px-2 py-1 rounded bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 text-[11px] font-medium border border-amber-500/30">
+                      Tải .xml
+                    </button>
+                  </div>
+                </div>
+                <div class="px-3 py-1 bg-slate-900/40 border-b border-slate-800/60 text-[11px] text-slate-400 flex items-center justify-between">
+                  <span id="wazuhXmlValidationBanner" class="text-emerald-400 font-medium">✓ XML hợp lệ (ID trong dải 100100–109999, PCRE2 &amp; if_group chuẩn)</span>
+                  <span class="font-mono text-amber-300">Wazuh XML</span>
+                </div>
+                <pre id="wazuhXmlViewer" class="w-full flex-1 min-h-[340px] p-3 bg-slate-950 text-amber-100 text-xs leading-relaxed overflow-auto select-all"></pre>
+              </div>
+            </div>
+
+            <!-- TAB 2: Detailed Vòng A & Vòng B Verification Metrics -->
+            <div id="tabVerification" class="tab-pane hidden p-4 flex-1 flex flex-col gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">TP (True Pos)</div>
+                  <div id="metricTP" class="text-lg font-bold font-mono text-emerald-400 mt-0.5">1</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">FP (False Pos)</div>
+                  <div id="metricFP" class="text-lg font-bold font-mono text-emerald-400 mt-0.5">0</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">FN (False Neg)</div>
+                  <div id="metricFN" class="text-lg font-bold font-mono text-emerald-400 mt-0.5">0</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">TN (True Neg)</div>
+                  <div id="metricTN" class="text-lg font-bold font-mono text-cyan-300 mt-0.5">10</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">Precision</div>
+                  <div id="metricPrecision" class="text-lg font-bold font-mono text-white mt-0.5">1.00</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">Recall</div>
+                  <div id="metricRecall" class="text-lg font-bold font-mono text-white mt-0.5">1.00</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">F1-Score</div>
+                  <div id="metricF1" class="text-lg font-bold font-mono text-cyan-300 mt-0.5">1.00</div>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-center">
+                  <div class="text-[11px] text-slate-400">Generalization</div>
+                  <div id="metricGenRate" class="text-lg font-bold font-mono text-purple-300 mt-0.5">3/3 (100%)</div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+                  <h4 class="text-xs font-semibold uppercase tracking-wider text-cyan-300 mb-2">
+                    Chi tiết Kiểm tra Cú pháp (Câu 1) &amp; Khớp Dữ liệu Alert/Evidence (Câu 2)
+                  </h4>
+                  <ul id="verificationChecklistUl" class="space-y-2 text-xs text-slate-300"></ul>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+                  <h4 class="text-xs font-semibold uppercase tracking-wider text-amber-300 mb-2">
+                    Chẩn đoán Replay Vòng B &amp; Khuyến nghị Triển khai Wazuh
+                  </h4>
+                  <div id="verificationRecommendationBox" class="text-xs text-slate-300 space-y-2 leading-relaxed"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: Normalized Alert Telemetry & Sliding Window Context Events -->
+            <div id="tabTelemetry" class="tab-pane hidden p-4 flex-1 flex flex-col gap-4">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                      Target Event (Sự kiện Bất thường Chính — Dùng để Sinh &amp; Replay Vòng A)
+                    </h4>
+                    <span id="telemetryEventIdBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300">Sysmon EID 1</span>
+                  </div>
+                  <div id="primaryFieldsTable" class="space-y-1.5 text-xs font-mono max-h-[300px] overflow-y-auto"></div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-3.5">
+                  <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-purple-300">
+                      Context Events (Cửa sổ trượt Evidence — Chỉ làm Ngữ cảnh, Không sinh FP)
+                    </h4>
+                    <span id="contextEventsCountBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300">0 events</span>
+                  </div>
+                  <div id="contextEventsList" class="space-y-2 text-xs max-h-[300px] overflow-y-auto"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 4: Architecture Explanation -->
+            <div id="tabArchitecture" class="tab-pane hidden p-4 flex-1 text-xs text-slate-300 space-y-3 leading-relaxed">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
+                  <h4 class="text-sm font-bold text-cyan-300">1. Kiểm tra Tương ứng Bắt buộc (<code class="text-white">alert_id</code> &amp; <code class="text-white">evidence_id</code>)</h4>
+                  <ul class="list-disc pl-4 space-y-1.5">
+                    <li><strong>Ở đầu mỗi file Alert và Evidence:</strong> Luôn chứa cặp định danh <code class="text-cyan-300">alert_id</code> (ví dụ <code class="text-cyan-300">AI-20261012_133136.466-adfa8daeb9bd</code>) và <code class="text-purple-300">evidence_id</code> (ví dụ <code class="text-purple-300">EVID-9d51cb9d30e6</code>).</li>
+                    <li><strong>Chặn tuyệt đối lệch cặp file:</strong> Nếu tải lên 2 file không khớp <code class="text-cyan-300">alert_id</code> hoặc <code class="text-purple-300">evidence_id</code> (hoặc nạp nhầm file Evidence vào ô Alert), cả giao diện Web và Backend API sẽ báo lỗi đỏ và từ chối sinh rule.</li>
+                    <li><strong>Kiểm chứng Rule với Evidence:</strong> Khi bấm <em>"Kiểm chứng lại &amp; Cập nhật XML"</em> hoặc nạp file <code class="text-cyan-300">.yml</code>, hệ thống đối chiếu trực tiếp với <code class="text-purple-300">target_event</code> của Evidence hiện tại.</li>
+                  </ul>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
+                  <h4 class="text-sm font-bold text-amber-300">2. Cấp Rule ID Tự động Liên tục &amp; Quét <code class="text-white">./alert</code></h4>
+                  <ul class="list-disc pl-4 space-y-1.5">
+                    <li><strong>Đồng bộ hoàn toàn bộ đếm <code class="text-amber-300">next_id</code>:</strong> Khi bộ đếm đang ở <code class="text-emerald-300">100115</code>, rule tiếp theo sinh ra từ file bất kỳ sẽ nhận đúng <code class="text-amber-300">#100115</code> và tăng bộ đếm lên <code class="text-emerald-300">100116</code>.</li>
+                    <li><strong>Tự động suy luận MITRE ATT&amp;CK cho Backfill Alerts:</strong> Với các cảnh báo LogDeep không có sẵn tag MITRE từ Wazuh (như trong <code class="text-cyan-300">backfill.zip</code>), hệ thống tự động ánh xạ kỹ thuật ATT&amp;CK chuẩn từ hành vi thực tế để đạt 100% điểm cú pháp.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // =========================================================================
+    // 1. BENIGN BACKGROUND CORPUS (10 diverse Windows/Sysmon events for Vòng B)
+    // =========================================================================
+    const BENIGN_CORPUS = [
+      { uid: "benign-1", family: "sysmon", code: 1, fields: { EventID: "1", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\svchost.exe", ParentImage: "C:\\Windows\\System32\\services.exe", CommandLine: "C:\\Windows\\system32\\svchost.exe -k netsvcs -p", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-2", family: "sysmon", code: 1, fields: { EventID: "1", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\WerFault.exe", ParentImage: "C:\\Windows\\System32\\svchost.exe", CommandLine: "C:\\WINDOWS\\system32\\WerFault.exe -pss -s 576", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-3", family: "sysmon", code: 1, fields: { EventID: "1", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\taskhostw.exe", ParentImage: "C:\\Windows\\System32\\svchost.exe", CommandLine: "taskhostw.exe", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-4", family: "sysmon", code: 1, fields: { EventID: "1", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", ParentImage: "C:\\Windows\\explorer.exe", CommandLine: "powershell.exe Get-Service", User: "CORP\\admin" } },
+      { uid: "benign-5", family: "sysmon", code: 11, fields: { EventID: "11", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscorsvw.exe", TargetFilename: "C:\\Windows\\Temp\\ngen_service.log", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-6", family: "sysmon", code: 11, fields: { EventID: "11", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", TargetFilename: "C:\\Users\\admin\\Documents\\WindowsPowerShell\\Microsoft.PowerShell_profile.ps1", User: "CORP\\admin" } },
+      { uid: "benign-7", family: "sysmon", code: 13, fields: { EventID: "13", Channel: "Microsoft-Windows-Sysmon/Operational", EventType: "SetValue", Image: "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\MsMpEng.exe", TargetObject: "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Signature Updates\\AVSignatureVersion", Details: "1.401.123.0", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-8", family: "sysmon", code: 1, fields: { EventID: "1", Channel: "Microsoft-Windows-Sysmon/Operational", Image: "C:\\Windows\\System32\\reg.exe", ParentImage: "C:\\Windows\\System32\\gpscript.exe", CommandLine: "reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", User: "NT AUTHORITY\\SYSTEM" } },
+      { uid: "benign-9", family: "windows_security", code: 4624, fields: { EventID: "4624", Channel: "Security", User: "DESKTOP-QGB4EQH$" } },
+      { uid: "benign-10", family: "service_control", code: 7036, fields: { EventID: "7036", Channel: "System" } }
+    ];
+
+    // =========================================================================
+    // 2. APPLICATION STATE & MONOTONIC AUTO-ID ALLOCATOR (100100 - 109999)
+    // =========================================================================
+    const savedNextId = Number(window.localStorage.getItem("sigmagen_next_wazuh_rule_id") || 100100);
+    const state = {
+      rules: [],
+      selectedRuleId: null,
+      nextWazuhRuleId: (savedNextId >= 100100 && savedNextId <= 109999) ? savedNextId : 100100,
+      autoWatchEnabled: false,
+      autoWatchTimer: null,
+      uploadedAlertRaw: null,
+      uploadedAlertName: "",
+      uploadedEvidenceRaw: null,
+      uploadedEvidenceName: "",
+      correspondenceValid: false,
+      correspondenceError: "",
+      backendConnected: false
+    };
+
+    function setNextWazuhRuleId(newId) {
+      const cleanId = Math.max(100100, Math.min(109999, Number(newId) || 100100));
+      state.nextWazuhRuleId = cleanId;
+      window.localStorage.setItem("sigmagen_next_wazuh_rule_id", String(cleanId));
+      const badge = document.getElementById("nextRuleIdBadge");
+      if (badge) badge.textContent = String(cleanId);
+    }
+
+    function allocateNextWazuhRuleId() {
+      // Strictly allocate from state.nextWazuhRuleId and advance by 1 (never jump back to old IDs)
+      const used = new Set(state.rules.map(r => Number(r.wazuh_rule_id)).filter(Boolean));
+      let assigned = state.nextWazuhRuleId;
+      while (used.has(assigned) && assigned < 109999) {
+        assigned++;
+      }
+      setNextWazuhRuleId(assigned + 1);
+      return assigned;
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      const el = document.createElement("div");
+      const colors = {
+        success: "bg-emerald-950/95 border-emerald-500/50 text-emerald-200",
+        warn: "bg-amber-950/95 border-amber-500/50 text-amber-200",
+        error: "bg-rose-950/95 border-rose-500/50 text-rose-200",
+        info: "bg-slate-900/95 border-cyan-500/50 text-cyan-200"
+      };
+      el.className = `pointer-events-auto border rounded-xl px-3.5 py-2.5 shadow-xl text-xs font-medium flex items-center justify-between gap-2 transition-all ${colors[type] || colors.info}`;
+      el.innerHTML = `<span>${message}</span>`;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = "0";
+        setTimeout(() => el.remove(), 250);
+      }, 4200);
+    }
+
+    // =========================================================================
+    // 3. STRICT ALERT <-> EVIDENCE CORRESPONDENCE VALIDATOR
+    // =========================================================================
+    function extractAlertMetaList(rawAlert) {
+      if (!rawAlert) return { error: "Chưa chọn file Alert", items: [] };
+      if (typeof rawAlert === "object" && !Array.isArray(rawAlert)) {
+        if ((rawAlert.target_event && rawAlert.window_size !== undefined && rawAlert.anomaly_score === undefined) || (rawAlert.evidence && !rawAlert.alerts && !rawAlert.alert)) {
+          return { error: "File chọn ở ô số 1 thực chất là file Evidence (chứa window_size/context_events). Vui lòng chọn đúng file Alert JSON ở ô số 1!", items: [] };
+        }
+        if (Array.isArray(rawAlert.alerts)) {
+          return { error: null, items: rawAlert.alerts.map((a, i) => ({ alert_id: String(a.alert_id || `ALERT-${i+1}`).trim(), evidence_id: String(a.evidence_id || "").trim() })) };
+        }
+        if (rawAlert.alert && typeof rawAlert.alert === "object") {
+          const a = rawAlert.alert;
+          return { error: null, items: [{ alert_id: String(a.alert_id || "").trim(), evidence_id: String(a.evidence_id || "").trim() }] };
+        }
+        if (rawAlert.alert_id || rawAlert.target_event || rawAlert.process) {
+          return { error: null, items: [{ alert_id: String(rawAlert.alert_id || "").trim(), evidence_id: String(rawAlert.evidence_id || "").trim() }] };
+        }
+      } else if (Array.isArray(rawAlert) && rawAlert.length > 0) {
+        const first = rawAlert[0] || {};
+        if ((first.window_size !== undefined && first.anomaly_score === undefined) || (first._evidence && !first.alert_id)) {
+          return { error: "File chọn ở ô số 1 thực chất là file Evidence. Vui lòng chọn đúng file Alert JSON ở ô số 1!", items: [] };
+        }
+        return { error: null, items: rawAlert.map((a, i) => ({ alert_id: String(a.alert_id || `ALERT-${i+1}`).trim(), evidence_id: String(a.evidence_id || "").trim() })) };
+      }
+      return { error: "Cấu trúc file Alert JSON không hợp lệ (thiếu alert_id / evidence_id).", items: [] };
+    }
+
+    function extractEvidenceMetaIndex(rawEv) {
+      if (!rawEv) return { error: null, byEvId: {}, byAlertId: {}, pairs: [] };
+      if (typeof rawEv === "object" && !Array.isArray(rawEv)) {
+        if ((rawEv.anomaly_score !== undefined || rawEv.scored_token !== undefined || rawEv.alerts) && !rawEv.target_event && !rawEv.context_events && !rawEv.evidence) {
+          return { error: "File chọn ở ô số 2 thực chất là file Alert (chứa anomaly_score). Vui lòng chọn đúng file *_evidence.json ở ô số 2!", byEvId: {}, byAlertId: {}, pairs: [] };
+        }
+      }
+      let evItems = [];
+      if (Array.isArray(rawEv)) {
+        evItems = rawEv;
+      } else if (rawEv && Array.isArray(rawEv.evidence)) {
+        evItems = rawEv.evidence;
+      } else if (rawEv && typeof rawEv === "object") {
+        evItems = [rawEv];
+      }
+
+      const byEvId = {};
+      const byAlertId = {};
+      const pairs = [];
+
+      for (const item of evItems) {
+        if (!item || typeof item !== "object") continue;
+        const evId = String(item.evidence_id || "").trim();
+        let alId = String(item.alert_id || "").trim();
+        if (!alId && item._evidence && item._evidence.alert_id) {
+          alId = String(item._evidence.alert_id).trim();
+        }
+        if (evId || alId) {
+          if (!pairs.some(p => p.alert_id === alId && p.evidence_id === evId)) {
+            pairs.push({ alert_id: alId, evidence_id: evId });
+          }
+        }
+        if (evId) byEvId[evId] = item;
+        if (alId) {
+          if (item._evidence) {
+            if (!Array.isArray(byAlertId[alId])) byAlertId[alId] = [];
+            byAlertId[alId].push(item);
+          } else {
+            byAlertId[alId] = item;
+          }
+        }
+      }
+      return { error: null, byEvId, byAlertId, pairs };
+    }
+
+    function checkAlertEvidenceCorrespondence(rawAlert, rawEv) {
+      const aMeta = extractAlertMetaList(rawAlert);
+      if (aMeta.error) {
+        return { valid: false, reason: aMeta.error, badge: "LỖI FILE ALERT" };
+      }
+      if (!rawEv) {
+        // Check if alert already embeds target_event or if evidence is required
+        const firstA = Array.isArray(rawAlert) ? rawAlert[0] : (rawAlert.alerts ? rawAlert.alerts[0] : rawAlert);
+        const hasInlineTelemetry = firstA && (firstA.target_event || (firstA.process && firstA.process.image));
+        const p0 = aMeta.items[0] || {};
+        if (hasInlineTelemetry) {
+          return {
+            valid: true,
+            reason: `Đã nạp Alert [alert_id='${p0.alert_id}', evidence_id='${p0.evidence_id || "N/A"}'] (${aMeta.items.length} alert). Hãy chọn thêm file Evidence tương ứng để kiểm chứng đầy đủ context_events.`,
+            badge: "CHỈ CÓ ALERT (CHƯA CHỌN EVIDENCE)"
+          };
+        }
+        return {
+          valid: false,
+          reason: `Đã chọn Alert [alert_id='${p0.alert_id}', evidence_id='${p0.evidence_id || "N/A"}'] nhưng chưa có dữ liệu telemetry/Evidence. Vui lòng chọn file *_evidence.json tương ứng!`,
+          badge: "THIẾU FILE EVIDENCE"
+        };
+      }
+
+      const eMeta = extractEvidenceMetaIndex(rawEv);
+      if (eMeta.error) {
+        return { valid: false, reason: eMeta.error, badge: "LỖI FILE EVIDENCE" };
+      }
+
+      const mismatches = [];
+      for (const aItem of aMeta.items) {
+        const aid = aItem.alert_id;
+        const evid = aItem.evidence_id;
+        let matched = null;
+
+        if (evid && eMeta.byEvId[evid]) {
+          matched = eMeta.byEvId[evid];
+          const evAid = String(matched.alert_id || "").trim();
+          if (aid && evAid && aid !== evAid) {
+            mismatches.push(`Alert [alert_id='${aid}', evidence_id='${evid}'] lệch alert_id với Evidence [alert_id='${evAid}']`);
+            continue;
+          }
+        } else if (aid && eMeta.byAlertId[aid]) {
+          matched = eMeta.byAlertId[aid];
+          const evEvid = !Array.isArray(matched) ? String(matched.evidence_id || "").trim() : "";
+          if (evid && evEvid && evid !== evEvid) {
+            mismatches.push(`Alert [alert_id='${aid}', evidence_id='${evid}'] lệch evidence_id với Evidence [evidence_id='${evEvid}']`);
+            continue;
+          }
+        }
+
+        if (!matched) {
+          const evSample = eMeta.pairs.slice(0, 2).map(p => `[alert_id='${p.alert_id}', evidence_id='${p.evidence_id || "N/A"}']`).join(", ") || "không có ID";
+          mismatches.push(`Alert [alert_id='${aid}', evidence_id='${evid || "N/A"}'] KHÔNG KHỚP với file Evidence ${evSample}`);
+        }
+      }
+
+      if (mismatches.length > 0) {
+        return {
+          valid: false,
+          reason: `KHÔNG KHỚP DỮ LIỆU: ${mismatches[0]}. Hệ thống đã chặn sinh Rule để tránh ghép sai sự kiện!`,
+          badge: "KHÔNG KHỚP (ĐÃ CHẶN)"
+        };
+      }
+
+      const p0 = aMeta.items[0] || {};
+      return {
+        valid: true,
+        reason: `KHỚP CẶP FILE HỢP LỆ (${aMeta.items.length} alert): alert_id = '${p0.alert_id}' | evidence_id = '${p0.evidence_id || "Matched"}'`,
+        badge: "✓ KHỚP CẶP ID"
+      };
+    }
+
+    function updateCorrespondenceUI() {
+      const banner = document.getElementById("correspondenceBanner");
+      const textEl = document.getElementById("correspondenceText");
+      const badgeEl = document.getElementById("correspondenceBadge");
+      const btnProcess = document.getElementById("btnProcessUploaded");
+
+      if (!state.uploadedAlertRaw && !state.uploadedEvidenceRaw) {
+        state.correspondenceValid = false;
+        banner.className = "mt-3 px-3 py-2 rounded-lg border border-slate-800 bg-slate-950/70 text-xs font-mono text-slate-400 flex items-center justify-between gap-2";
+        textEl.textContent = "Trạng thái đối chiếu Alert ↔ Evidence: Đang chờ chọn cặp file Alert (.json) và Evidence (.json)...";
+        badgeEl.textContent = "CHỜ DỮ LIỆU";
+        badgeEl.className = "px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[11px] font-bold shrink-0";
+        btnProcess.disabled = false;
+        return;
+      }
+
+      const check = checkAlertEvidenceCorrespondence(state.uploadedAlertRaw, state.uploadedEvidenceRaw);
+      state.correspondenceValid = check.valid;
+      state.correspondenceError = check.valid ? "" : check.reason;
+
+      if (check.valid) {
+        banner.className = "mt-3 px-3 py-2 rounded-lg border border-emerald-500/40 bg-emerald-950/30 text-xs font-mono text-emerald-300 flex items-center justify-between gap-2";
+        textEl.textContent = check.reason;
+        badgeEl.textContent = check.badge;
+        badgeEl.className = "px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-bold shrink-0";
+        btnProcess.disabled = false;
+      } else {
+        banner.className = "mt-3 px-3 py-2 rounded-lg border border-rose-500/50 bg-rose-950/40 text-xs font-mono text-rose-300 flex items-center justify-between gap-2";
+        textEl.textContent = check.reason;
+        badgeEl.textContent = check.badge;
+        badgeEl.className = "px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold shrink-0";
+        btnProcess.disabled = true;
+      }
+    }
+
+    // =========================================================================
+    // 4. TELEMETRY-GROUNDED MITRE INFERENCE & SIGMA SYNTHESIZER
+    // =========================================================================
+    function inferMitreFromTelemetry(ecode, fields) {
+      const techs = [];
+      const combined = [fields.RuleName, fields.CommandLine, fields.ParentCommandLine, fields.TargetFilename, fields.TargetObject].filter(Boolean).join(" ");
+      const reTid = /\b(T\d{4}(?:\.\d{3})?)\b/gi;
+      let m;
+      while ((m = reTid.exec(combined)) !== null) {
+        let tid = m[1].toUpperCase();
+        if (tid === "T1089") tid = "T1562.001";
+        if (!techs.includes(tid)) techs.push(tid);
+      }
+
+      const img = (fields.Image || "").toLowerCase();
+      const pimg = (fields.ParentImage || "").toLowerCase();
+      const cmd = (fields.CommandLine || "").toLowerCase();
+      const tf = (fields.TargetFilename || "").toLowerCase();
+      const tobj = (fields.TargetObject || "").toLowerCase();
+
+      if (Number(ecode) === 11) {
+        if (tf.includes(".ps1") || img.includes("powershell")) {
+          if (!techs.includes("T1059.001")) techs.push("T1059.001");
+        }
+        if (!techs.includes("T1105")) techs.push("T1105");
+      } else if ([12, 13, 14].includes(Number(ecode))) {
+        if (tobj.includes("disablerealtimemonitoring") || tobj.includes("windows defender")) {
+          if (!techs.includes("T1562.001")) techs.push("T1562.001");
+        }
+        if (!techs.includes("T1112")) techs.push("T1112");
+      } else if (Number(ecode) === 22) {
+        if (!techs.includes("T1071.004")) techs.push("T1071.004");
+      } else if (Number(ecode) === 3) {
+        if (!techs.includes("T1071")) techs.push("T1071");
+      } else {
+        if (img.endsWith("\\whoami.exe")) techs.push("T1033");
+        else if (img.endsWith("\\hostname.exe") || img.endsWith("\\systeminfo.exe") || img.endsWith("\\trustedinstaller.exe") || img.endsWith("\\lpremove.exe")) techs.push("T1082");
+        else if (img.endsWith("\\reg.exe")) techs.push(cmd.includes("query") ? "T1012" : "T1112");
+        else if (img.endsWith("\\netsh.exe") || img.endsWith("\\ipconfig.exe") || img.endsWith("\\arp.exe") || img.endsWith("\\nbtstat.exe")) techs.push("T1016");
+        else if (img.endsWith("\\netstat.exe")) techs.push("T1049");
+        else if (img.endsWith("\\tasklist.exe")) techs.push("T1057");
+        else if (img.endsWith("\\sc.exe")) techs.push("T1007");
+        else if (img.endsWith("\\tree.com")) techs.push("T1083");
+        else if (img.endsWith("\\w32tm.exe")) techs.push("T1124");
+        else if (img.endsWith("\\rundll32.exe")) techs.push("T1218.011");
+        else if (img.endsWith("\\mpcmdrun.exe")) techs.push("T1562.001");
+        else if (img.endsWith("\\net.exe") || img.endsWith("\\net1.exe")) {
+          if (cmd.includes("view")) techs.push("T1135");
+          else if (cmd.includes("time")) techs.push("T1124");
+          else techs.push("T1049");
+        } else if (img.endsWith("\\powershell.exe")) techs.push("T1059.001");
+        else if (img.endsWith("\\cmd.exe")) techs.push("T1059.003");
+        else techs.push("T1082");
+
+        if (pimg.endsWith("\\powershell.exe") && !techs.includes("T1059.001")) techs.push("T1059.001");
+        if (pimg.endsWith("\\cmd.exe") && !techs.includes("T1059.003")) techs.push("T1059.003");
+      }
+
+      return techs.length > 0 ? Array.from(new Set(techs)) : ["T1059"];
+    }
+
+    // =========================================================================
+    // 5. SIGMA YAML PARSER, 3-QUESTION VERIFIER & WAZUH XML COMPILER
+    // =========================================================================
+    function parseSimpleSigmaYaml(yamlText) {
+      const lines = String(yamlText || "").replace(/\r\n/g, "\n").split("\n");
+      const result = {
+        title: "",
+        id: "",
+        status: "experimental",
+        description: "",
+        level: "high",
+        logsource: {},
+        detection: { selection: {}, condition: "selection" },
+        tags: []
+      };
+
+      let section = null;
+      let subSection = null;
+      let currentFieldKey = null;
+
+      for (let rawLine of lines) {
+        const trimmed = rawLine.trim();
+        if (!trimmed || trimmed.startsWith("#")) continue;
+        const indent = rawLine.search(/\S/);
+
+        if (indent === 0) {
+          subSection = null;
+          currentFieldKey = null;
+          const m = trimmed.match(/^([a-zA-Z0-9_-]+):\s*(.*)$/);
+          if (m) {
+            const key = m[1];
+            const val = m[2].replace(/^['"]|['"]$/g, "").trim();
+            if (["title", "id", "status", "description", "author", "date", "level"].includes(key)) {
+              result[key] = val;
+              section = null;
+            } else {
+              section = key;
+              if (key === "tags" && val.startsWith("[") && val.endsWith("]")) {
+                const inner = val.slice(1, -1).split(",").map(s => s.replace(/^['"]|['"]$/g, "").trim()).filter(Boolean);
+                result.tags.push(...inner);
+              }
+            }
+          }
+        } else if (section === "logsource") {
+          const m = trimmed.match(/^([a-zA-Z0-9_-]+):\s*(.*)$/);
+          if (m) {
+            result.logsource[m[1]] = m[2].replace(/^['"]|['"]$/g, "").trim();
+          }
+        } else if (section === "tags") {
+          if (trimmed.startsWith("-")) {
+            const tVal = trimmed.replace(/^-\s*/, "").replace(/^['"]|['"]$/g, "").trim();
+            if (tVal) result.tags.push(tVal);
+          }
+        } else if (section === "detection") {
+          if (indent <= 4 && trimmed.endsWith(":") && !trimmed.startsWith("-")) {
+            subSection = trimmed.slice(0, -1).trim();
+            if (!result.detection[subSection]) result.detection[subSection] = {};
+            currentFieldKey = null;
+          } else if (trimmed.startsWith("condition:")) {
+            result.detection.condition = trimmed.split(":", 2)[1].replace(/^['"]|['"]$/g, "").trim();
+          } else if (subSection && subSection !== "condition") {
+            if (trimmed.startsWith("-")) {
+              const itemVal = trimmed.replace(/^-\s*/, "").replace(/^['"]|['"]$/g, "").trim();
+              if (currentFieldKey) {
+                if (!Array.isArray(result.detection[subSection][currentFieldKey])) {
+                  result.detection[subSection][currentFieldKey] = [];
+                }
+                result.detection[subSection][currentFieldKey].push(itemVal);
+              }
+            } else {
+              const colonIdx = trimmed.indexOf(":");
+              if (colonIdx > 0) {
+                const fKey = trimmed.slice(0, colonIdx).trim();
+                const fValRaw = trimmed.slice(colonIdx + 1).trim();
+                if (!fValRaw) {
+                  currentFieldKey = fKey;
+                  result.detection[subSection][fKey] = [];
+                } else if (fValRaw.startsWith("[") && fValRaw.endsWith("]")) {
+                  currentFieldKey = fKey;
+                  result.detection[subSection][fKey] = fValRaw
+                    .slice(1, -1)
+                    .split(",")
+                    .map(s => s.trim().replace(/^['"]|['"]$/g, ""))
+                    .filter(Boolean);
+                } else {
+                  currentFieldKey = fKey;
+                  result.detection[subSection][fKey] = fValRaw.replace(/^['"]|['"]$/g, "");
+                }
+              }
+            }
+          }
+        }
+      }
+      return result;
+    }
+
+    function normalizeWinStr(s) {
+      return String(s || "")
+        .replace(/\\{2,}/g, "\\")
+        .replace(/["']/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+    }
+
+    function evaluateClauseAgainstEvent(specKey, expectedRaw, eventFields) {
+      const parts = specKey.split("|").map(p => p.trim()).filter(Boolean);
+      const fieldName = parts[0];
+      const mods = parts.slice(1).map(m => m.toLowerCase());
+
+      const actualKey = Object.keys(eventFields).find(k => k.toLowerCase() === fieldName.toLowerCase());
+      if (!actualKey || eventFields[actualKey] === undefined || eventFields[actualKey] === null || eventFields[actualKey] === "") {
+        return false;
+      }
+
+      const actualNorm = normalizeWinStr(eventFields[actualKey]);
+      const values = Array.isArray(expectedRaw) ? expectedRaw : [expectedRaw];
+      const requireAll = mods.includes("all");
+
+      const checkOne = (expVal) => {
+        const expNorm = normalizeWinStr(expVal);
+        if (!expNorm) return true;
+        if (mods.includes("contains")) return actualNorm.includes(expNorm);
+        if (mods.includes("startswith")) return actualNorm.startsWith(expNorm);
+        if (mods.includes("endswith")) {
+          if (actualNorm.endsWith(expNorm)) return true;
+          const base = expNorm.split("\\").pop();
+          return Boolean(base && actualNorm.endsWith(base));
+        }
+        return actualNorm === expNorm || actualNorm.includes(expNorm);
+      };
+
+      return requireAll ? values.every(checkOne) : values.some(checkOne);
+    }
+
+    function isLogsourceCompatible(cat, srv, evFamily, evCode) {
+      const c = (cat || "").toLowerCase();
+      const s = (srv || "").toLowerCase();
+      const code = Number(evCode);
+      if (evFamily === "sysmon") {
+        const map = {
+          1: ["process_creation"],
+          3: ["network_connection"],
+          7: ["image_load"],
+          8: ["create_remote_thread"],
+          10: ["process_access"],
+          11: ["file_event", "file_create"],
+          12: ["registry_event", "registry_add", "registry_delete", "registry_set"],
+          13: ["registry_set", "registry_event"],
+          15: ["file_event", "file_createstreamhash"],
+          22: ["dns_query", "dns"]
+        };
+        const allowed = map[code];
+        if (allowed) return allowed.includes(c);
+      }
+      if (evFamily === "service_control") {
+        return s === "system" || !c;
+      }
+      if (evFamily === "windows_security") {
+        return s === "security" || c === "process_creation";
+      }
+      return true;
+    }
+
+    function matchRuleOnEvent(parsed, evFamily, evCode, evFields) {
+      const cat = (parsed.logsource.category || "").toLowerCase();
+      const srv = (parsed.logsource.service || "").toLowerCase();
+      if (!isLogsourceCompatible(cat, srv, evFamily, evCode)) return false;
+
+      const sel = parsed.detection.selection || {};
+      const keys = Object.keys(sel);
+      if (keys.length === 0) return false;
+
+      for (const k of keys) {
+        if (!evaluateClauseAgainstEvent(k, sel[k], evFields)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function verifyAndCompileRule(yamlText, bundle, assignedRuleId) {
+      const parsed = parseSimpleSigmaYaml(yamlText);
+      const q1Errors = [];
+      const q1Warnings = [];
+      let q1Score = 100.0;
+
+      if (!parsed.title) { q1Errors.push("Thiếu trường bắt buộc 'title'"); q1Score -= 25; }
+      if (!parsed.logsource || !parsed.logsource.product) { q1Errors.push("Thiếu 'logsource.product'"); q1Score -= 30; }
+      const selKeys = Object.keys(parsed.detection.selection || {});
+      if (selKeys.length === 0) { q1Errors.push("Khối 'detection.selection' rỗng"); q1Score -= 50; }
+
+      // Optional MITRE tags check: missing tags is a warning (-10 points -> 90/100 = 18%), NEVER a hard error in q1Errors!
+      const hasAttackTag = (parsed.tags || []).some(t => /^attack\.t\d{4}/i.test(String(t).trim()) || /^t\d{4}/i.test(String(t).trim()));
+      if (!hasAttackTag) {
+        q1Warnings.push("Chưa gắn thẻ 'tags' MITRE ATT&CK (attack.tXXXX)");
+        q1Score -= 10;
+      }
+      q1Score = Math.max(0, q1Score);
+      const q1Valid = q1Errors.length === 0 && q1Score >= 60;
+
+      // Q2: Data Match & Alert Linkage (30%)
+      const q2Errors = [];
+      const q2Warnings = [];
+      let q2Score = 100.0;
+      const expLs = bundle.expected_logsource || { product: "windows" };
+      const actualCat = (parsed.logsource.category || "").toLowerCase();
+      const actualSrv = (parsed.logsource.service || "").toLowerCase();
+      const expCat = (expLs.category || "").toLowerCase();
+
+      const logsourceMatched = isLogsourceCompatible(actualCat, actualSrv, bundle.event_family || "sysmon", bundle.event_code || 1);
+      if (!logsourceMatched) {
+        q2Errors.push(`Sai lệch logsource: rule dùng category='${actualCat}' nhưng ${bundle.event_family} EventID ${bundle.event_code} yêu cầu '${expCat || expLs.service}'`);
+        q2Score -= 45;
+      }
+
+      // Check if rule explicitly references a DIFFERENT alert_id in description/title
+      const alertRefMatch = (parsed.description + " " + parsed.title).match(/\b(AI-\d{8}_\d{6}\.\d{3}-[a-f0-9]+|ALERT-\d{3})\b/i);
+      if (alertRefMatch && bundle.alert_id && alertRefMatch[1].toLowerCase() !== bundle.alert_id.toLowerCase()) {
+        q2Errors.push(`Không khớp Rule ↔ Evidence: Rule ghi nhận của Alert '${alertRefMatch[1]}' nhưng đang kiểm chứng với Alert/Evidence '${bundle.alert_id}'!`);
+        q2Score -= 50;
+      }
+
+      let allFieldsPresent = true;
+      const availFieldsLower = Object.keys(bundle.sigma_fields || {}).map(k => k.toLowerCase());
+      for (const specK of selKeys) {
+        const fName = specK.split("|")[0].trim();
+        if (!availFieldsLower.includes(fName.toLowerCase())) {
+          allFieldsPresent = false;
+          q2Errors.push(`Trường bịa đặt/NULL '${fName}': sự kiện gốc KHÔNG có trường này (các trường hợp lệ: ${Object.keys(bundle.sigma_fields).join(", ")})`);
+          q2Score -= 35;
+        }
+      }
+
+      for (const specK of selKeys) {
+        const valStr = JSON.stringify(parsed.detection.selection[specK] || "");
+        if (/__PSScriptPolicyTest_[a-z0-9]{6,}/i.test(valStr)) {
+          q2Warnings.push(`Hardcode hậu tố ngẫu nhiên trong '${specK}' gây giảm khả năng tổng quát hóa`);
+          q2Score -= 20;
+        }
+      }
+      q2Score = Math.max(0, q2Score);
+      const q2Valid = logsourceMatched && allFieldsPresent && q2Errors.length === 0 && q2Score >= 65;
+
+      // Q3: Behavioral Detection & Replay (Vòng A + Vòng B) (50%)
+      const primaryMatch = matchRuleOnEvent(parsed, bundle.event_family || "sysmon", bundle.event_code || 1, bundle.sigma_fields || {});
+      const tp = primaryMatch ? 1 : 0;
+      const fn = primaryMatch ? 0 : 1;
+
+      const v1Fields = { ...bundle.sigma_fields, User: "CORP\\soc_test_user" };
+      if (v1Fields.TargetFilename) v1Fields.TargetFilename = v1Fields.TargetFilename.replace(/\\Users\\[^\\]+\\/i, "\\Users\\soc_test_user\\");
+      const v2Fields = { ...bundle.sigma_fields };
+      if (v2Fields.TargetFilename) v2Fields.TargetFilename = v2Fields.TargetFilename.replace(/__PSScriptPolicyTest_[a-z0-9.]+/i, "__PSScriptPolicyTest_xyz987.tmp.ps1");
+      const v3Fields = { ...bundle.sigma_fields };
+      if (v3Fields.Image) v3Fields.Image = v3Fields.Image.replace("C:\\WINDOWS\\system32", "C:\\Windows\\System32");
+
+      const genHits = [v1Fields, v2Fields, v3Fields].filter(vf => matchRuleOnEvent(parsed, bundle.event_family || "sysmon", bundle.event_code || 1, vf)).length;
+      const genTotal = 3;
+      const genRate = genHits / genTotal;
+
+      let fp = 0;
+      let tn = 0;
+      for (const bEv of BENIGN_CORPUS) {
+        if (matchRuleOnEvent(parsed, bEv.family, bEv.code, bEv.fields)) {
+          fp++;
+        } else {
+          tn++;
+        }
+      }
+
+      const precision = (tp + fp) > 0 ? tp / (tp + fp) : 0;
+      const recall = (tp + fn) > 0 ? tp / (tp + fn) : 0;
+      const f1 = (precision + recall) > 0 ? (2 * precision * recall) / (precision + recall) : 0;
+      const fpr = (fp + tn) > 0 ? fp / (fp + tn) : 0;
+
+      let q3Score = 0;
+      if (tp > 0) {
+        q3Score = (recall * 45) + (genRate * 25) + ((1 - fpr) * 30);
+        if (fp > 0) q3Score -= Math.min(40, fp * 20);
+      }
+      q3Score = Math.max(0, Math.min(100, q3Score));
+      const q3Valid = tp > 0 && fp === 0 && q3Score >= 70;
+
+      const confidenceScore = Number(((0.20 * q1Score) + (0.30 * q2Score) + (0.50 * q3Score)).toFixed(1));
+      let qualityGate = "FAIL - REJECT";
+      let recReason = "Rule KHÔNG đạt ngưỡng an toàn để đưa vào Wazuh (không bắt được sự kiện mục tiêu hoặc sai lệch trường/logsource/Alert ID).";
+      if (q1Valid && q2Valid && q3Valid && confidenceScore >= 80) {
+        qualityGate = "PASS - RECOMMEND_ADD";
+        recReason = "Rule hợp lệ cú pháp, khớp chính xác trường non-null của sự kiện, bắt đúng hành vi tấn công (TP=1, FP=0) và tổng quát hóa tốt trên cả 3 biến thể.";
+      } else if (q1Valid && q2Valid && tp > 0 && confidenceScore >= 60) {
+        qualityGate = "WARN - REVIEW_NEEDED";
+        recReason = "Rule bắt được sự kiện bất thường nhưng cần SOC xem xét lại độ rộng điều kiện hoặc cảnh báo quá khớp.";
+      }
+
+      // Compile to Wazuh XML (<group name="ml_generated,sysmon,"><rule id="1001xx">)
+      const levelMap = { informational: 3, low: 5, medium: 8, high: 12, critical: 15 };
+      const wazuhLevel = levelMap[(parsed.level || "high").toLowerCase()] || 12;
+      const parentGroup = bundle.expected_wazuh_group || "sysmon_event1";
+      const fieldMap = {
+        image: "win.eventdata.image",
+        parentimage: "win.eventdata.parentImage",
+        commandline: "win.eventdata.commandLine",
+        parentcommandline: "win.eventdata.parentCommandLine",
+        targetfilename: "win.eventdata.targetFilename",
+        targetobject: "win.eventdata.targetObject",
+        details: "win.eventdata.details",
+        eventtype: "win.eventdata.eventType",
+        queryname: "win.eventdata.queryName",
+        querystatus: "win.eventdata.queryStatus",
+        queryresults: "win.eventdata.queryResults",
+        user: "win.eventdata.user",
+        eventid: "win.system.eventID",
+        channel: "win.system.channel"
+      };
+
+      const xmlFields = [];
+      for (const specK of selKeys) {
+        const parts = specK.split("|").map(s => s.trim());
+        const fName = parts[0];
+        if (parentGroup.startsWith("sysmon_event") && ["eventid", "channel"].includes(fName.toLowerCase())) continue;
+        const wField = fieldMap[fName.toLowerCase()] || `win.eventdata.${fName.charAt(0).toLowerCase() + fName.slice(1)}`;
+        const rawV = parsed.detection.selection[specK];
+        const vals = Array.isArray(rawV) ? rawV : [rawV];
+        const escapedVals = vals.map(v => {
+          const clean = String(v).replace(/\\{2,}/g, "\\").trim();
+          const segs = clean.split("\\").map(seg => seg.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+          const joined = segs.join("\\\\+");
+          if (parts.includes("endswith")) return `${joined}$`;
+          if (parts.includes("startswith")) return `^${joined}`;
+          return joined;
+        });
+        if (parts.includes("all")) {
+          for (const evPat of escapedVals) {
+            xmlFields.push(`    <field name="${wField}" type="pcre2">(?i)${evPat}</field>`);
+          }
+        } else {
+          const pat = escapedVals.length === 1 ? `(?i)${escapedVals[0]}` : `(?i)(?:${escapedVals.join("|")})`;
+          xmlFields.push(`    <field name="${wField}" type="pcre2">${pat}</field>`);
+        }
+      }
+
+      const mitreIds = (parsed.tags || [])
+        .map(t => {
+          const m = String(t).match(/(?:attack\.)?(t\d{4}(?:\.\d{3})?)/i);
+          return m ? m[1].toUpperCase() : null;
+        })
+        .filter(Boolean);
+      const finalMitreIds = mitreIds.length ? Array.from(new Set(mitreIds)) : (bundle.mitre_techniques || ["T1059"]);
+
+      const mitreBlock = finalMitreIds.length > 0
+        ? `    <mitre>\n${finalMitreIds.map(id => `      <id>${id}</id>`).join("\n")}\n    </mitre>\n`
+        : "";
+
+      const wazuhXml = `<group name="ml_generated,sysmon,">
+  <rule id="${assignedRuleId}" level="${wazuhLevel}">
+    <if_group>${parentGroup}</if_group>
+${xmlFields.join("\n")}
+    <description>${parsed.title || bundle.title} [Alert: ${bundle.alert_id}]</description>
+${mitreBlock}  </rule>
+</group>`;
+
+      return {
+        wazuh_rule_id: assignedRuleId,
+        alert_id: bundle.alert_id,
+        evidence_id: bundle.evidence_id || "",
+        source_format: bundle.source_format || "logdeep_v2",
+        title: parsed.title || bundle.title,
+        description: bundle.description,
+        severity: parsed.level || bundle.severity || "high",
+        mitre_techniques: finalMitreIds,
+        event_family: bundle.event_family || "sysmon",
+        event_code: bundle.event_code || 1,
+        expected_logsource: bundle.expected_logsource,
+        expected_wazuh_group: parentGroup,
+        sigma_fields: bundle.sigma_fields || {},
+        context_events: bundle.context_events || [],
+        raw_yaml: yamlText,
+        wazuh_xml: wazuhXml,
+        sigma_file: bundle.sigma_file || `${bundle.alert_id.toLowerCase().replace(/[^a-z0-9]+/g, "_")}.yml`,
+        wazuh_file: bundle.wazuh_file || `ml_generated_${assignedRuleId}.xml`,
+        report: {
+          q1_syntax_valid: q1Valid,
+          q1_syntax_score: q1Score,
+          q1_errors: q1Errors,
+          q1_warnings: q1Warnings,
+          q2_data_match_valid: q2Valid,
+          q2_data_linkage_score: q2Score,
+          q2_logsource_matched: logsourceMatched,
+          q2_all_fields_present: allFieldsPresent,
+          q2_errors: q2Errors,
+          q2_warnings: q2Warnings,
+          q3_behavior_valid: q3Valid,
+          q3_behavior_score: Number(q3Score.toFixed(1)),
+          tp, fp, fn, tn,
+          precision: Number(precision.toFixed(2)),
+          recall: Number(recall.toFixed(2)),
+          f1_score: Number(f1.toFixed(2)),
+          generalization_hits: genHits,
+          generalization_total: genTotal,
+          generalization_rate: genRate,
+          fpr: Number(fpr.toFixed(4)),
+          confidence_score: confidenceScore,
+          quality_gate: qualityGate,
+          recommendation_reason: recReason
+        }
+      };
+    }
+
+    // =========================================================================
+    // 6. CLIENT-SIDE TELEMETRY EXTRACTOR & RULE SYNTHESIZER
+    // =========================================================================
+    function extractNestedTelemetryFields(rawEv) {
+      const out = {};
+      if (!rawEv || typeof rawEv !== "object") return { ecode: 1, fields: out };
+      const ed = rawEv.event_data || ((rawEv.data || {}).win || {}).eventdata || {};
+      const sysd = rawEv.system_data || ((rawEv.data || {}).win || {}).system || {};
+      const proc = rawEv.process || {};
+      const pproc = rawEv.parent_process || {};
+      const fobj = rawEv.file || {};
+      const nobj = rawEv.network || {};
+
+      const ecode = Number(rawEv.event_id || sysd.eventID || sysd.event_id || 1);
+      out.EventID = String(ecode);
+      out.Channel = rawEv.channel || sysd.channel || "Microsoft-Windows-Sysmon/Operational";
+
+      const img = proc.image || ed.image || ed.Image || rawEv.image;
+      const cmd = proc.command_line || ed.commandLine || ed.CommandLine || ed.command_line || rawEv.command_line;
+      const pimg = pproc.image || ed.parentImage || ed.ParentImage || ed.parent_image || rawEv.parent_image;
+      const pcmd = pproc.command_line || ed.parentCommandLine || ed.ParentCommandLine || ed.parent_command_line || rawEv.parent_command_line;
+      const tf = fobj.target_filename || ed.targetFilename || ed.TargetFilename || ed.target_filename || rawEv.target_filename;
+      const tobj = fobj.target_object || ed.targetObject || ed.TargetObject || ed.target_object || rawEv.target_object;
+      const details = fobj.details || ed.details || ed.Details || rawEv.details;
+      const evType = ed.event_type || ed.eventType || ed.EventType;
+      const qname = nobj.query_name || ed.query_name || ed.queryName || ed.QueryName;
+      const qstatus = nobj.query_status || ed.query_status || ed.queryStatus;
+      const qresults = nobj.query_results || ed.query_results || ed.queryResults;
+      const rname = ed.rule_name || ed.ruleName || ed.RuleName;
+      const user = rawEv.user || proc.user || ed.user || ed.User;
+
+      if (img) out.Image = String(img).replace(/\\{2,}/g, "\\");
+      if (cmd) out.CommandLine = String(cmd).replace(/\\{2,}/g, "\\");
+      if (pimg) out.ParentImage = String(pimg).replace(/\\{2,}/g, "\\");
+      if (pcmd) out.ParentCommandLine = String(pcmd).replace(/\\{2,}/g, "\\");
+      if (tf) out.TargetFilename = String(tf).replace(/\\{2,}/g, "\\");
+      if (tobj) out.TargetObject = String(tobj).replace(/\\{2,}/g, "\\");
+      if (details) out.Details = String(details);
+      if (evType) out.EventType = String(evType);
+      if (qname) out.QueryName = String(qname);
+      if (qstatus) out.QueryStatus = String(qstatus);
+      if (qresults) out.QueryResults = String(qresults);
+      if (rname) out.RuleName = String(rname);
+      if (user) out.User = String(user);
+      return { ecode, fields: out };
+    }
+
+    function synthesizeSigmaYamlFromBundle(bundle) {
+      const sf = bundle.sigma_fields || {};
+      const ls = bundle.expected_logsource || { product: "windows", category: "process_creation" };
+      const lsLines = Object.entries(ls).map(([k, v]) => `  ${k}: ${v}`).join("\n");
+      const selLines = [];
+
+      const img = sf.Image || "";
+      const imgLow = img.toLowerCase();
+      const cmd = sf.CommandLine || "";
+      const cmdLow = cmd.toLowerCase();
+
+      if (img) {
+        const base = img.split("\\").pop();
+        selLines.push(`    Image|endswith: '\\${base}'`);
+      }
+      if (sf.ParentImage) {
+        const pbase = sf.ParentImage.split("\\").pop();
+        if (["powershell.exe", "cmd.exe", "winword.exe", "services.exe", "winlogon.exe", "net.exe"].includes(pbase.toLowerCase())) {
+          selLines.push(`    ParentImage|endswith: '\\${pbase}'`);
+        }
+      }
+      if (sf.TargetFilename) {
+        if (sf.TargetFilename.includes("__PSScriptPolicyTest_")) {
+          selLines.push(`    TargetFilename|contains: '\\AppData\\Local\\Temp\\__PSScriptPolicyTest_'`);
+          selLines.push(`    TargetFilename|endswith: '.ps1'`);
+        } else {
+          const fbase = sf.TargetFilename.split("\\").pop();
+          selLines.push(`    TargetFilename|endswith: '\\${fbase}'`);
+        }
+      }
+      if (sf.TargetObject) {
+        if (sf.TargetObject.includes("DisableRealtimeMonitoring")) {
+          selLines.push(`    TargetObject|contains: 'DisableRealtimeMonitoring'`);
+          if (sf.Details && sf.Details.includes("0x00000001")) {
+            selLines.push(`    Details|contains: '0x00000001'`);
+          }
+        } else if (sf.TargetObject.includes("Keyboard Layout\\Preload")) {
+          selLines.push(`    TargetObject|contains: '\\Keyboard Layout\\Preload\\'`);
+        } else if (sf.TargetObject.includes("LastLoggedOnUser")) {
+          selLines.push(`    TargetObject|contains: '\\Authentication\\LogonUI\\LastLoggedOnUser'`);
+        } else if (sf.TargetObject.includes("DateLastConnected")) {
+          selLines.push(`    TargetObject|contains: '\\DateLastConnected'`);
+        } else {
+          const segs = sf.TargetObject.split("\\").filter(Boolean);
+          let tail = segs[segs.length - 1] || sf.TargetObject;
+          if (tail.length < 4 && segs.length >= 2) {
+            tail = "\\" + segs.slice(-2).join("\\");
+          }
+          selLines.push(`    TargetObject|contains: '${tail}'`);
+        }
+      }
+      if (sf.QueryName) {
+        const hostPart = sf.QueryName.split(".")[0] || sf.QueryName;
+        selLines.push(`    QueryName|contains: '${hostPart}'`);
+      }
+      if (cmd) {
+        if (cmdLow.includes("services\\disk\\enum")) {
+          selLines.push(`    CommandLine|contains: 'Services\\Disk\\Enum'`);
+        } else if (cmdLow.includes("interface show interface")) {
+          selLines.push(`    CommandLine|contains: 'interface'`);
+        } else if (cmdLow.includes("start-process") && cmdLow.includes("externalpayloads")) {
+          selLines.push(`    CommandLine|contains: 'ExternalPayloads'`);
+        } else if (cmdLow.includes("dir /s")) {
+          selLines.push(`    CommandLine|contains: 'dir /s'`);
+        } else if (cmdLow.includes("getdeviceticket")) {
+          selLines.push(`    CommandLine|contains: 'GetDeviceTicket'`);
+        } else if (cmdLow.includes("keyroaming")) {
+          selLines.push(`    CommandLine|contains: 'KEYROAMING'`);
+        } else if (cmdLow.includes("ngckeypregen")) {
+          selLines.push(`    CommandLine|contains: 'NGCKeyPregen'`);
+        } else if (cmdLow.includes("startupscan.dll")) {
+          selLines.push(`    CommandLine|contains: 'Startupscan.dll,SusRunTask'`);
+        } else if (cmdLow.includes("acproxy.dll")) {
+          selLines.push(`    CommandLine|contains: 'acproxy.dll,PerformAutochkOperations'`);
+        } else if (imgLow.endsWith("\\net.exe") || imgLow.endsWith("\\net1.exe")) {
+          for (const sub of ["/domain", "view", "sessions", "use", "config", "time"]) {
+            if (cmdLow.includes(sub)) {
+              selLines.push(`    CommandLine|contains: '${sub}'`);
+              break;
+            }
+          }
+        } else if (imgLow.endsWith("\\sc.exe")) {
+          selLines.push(`    CommandLine|contains: '${cmdLow.includes("state=") ? "state=" : "query"}'`);
+        } else if (!imgLow.endsWith("\\trustedinstaller.exe") && !imgLow.endsWith("\\lpremove.exe") && !imgLow.endsWith("\\hostname.exe")) {
+          const tokens = cmd.split(/\s+/).map(t => t.replace(/^['"]|['"]$/g, "")).filter(t => t.length >= 2 && !t.includes(":\\"));
+          if (tokens.length >= 2) {
+            selLines.push(`    CommandLine|contains: '${tokens[tokens.length - 1].replace(/'/g, "''")}'`);
+          }
+        }
+      }
+      if (selLines.length === 0 && sf.EventID) {
+        selLines.push(`    EventID: ${sf.EventID}`);
+      }
+
+      const mitreTags = (bundle.mitre_techniques && bundle.mitre_techniques.length ? bundle.mitre_techniques : ["T1059"])
+        .map(t => `  - attack.${String(t).replace(/^attack\./i, "").toLowerCase()}`)
+        .join("\n");
+
+      return `title: ${bundle.title.replace(/:/g, " -")}
+id: auto-${bundle.alert_id.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 16)}-rule
+status: experimental
+description: Auto-generated and verified Sigma rule for alert ${bundle.alert_id} on host ${bundle.host || "Windows"}.
+author: SigmaGen Auto-Pipeline (Qwen 2.5 7B)
+date: 2026-10-27
+logsource:
+${lsLines}
+detection:
+  selection:
+${selLines.join("\n")}
+  condition: selection
+falsepositives:
+  - Legitimate administrative activity
+level: ${bundle.severity || "high"}
+tags:
+${mitreTags}`;
+    }
+
+    function parseUploadedAlertAndEvidence(rawAlertData, rawEvData, deduplicate = true) {
+      const check = checkAlertEvidenceCorrespondence(rawAlertData, rawEvData);
+      if (!check.valid) {
+        throw new Error(check.reason);
+      }
+
+      let alertList = [];
+      if (Array.isArray(rawAlertData)) {
+        alertList = rawAlertData;
+      } else if (rawAlertData && Array.isArray(rawAlertData.alerts)) {
+        alertList = rawAlertData.alerts;
+      } else if (rawAlertData && typeof rawAlertData === "object") {
+        alertList = [rawAlertData.alert || rawAlertData];
+      }
+
+      const eMeta = extractEvidenceMetaIndex(rawEvData);
+      const seenPatterns = new Set();
+      const bundles = [];
+
+      alertList.forEach((aObj, idx) => {
+        const aid = String(aObj.alert_id || `AI-UPLOAD-${idx + 1}`).trim();
+        const evid = String(aObj.evidence_id || "").trim();
+        const matchedEv = (evid && eMeta.byEvId[evid]) || (aid && eMeta.byAlertId[aid]) || {};
+        const te = matchedEv.target_event || aObj.target_event || aObj;
+        const { ecode, fields } = extractNestedTelemetryFields(te);
+
+        const topExtracted = extractNestedTelemetryFields(aObj);
+        Object.entries(topExtracted.fields).forEach(([k, v]) => {
+          if (!fields[k]) fields[k] = v;
+        });
+
+        const token = aObj.event_token || aObj.observed_token || `sysmon|${ecode}`;
+        const patKey = `${token}|${fields.Image || ""}|${fields.CommandLine || ""}|${(fields.TargetFilename || "").replace(/__PSScriptPolicyTest_[a-z0-9.]+/i, "*Test*")}|${fields.TargetObject || ""}|${fields.QueryName || ""}`;
+        if (deduplicate && seenPatterns.has(patKey)) return;
+        seenPatterns.add(patKey);
+
+        const catMap = { 1: "process_creation", 3: "network_connection", 7: "image_load", 8: "create_remote_thread", 10: "process_access", 11: "file_event", 12: "registry_event", 13: "registry_set", 15: "file_event", 22: "dns_query" };
+        const grpMap = { 1: "sysmon_event1", 3: "sysmon_event3", 7: "sysmon_event7", 8: "sysmon_event8", 10: "sysmon_event10", 11: "sysmon_event_11", 12: "sysmon_event_12", 13: "sysmon_event_13", 15: "sysmon_event_15", 22: "sysmon_event_22" };
+        const ctxList = (matchedEv.context_events || []).slice(0, 8).map((c, cIdx) => {
+          const ce = extractNestedTelemetryFields(c);
+          return {
+            uid: c.event_uid || `ctx-${cIdx + 1}`,
+            ecode: ce.ecode,
+            family: c.event_family || "sysmon",
+            summary: `${ce.fields.Image || c.channel || "Event"} ${ce.fields.CommandLine || ce.fields.TargetFilename || ce.fields.TargetObject || ""}`
+          };
+        });
+
+        const wCtx = aObj.wazuh_context || {};
+        let mitreTechs = (wCtx.mitre && wCtx.mitre.id) || (aObj.mitre_context && aObj.mitre_context.technique) || aObj.mitre_attack || [];
+        if (!Array.isArray(mitreTechs)) mitreTechs = mitreTechs ? [String(mitreTechs)] : [];
+        mitreTechs = mitreTechs.filter(Boolean);
+        if (mitreTechs.length === 0) {
+          mitreTechs = inferMitreFromTelemetry(ecode, fields);
+        }
+
+        const imgBase = (fields.Image || "Process").split("\\").pop();
+        const pimgBase = (fields.ParentImage || "").split("\\").pop();
+        const defaultTitle = wCtx.rule_description
+          ? (pimgBase ? `Suspicious ${pimgBase} Spawning ${imgBase} (${wCtx.rule_description})` : wCtx.rule_description)
+          : (pimgBase ? `Suspicious ${pimgBase} Spawning ${imgBase} (${mitreTechs[0]})` : `Suspicious Activity by ${imgBase} (${mitreTechs[0]})`);
+
+        const bundle = {
+          alert_id: aid,
+          evidence_id: evid || matchedEv.evidence_id || "",
+          source_format: aObj.process ? "logdeep_v2" : (aObj.observed_token ? "logdeep" : "wazuh_ml"),
+          title: aObj.title || defaultTitle,
+          description: aObj.description || `Host ${aObj.host || "Windows"} triggered anomaly score ${Number(aObj.anomaly_score || 0).toFixed(4)} on token ${token}.`,
+          severity: (aObj.severity || "high").toLowerCase(),
+          anomaly_score: Number(aObj.anomaly_score || 10.0),
+          host: aObj.host || "Windows",
+          timestamp: aObj.timestamp || new Date().toISOString(),
+          observed_token: token,
+          mitre_techniques: mitreTechs,
+          event_family: ecode >= 4000 ? "service_control" : "sysmon",
+          event_code: ecode,
+          expected_logsource: ecode >= 4000 ? { product: "windows", service: "system" } : { product: "windows", category: catMap[ecode] || "process_creation" },
+          expected_wazuh_group: grpMap[ecode] || "windows",
+          sigma_fields: fields,
+          context_events: ctxList
+        };
+        bundle.raw_yaml = synthesizeSigmaYamlFromBundle(bundle);
+        bundles.push(bundle);
+      });
+
+      return bundles;
+    }
+
+    // =========================================================================
+    // 7. UI RENDERING & EVENT HANDLERS
+    // =========================================================================
+    function normalizeDashboardRuleItem(rawItem) {
+      if (!rawItem || typeof rawItem !== "object") return null;
+      const rep = rawItem.report && typeof rawItem.report === "object" ? rawItem.report : {};
+      return {
+        ...rawItem,
+        wazuh_rule_id: Number(rawItem.wazuh_rule_id || 100100),
+        alert_id: String(rawItem.alert_id || "ALERT-UNKNOWN"),
+        evidence_id: String(rawItem.evidence_id || ""),
+        title: String(rawItem.title || rawItem.rule_title || rawItem.alert_id || "Sigma Rule"),
+        description: String(rawItem.description || ""),
+        mitre_techniques: Array.isArray(rawItem.mitre_techniques) && rawItem.mitre_techniques.length ? rawItem.mitre_techniques : ["T1059"],
+        event_family: String(rawItem.event_family || "sysmon"),
+        event_code: Number(rawItem.event_code || 1),
+        expected_wazuh_group: String(rawItem.expected_wazuh_group || "sysmon_event1"),
+        sigma_fields: rawItem.sigma_fields || {},
+        context_events: Array.isArray(rawItem.context_events) ? rawItem.context_events : [],
+        raw_yaml: String(rawItem.raw_yaml || ""),
+        wazuh_xml: String(rawItem.wazuh_xml || ""),
+        sigma_file: String(rawItem.sigma_file || rawItem.sigma_yaml_file || "rule.yml"),
+        wazuh_file: String(rawItem.wazuh_file || rawItem.wazuh_xml_file || `ml_generated_${rawItem.wazuh_rule_id || 100100}.xml`),
+        report: {
+          q1_syntax_valid: rep.q1_syntax_valid !== undefined ? Boolean(rep.q1_syntax_valid) : true,
+          q1_syntax_score: Number(rep.q1_syntax_score !== undefined ? rep.q1_syntax_score : 100),
+          q1_errors: Array.isArray(rep.q1_errors) ? rep.q1_errors : [],
+          q1_warnings: Array.isArray(rep.q1_warnings) ? rep.q1_warnings : [],
+          q2_data_match_valid: rep.q2_data_match_valid !== undefined ? Boolean(rep.q2_data_match_valid) : true,
+          q2_data_linkage_score: Number(rep.q2_data_linkage_score !== undefined ? rep.q2_data_linkage_score : 100),
+          q2_logsource_matched: rep.q2_logsource_matched !== undefined ? Boolean(rep.q2_logsource_matched) : true,
+          q2_all_fields_present: rep.q2_all_fields_present !== undefined ? Boolean(rep.q2_all_fields_present) : true,
+          q2_errors: Array.isArray(rep.q2_errors) ? rep.q2_errors : [],
+          q2_warnings: Array.isArray(rep.q2_warnings) ? rep.q2_warnings : [],
+          q3_behavior_valid: rep.q3_behavior_valid !== undefined ? Boolean(rep.q3_behavior_valid) : true,
+          q3_behavior_score: Number(rep.q3_behavior_score !== undefined ? rep.q3_behavior_score : 100),
+          tp: Number(rep.tp !== undefined ? rep.tp : 1),
+          fp: Number(rep.fp !== undefined ? rep.fp : 0),
+          fn: Number(rep.fn !== undefined ? rep.fn : 0),
+          tn: Number(rep.tn !== undefined ? rep.tn : 10),
+          precision: Number(rep.precision !== undefined ? rep.precision : 1),
+          recall: Number(rep.recall !== undefined ? rep.recall : 1),
+          f1_score: Number(rep.f1_score !== undefined ? rep.f1_score : 1),
+          generalization_hits: Number(rep.generalization_hits !== undefined ? rep.generalization_hits : 3),
+          generalization_total: Number(rep.generalization_total !== undefined ? rep.generalization_total : 3),
+          generalization_rate: Number(rep.generalization_rate !== undefined ? rep.generalization_rate : 1),
+          fpr: Number(rep.fpr !== undefined ? rep.fpr : 0),
+          confidence_score: Number(rep.confidence_score !== undefined ? rep.confidence_score : 100),
+          quality_gate: String(rep.quality_gate || "PASS - RECOMMEND_ADD"),
+          recommendation_reason: String(rep.recommendation_reason || "")
+        }
+      };
+    }
+
+    function updateKPIs() {
+      const total = state.rules.length;
+      const passCount = state.rules.filter(r => r.report && r.report.quality_gate.startsWith("PASS")).length;
+      const xmlValidCount = state.rules.filter(r => r.wazuh_xml && r.wazuh_xml.includes("<rule id=")).length;
+      const avgScore = total > 0
+        ? (state.rules.reduce((acc, r) => acc + (r.report ? r.report.confidence_score : 0), 0) / total).toFixed(1)
+        : "0.0";
+      const totalFp = state.rules.reduce((acc, r) => acc + (r.report ? r.report.fp : 0), 0);
+
+      document.getElementById("kpiTotalAlerts").textContent = String(total);
+      document.getElementById("kpiTotalRules").textContent = String(total);
+      document.getElementById("kpiPassCount").textContent = `${passCount} / ${total} PASS`;
+      document.getElementById("kpiAvgScore").textContent = `TB: ${avgScore}%`;
+      document.getElementById("kpiXmlValid").textContent = `${xmlValidCount} XML`;
+      document.getElementById("kpiZeroFp").textContent = `FP = ${totalFp}`;
+      document.getElementById("ruleListCountBadge").textContent = `${total} rules`;
+    }
+
+    function renderRulesList() {
+      const container = document.getElementById("rulesListContainer");
+      const query = (document.getElementById("searchRuleInput").value || "").toLowerCase().trim();
+      const gateFilter = document.getElementById("filterGateSelect").value;
+
+      if (state.rules.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-xs text-slate-500 space-y-1">
+            <div class="font-semibold text-slate-400">Danh sách trống (0 rules)</div>
+            <div>Chọn cặp file Alert + Evidence hoặc bấm "Quét Tự Động ./alert" để sinh rule mới.</div>
+          </div>`;
+        return;
+      }
+
+      const filtered = state.rules.filter(item => {
+        if (gateFilter !== "ALL" && !item.report.quality_gate.startsWith(gateFilter)) return false;
+        if (!query) return true;
+        const hay = `${item.alert_id} ${item.evidence_id} ${item.wazuh_rule_id} ${item.title} ${(item.mitre_techniques || []).join(" ")}`.toLowerCase();
+        return hay.includes(query);
+      });
+
+      container.innerHTML = "";
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="p-6 text-center text-xs text-slate-500">Không có rule nào khớp bộ lọc.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const isSelected = item.wazuh_rule_id === state.selectedRuleId;
+        const gate = item.report.quality_gate;
+        const badgeClass = gate.startsWith("PASS")
+          ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+          : (gate.startsWith("WARN") ? "bg-amber-500/15 text-amber-300 border-amber-500/30" : "bg-rose-500/15 text-rose-300 border-rose-500/30");
+
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = `w-full text-left p-3 transition flex flex-col gap-1.5 ${
+          isSelected ? "bg-cyan-500/10 border-l-4 border-l-cyan-400" : "hover:bg-slate-800/50"
+        }`;
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                #${item.wazuh_rule_id}
+              </span>
+              <span class="font-mono text-[11px] text-slate-400 truncate max-w-[140px]">${item.alert_id}</span>
+            </div>
+            <span class="font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded border ${badgeClass}">
+              ${item.report.confidence_score}% ${gate.split(" ")[0]}
+            </span>
+          </div>
+          <div class="text-xs font-semibold text-slate-100 line-clamp-1">${item.title}</div>
+          <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+            <span>EID ${item.event_code} (${item.expected_wazuh_group})</span>
+            <span>TP=${item.report.tp} FP=${item.report.fp} Gen=${item.report.generalization_hits}/3</span>
+          </div>
+        `;
+        card.addEventListener("click", () => {
+          state.selectedRuleId = item.wazuh_rule_id;
+          renderRulesList();
+          renderSelectedRuleDetail();
+        });
+        container.appendChild(card);
+      });
+    }
+
+    function renderSelectedRuleDetail() {
+      const emptyBox = document.getElementById("emptyInspectorState");
+      const activeBox = document.getElementById("activeInspectorContainer");
+
+      if (state.rules.length === 0) {
+        emptyBox.classList.remove("hidden");
+        emptyBox.classList.add("flex");
+        activeBox.classList.add("hidden");
+        activeBox.classList.remove("flex");
+        return;
+      }
+
+      emptyBox.classList.add("hidden");
+      emptyBox.classList.remove("flex");
+      activeBox.classList.remove("hidden");
+      activeBox.classList.add("flex");
+
+      const item = state.rules.find(r => r.wazuh_rule_id === state.selectedRuleId) || state.rules[0];
+      if (!item) return;
+      state.selectedRuleId = item.wazuh_rule_id;
+
+      const rep = item.report;
+      document.getElementById("detailWazuhIdBadge").textContent = `Wazuh ID: #${item.wazuh_rule_id} (Auto)`;
+      document.getElementById("detailAlertIdBadge").textContent = `Alert: ${item.alert_id}`;
+      document.getElementById("detailSourceSchemaBadge").textContent = `Evidence: ${item.evidence_id || "Matched"} (${item.source_format})`;
+      document.getElementById("detailMitreBadge").textContent = `MITRE: ${(item.mitre_techniques || []).join(", ") || "T1059"}`;
+      document.getElementById("detailRuleTitle").textContent = item.title;
+      document.getElementById("detailRuleDesc").textContent = item.description;
+
+      const scoreEl = document.getElementById("detailConfidenceScore");
+      const gateEl = document.getElementById("detailQualityGateBadge");
+      scoreEl.textContent = `${rep.confidence_score.toFixed(1)}%`;
+      gateEl.textContent = rep.quality_gate;
+
+      if (rep.quality_gate.startsWith("PASS")) {
+        scoreEl.className = "text-2xl font-extrabold font-mono text-emerald-400";
+        gateEl.className = "mt-1 inline-block text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30";
+      } else if (rep.quality_gate.startsWith("WARN")) {
+        scoreEl.className = "text-2xl font-extrabold font-mono text-amber-400";
+        gateEl.className = "mt-1 inline-block text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30";
+      } else {
+        scoreEl.className = "text-2xl font-extrabold font-mono text-rose-400";
+        gateEl.className = "mt-1 inline-block text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30";
+      }
+
+      // Q1, Q2, Q3 Cards
+      document.getElementById("q1Badge").textContent = rep.q1_syntax_valid ? "PASS" : "FAIL";
+      document.getElementById("q1Badge").className = `text-[11px] font-mono font-bold px-1.5 py-0.5 rounded ${rep.q1_syntax_valid ? "bg-emerald-500/15 text-emerald-300" : "bg-rose-500/15 text-rose-300"}`;
+      document.getElementById("q1ScoreText").textContent = `${rep.q1_syntax_score.toFixed(1)} / 100`;
+      document.getElementById("q1WeightedText").textContent = `${(rep.q1_syntax_score * 0.20).toFixed(1)}%`;
+      const q1Msgs = [...(rep.q1_errors || []), ...(rep.q1_warnings || [])];
+      document.getElementById("q1DetailText").textContent = q1Msgs.length ? q1Msgs.join("; ") : "Đạt chuẩn YAML, đủ title, logsource, detection.selection & MITRE tags.";
+
+      document.getElementById("q2Badge").textContent = rep.q2_data_match_valid ? "PASS" : "FAIL";
+      document.getElementById("q2Badge").className = `text-[11px] font-mono font-bold px-1.5 py-0.5 rounded ${rep.q2_data_match_valid ? "bg-emerald-500/15 text-emerald-300" : "bg-rose-500/15 text-rose-300"}`;
+      document.getElementById("q2ScoreText").textContent = `${rep.q2_data_linkage_score.toFixed(1)} / 100`;
+      document.getElementById("q2WeightedText").textContent = `${(rep.q2_data_linkage_score * 0.30).toFixed(1)}%`;
+      document.getElementById("q2DetailText").textContent = rep.q2_errors.length
+        ? rep.q2_errors.join("; ")
+        : `Logsource khớp EventID ${item.event_code}; 100% trường dùng trong rule đều tồn tại (non-null) trong Evidence.`;
+
+      document.getElementById("q3Badge").textContent = rep.q3_behavior_valid ? "PASS" : (rep.tp > 0 ? "WARN" : "FAIL");
+      document.getElementById("q3Badge").className = `text-[11px] font-mono font-bold px-1.5 py-0.5 rounded ${rep.q3_behavior_valid ? "bg-emerald-500/15 text-emerald-300" : "bg-rose-500/15 text-rose-300"}`;
+      document.getElementById("q3ScoreText").textContent = `${rep.q3_behavior_score.toFixed(1)} / 100`;
+      document.getElementById("q3WeightedText").textContent = `${(rep.q3_behavior_score * 0.50).toFixed(1)}%`;
+      document.getElementById("q3MetricsPills").innerHTML = `
+        <span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">TP=${rep.tp}</span>
+        <span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-emerald-300">FP=${rep.fp}</span>
+        <span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300">FN=${rep.fn}</span>
+        <span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300">TN=${rep.tn}</span>
+        <span class="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-purple-300">Gen=${rep.generalization_hits}/${rep.generalization_total}</span>
+      `;
+
+      // Code Viewers (Tab 1)
+      document.getElementById("sigmaFileNameLabel").textContent = item.sigma_file;
+      document.getElementById("wazuhFileNameLabel").textContent = item.wazuh_file;
+      document.getElementById("sigmaYamlEditor").value = item.raw_yaml;
+      document.getElementById("wazuhXmlViewer").textContent = item.wazuh_xml;
+
+      // Detailed Metrics (Tab 2)
+      document.getElementById("metricTP").textContent = String(rep.tp);
+      document.getElementById("metricFP").textContent = String(rep.fp);
+      document.getElementById("metricFN").textContent = String(rep.fn);
+      document.getElementById("metricTN").textContent = String(rep.tn);
+      document.getElementById("metricPrecision").textContent = rep.precision.toFixed(2);
+      document.getElementById("metricRecall").textContent = rep.recall.toFixed(2);
+      document.getElementById("metricF1").textContent = rep.f1_score.toFixed(2);
+      document.getElementById("metricGenRate").textContent = `${rep.generalization_hits}/${rep.generalization_total} (${Math.round(rep.generalization_rate * 100)}%)`;
+
+      const checklistEl = document.getElementById("verificationChecklistUl");
+      const checks = [
+        { ok: rep.q1_syntax_valid, label: "Câu 1 — Cú pháp YAML & cấu trúc trường chuẩn SigmaHQ" },
+        { ok: rep.q2_logsource_matched, label: `Câu 2a — Khớp Logsource với ${item.event_family} EventID ${item.event_code} (${item.expected_wazuh_group})` },
+        { ok: rep.q2_all_fields_present, label: "Câu 2b — Tất cả các trường trong detection đều tồn tại thực tế (Non-Null) trong Alert/Evidence" },
+        { ok: rep.tp > 0, label: `Câu 3a — Bắt trúng sự kiện bất thường mục tiêu (TP = ${rep.tp}, Recall = ${rep.recall.toFixed(2)})` },
+        { ok: rep.fp === 0, label: `Câu 3b — Không báo động giả trên tập log nền lành tính (FP = ${rep.fp}, TN = ${rep.tn})` },
+        { ok: rep.generalization_hits === rep.generalization_total, label: `Câu 3c — Chống Overfitting: Bắt trúng ${rep.generalization_hits}/${rep.generalization_total} biến thể đột biến` }
+      ];
+      checklistEl.innerHTML = checks.map(c => `
+        <li class="flex items-start gap-2">
+          <span class="font-bold ${c.ok ? "text-emerald-400" : "text-rose-400"}">${c.ok ? "✓" : "✗"}</span>
+          <span>${c.label}</span>
+        </li>
+      `).join("");
+
+      document.getElementById("verificationRecommendationBox").innerHTML = `
+        <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+          <div class="font-semibold text-white mb-1">Kết luận Quality Gate: <span class="text-cyan-300 font-mono">${rep.quality_gate}</span></div>
+          <p>${rep.recommendation_reason}</p>
+        </div>
+        <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300">
+          <div>Alert ID: <span class="text-cyan-300">${item.alert_id}</span> | Evidence ID: <span class="text-purple-300">${item.evidence_id || "Matched"}</span></div>
+          <div>File Sigma (.yml): <span class="text-cyan-300">output/new_rules/${item.sigma_file}</span></div>
+          <div>File Wazuh (.xml): <span class="text-amber-300">output/new_rules/${item.wazuh_file}</span> (Rule ID: <strong>${item.wazuh_rule_id}</strong>)</div>
+        </div>
+      `;
+
+      // Tab 3: Telemetry & Sliding Window Context Events
+      document.getElementById("telemetryEventIdBadge").textContent = `${item.event_family} EID ${item.event_code}`;
+      const pTable = document.getElementById("primaryFieldsTable");
+      pTable.innerHTML = Object.entries(item.sigma_fields || {}).map(([k, v]) => `
+        <div class="p-2 rounded bg-slate-900 border border-slate-800/90 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+          <span class="text-cyan-300 font-semibold">${k}</span>
+          <span class="text-slate-200 break-all sm:text-right">${v}</span>
+        </div>
+      `).join("");
+
+      const ctxList = item.context_events || [];
+      document.getElementById("contextEventsCountBadge").textContent = `${ctxList.length} context events`;
+      const ctxEl = document.getElementById("contextEventsList");
+      ctxEl.innerHTML = ctxList.length > 0
+        ? ctxList.map((c, idx) => `
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <div class="flex items-center justify-between text-[11px] font-mono text-purple-300 mb-1">
+                <span>#${idx + 1} [${c.uid}]</span>
+                <span>${c.family} EventID ${c.ecode}</span>
+              </div>
+              <div class="text-slate-300 font-mono text-[11px] break-all">${c.summary}</div>
+            </div>
+          `).join("")
+        : `<div class="text-slate-500 text-xs">Không có sự kiện ngữ cảnh đi kèm.</div>`;
+    }
+
+    function ingestBundlesIntoDashboard(bundles, sourceLabel = "Auto-Ingest") {
+      let addedCount = 0;
+      let firstRuleId = null;
+
+      bundles.forEach(b => {
+        const assignedId = allocateNextWazuhRuleId();
+        const compiled = verifyAndCompileRule(b.raw_yaml, b, assignedId);
+        state.rules.unshift(compiled);
+        if (firstRuleId === null) firstRuleId = assignedId;
+        addedCount++;
+      });
+
+      if (firstRuleId !== null) {
+        state.selectedRuleId = firstRuleId;
+      }
+      updateKPIs();
+      renderRulesList();
+      renderSelectedRuleDetail();
+      showToast(`${sourceLabel}: Đã xử lý ${addedCount} cảnh báo, tự động cấp ID (#${firstRuleId}) và kiểm chứng hoàn tất!`, "success");
+    }
+
+    // =========================================================================
+    // 8. INITIALIZATION & INTERACTIVE CONTROLS
+    // =========================================================================
+    function initDashboard() {
+      // Clear file inputs on reload so browser form restoration never desyncs with JS state
+      const fAlert = document.getElementById("fileAlertInput");
+      const fEv = document.getElementById("fileEvidenceInput");
+      if (fAlert) fAlert.value = "";
+      if (fEv) fEv.value = "";
+
+      setNextWazuhRuleId(state.nextWazuhRuleId);
+      updateKPIs();
+      renderRulesList();
+      renderSelectedRuleDetail();
+      updateCorrespondenceUI();
+
+      const callBackendApi = (endpoint, opts) => {
+        if (!window.location.protocol.startsWith("http")) return Promise.reject(new Error("standalone"));
+        const url = window.location.origin + "/" + "api" + "/" + endpoint;
+        return window.fetch(url, opts);
+      };
+
+      // Sync state from FastAPI backend (/api/dashboard-state) on startup / F5 reload
+      callBackendApi("dashboard-state")
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          if (data && data.status === "ok") {
+            state.backendConnected = true;
+            document.getElementById("modeBadge").textContent = "Connected: FastAPI + Ollama Local";
+            if (data.next_wazuh_rule_id) {
+              setNextWazuhRuleId(data.next_wazuh_rule_id);
+            }
+            if (Array.isArray(data.rules) && data.rules.length > 0) {
+              state.rules = data.rules.map(normalizeDashboardRuleItem).filter(Boolean);
+              state.selectedRuleId = state.rules[0].wazuh_rule_id;
+              updateKPIs();
+              renderRulesList();
+              renderSelectedRuleDetail();
+            }
+          }
+        })
+        .catch(() => {
+          // Standalone mode
+        });
+
+      // Tab Switching
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-tab");
+          document.querySelectorAll(".tab-btn").forEach(b => {
+            b.className = "tab-btn px-3 py-2 text-xs font-medium rounded-t-lg border-b-2 border-transparent text-slate-400 hover:text-slate-200";
+          });
+          btn.className = "tab-btn px-3 py-2 text-xs font-semibold rounded-t-lg border-b-2 border-cyan-400 text-cyan-300 bg-slate-800/70";
+          document.querySelectorAll(".tab-pane").forEach(pane => pane.classList.add("hidden"));
+          document.getElementById(targetId).classList.remove("hidden");
+        });
+      });
+
+      // Search & Gate Filter
+      document.getElementById("searchRuleInput").addEventListener("input", renderRulesList);
+      document.getElementById("filterGateSelect").addEventListener("change", renderRulesList);
+
+      // Clear Rules List Button (keeps nextWazuhRuleId intact)
+      document.getElementById("btnClearRules").addEventListener("click", async () => {
+        if (state.backendConnected) {
+          try {
+            const resp = await callBackendApi("reset-dashboard", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ keep_next_id: true })
+            });
+            if (resp.ok) {
+              const d = await resp.json();
+              if (d.next_wazuh_rule_id) setNextWazuhRuleId(d.next_wazuh_rule_id);
+            }
+          } catch (e) {}
+        }
+        state.rules = [];
+        state.selectedRuleId = null;
+        updateKPIs();
+        renderRulesList();
+        renderSelectedRuleDetail();
+        showToast(`Đã làm sạch danh sách hiển thị (ID tự động kế tiếp giữ nguyên: #${state.nextWazuhRuleId}).`, "info");
+      });
+
+      // File Input Listeners with Immediate ID Extraction & Correspondence Check
+      document.getElementById("fileAlertInput").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+          state.uploadedAlertRaw = null;
+          document.getElementById("alertFileStatus").textContent = "Chưa chọn file Alert";
+          updateCorrespondenceUI();
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const raw = JSON.parse(ev.target.result);
+            state.uploadedAlertRaw = raw;
+            state.uploadedAlertName = file.name;
+            const meta = extractAlertMetaList(raw);
+            if (meta.error) {
+              document.getElementById("alertFileStatus").textContent = `✗ ${file.name}: ${meta.error}`;
+              document.getElementById("alertFileStatus").className = "text-[11px] font-mono text-rose-400 mt-2 break-all";
+            } else {
+              const p0 = meta.items[0] || {};
+              document.getElementById("alertFileStatus").textContent = `✓ ${file.name} | alert_id: ${p0.alert_id || "N/A"} | evidence_id: ${p0.evidence_id || "N/A"}`;
+              document.getElementById("alertFileStatus").className = "text-[11px] font-mono text-cyan-300 mt-2 break-all";
+            }
+            updateCorrespondenceUI();
+          } catch (err) {
+            state.uploadedAlertRaw = null;
+            showToast(`Lỗi đọc JSON từ ${file.name}: ${err.message}`, "error");
+            updateCorrespondenceUI();
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      document.getElementById("fileEvidenceInput").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+          state.uploadedEvidenceRaw = null;
+          document.getElementById("evidenceFileStatus").textContent = "Chưa chọn file Evidence";
+          updateCorrespondenceUI();
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const raw = JSON.parse(ev.target.result);
+            state.uploadedEvidenceRaw = raw;
+            state.uploadedEvidenceName = file.name;
+            const meta = extractEvidenceMetaIndex(raw);
+            if (meta.error) {
+              document.getElementById("evidenceFileStatus").textContent = `✗ ${file.name}: ${meta.error}`;
+              document.getElementById("evidenceFileStatus").className = "text-[11px] font-mono text-rose-400 mt-2 break-all";
+            } else {
+              const p0 = meta.pairs[0] || {};
+              document.getElementById("evidenceFileStatus").textContent = `✓ ${file.name} | alert_id: ${p0.alert_id || "N/A"} | evidence_id: ${p0.evidence_id || "N/A"}`;
+              document.getElementById("evidenceFileStatus").className = "text-[11px] font-mono text-purple-300 mt-2 break-all";
+            }
+            updateCorrespondenceUI();
+          } catch (err) {
+            state.uploadedEvidenceRaw = null;
+            showToast(`Lỗi đọc JSON từ ${file.name}: ${err.message}`, "error");
+            updateCorrespondenceUI();
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Process Uploaded Files
+      document.getElementById("btnProcessUploaded").addEventListener("click", async () => {
+        if (!state.uploadedAlertRaw) {
+          showToast("Vui lòng chọn file Alert JSON ở ô số 1 và file Evidence JSON ở ô số 2 trước!", "warn");
+          return;
+        }
+        const check = checkAlertEvidenceCorrespondence(state.uploadedAlertRaw, state.uploadedEvidenceRaw);
+        if (!check.valid) {
+          showToast(check.reason, "error");
+          updateCorrespondenceUI();
+          return;
+        }
+
+        const dedup = document.getElementById("chkDeduplicate").checked;
+        const btn = document.getElementById("btnProcessUploaded");
+        const origHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span>Đang sinh &amp; kiểm chứng Rule (ID #${state.nextWazuhRuleId})...</span>`;
+
+        try {
+          if (state.backendConnected) {
+            const resp = await callBackendApi("process-files", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                alert_data: state.uploadedAlertRaw,
+                evidence_data: state.uploadedEvidenceRaw,
+                deduplicate: dedup
+              })
+            });
+            if (!resp.ok) {
+              const errData = await resp.json().catch(() => ({}));
+              throw new Error(errData.detail || `HTTP ${resp.status}`);
+            }
+            const resJson = await resp.json();
+            if (resJson.next_wazuh_rule_id) {
+              setNextWazuhRuleId(resJson.next_wazuh_rule_id);
+            }
+            if (Array.isArray(resJson.rules) && resJson.rules.length > 0) {
+              resJson.rules.map(normalizeDashboardRuleItem).filter(Boolean).forEach(r => {
+                const idx = state.rules.findIndex(x => x.wazuh_rule_id === r.wazuh_rule_id);
+                if (idx >= 0) state.rules[idx] = r;
+                else state.rules.unshift(r);
+              });
+              state.selectedRuleId = resJson.rules[0].wazuh_rule_id;
+              updateKPIs();
+              renderRulesList();
+              renderSelectedRuleDetail();
+              showToast(`Đã sinh & kiểm chứng ${resJson.rules.length} rule (#${resJson.rules[0].wazuh_rule_id}) — Điểm: ${resJson.rules[0].report.confidence_score}%!`, "success");
+              return;
+            }
+          }
+
+          // Client-side execution when running standalone
+          const parsedBundles = parseUploadedAlertAndEvidence(state.uploadedAlertRaw, state.uploadedEvidenceRaw, dedup);
+          ingestBundlesIntoDashboard(parsedBundles, "Tự động Xử lý File Upload");
+        } catch (err) {
+          showToast(`Lỗi xử lý: ${err.message}`, "error");
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+          updateCorrespondenceUI();
+        }
+      });
+
+      // Upload an existing Sigma Rule (.yml) file into the editor to verify against current Alert + Evidence
+      document.getElementById("fileRuleYamlInput").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const ymlContent = String(ev.target.result || "");
+          document.getElementById("sigmaYamlEditor").value = ymlContent;
+          document.getElementById("sigmaFileNameLabel").textContent = file.name;
+          showToast(`Đã nạp file rule '${file.name}'. Đang chạy kiểm chứng với Evidence hiện tại...`, "info");
+          document.getElementById("btnReverifyLive").click();
+        };
+        reader.readAsText(file);
+      });
+
+      // Live Re-Verify Button ("Kiểm chứng lại & Cập nhật XML")
+      document.getElementById("btnReverifyLive").addEventListener("click", async () => {
+        const item = state.rules.find(r => r.wazuh_rule_id === state.selectedRuleId);
+        if (!item) {
+          showToast("Chưa có Rule nào đang được chọn để kiểm chứng!", "warn");
+          return;
+        }
+        const editedYaml = document.getElementById("sigmaYamlEditor").value;
+
+        if (state.backendConnected) {
+          try {
+            const resp = await callBackendApi("verify-rule", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                raw_yaml: editedYaml,
+                bundle_item: item,
+                wazuh_rule_id: item.wazuh_rule_id
+              })
+            });
+            if (resp.ok) {
+              const data = await resp.json();
+              if (data.dashboard_item) {
+                const updated = normalizeDashboardRuleItem(data.dashboard_item);
+                const idx = state.rules.findIndex(r => r.wazuh_rule_id === item.wazuh_rule_id);
+                if (idx >= 0) state.rules[idx] = updated;
+                updateKPIs();
+                renderRulesList();
+                renderSelectedRuleDetail();
+                showToast(
+                  `Đã kiểm chứng lại & lưu Rule #${item.wazuh_rule_id} -> Điểm: ${updated.report.confidence_score}% (${updated.report.quality_gate})`,
+                  updated.report.quality_gate.startsWith("PASS") ? "success" : "warn"
+                );
+                return;
+              }
+            }
+          } catch (e) {}
+        }
+
+        const updated = verifyAndCompileRule(editedYaml, item, item.wazuh_rule_id);
+        const idx = state.rules.findIndex(r => r.wazuh_rule_id === item.wazuh_rule_id);
+        if (idx >= 0) state.rules[idx] = updated;
+        updateKPIs();
+        renderRulesList();
+        renderSelectedRuleDetail();
+        showToast(
+          `Đã kiểm chứng lại Rule #${item.wazuh_rule_id} -> Điểm: ${updated.report.confidence_score}% (${updated.report.quality_gate})`,
+          updated.report.quality_gate.startsWith("PASS") ? "success" : "warn"
+        );
+      });
+
+      // Scan Folder Function
+      async function runFolderScan(isBackground = false) {
+        if (!state.backendConnected) {
+          if (!isBackground) {
+            showToast("Chức năng Quét Tự Động ./alert cần chạy qua server `sigmagen serve` (http://localhost:8000) để đọc thư mục trên ổ cứng.", "warn");
+          }
+          return;
+        }
+        const btn = document.getElementById("btnScanFolder");
+        const origHtml = btn.innerHTML;
+        if (!isBackground) {
+          btn.disabled = true;
+          btn.innerHTML = `<span>Đang quét ./alert...</span>`;
+        }
+        try {
+          const dedup = document.getElementById("chkDeduplicate").checked;
+          const resp = await callBackendApi("auto-watch/scan", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              alert_dir: "./alert",
+              output_dir: "./output/new_rules",
+              deduplicate: dedup,
+              max_alerts: 20,
+              force_reprocess: false
+            })
+          });
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.next_wazuh_rule_id) {
+              setNextWazuhRuleId(data.next_wazuh_rule_id);
+            }
+            if (Array.isArray(data.rules) && data.rules.length > 0) {
+              data.rules.map(normalizeDashboardRuleItem).filter(Boolean).forEach(r => {
+                const idx = state.rules.findIndex(x => x.wazuh_rule_id === r.wazuh_rule_id);
+                if (idx >= 0) state.rules[idx] = r;
+                else state.rules.unshift(r);
+              });
+              state.selectedRuleId = data.rules[0].wazuh_rule_id;
+              updateKPIs();
+              renderRulesList();
+              renderSelectedRuleDetail();
+              showToast(`Quét ./alert: Tìm thấy ${data.total_found} file, đã sinh & kiểm chứng ${data.rules.length} rule mới!`, "success");
+            } else if (!isBackground) {
+              if (data.total_found === 0) {
+                showToast("Thư mục ./alert hiện chưa có file alert JSON nào (hoặc chỉ có file *_evidence.json).", "info");
+              } else {
+                showToast(`Đã quét ${data.total_found} file trong ./alert: Tất cả cảnh báo đều đã được xử lý trước đó (${data.skipped_already_processed} trùng/đã sinh).`, "info");
+              }
+            }
+          }
+        } catch (err) {
+          if (!isBackground) {
+            showToast(`Lỗi khi quét ./alert: ${err.message}`, "error");
+          }
+        } finally {
+          if (!isBackground) {
+            btn.disabled = false;
+            btn.innerHTML = origHtml;
+          }
+        }
+      }
+
+      // Auto-Watch Toggle & Scan Folder Button
+      document.getElementById("btnToggleAutoWatch").addEventListener("click", () => {
+        state.autoWatchEnabled = !state.autoWatchEnabled;
+        const btn = document.getElementById("btnToggleAutoWatch");
+        const dot = document.getElementById("autoWatchDot");
+        const label = document.getElementById("autoWatchLabel");
+        if (state.autoWatchEnabled) {
+          btn.className = "px-3 py-1.5 rounded-lg border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-medium flex items-center gap-2 transition";
+          dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-ping";
+          label.textContent = "Auto-Watch: BẬT";
+          showToast("Đã BẬT Auto-Watch: Tự động quét thư mục ./alert mỗi 10 giây và tự động cấp Rule ID.", "success");
+          runFolderScan(true);
+          state.autoWatchTimer = window.setInterval(() => runFolderScan(true), 10000);
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-300 text-xs font-medium flex items-center gap-2 transition";
+          dot.className = "w-2 h-2 rounded-full bg-slate-500";
+          label.textContent = "Auto-Watch: TẮT";
+          if (state.autoWatchTimer) {
+            window.clearInterval(state.autoWatchTimer);
+            state.autoWatchTimer = null;
+          }
+          showToast("Đã TẮT chế độ tự động quét thư mục ./alert.", "info");
+        }
+      });
+
+      document.getElementById("btnScanFolder").addEventListener("click", () => {
+        runFolderScan(false);
+      });
+
+      // Copy & Download Buttons
+      function copyTextWithFallback(text, label) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(`Đã copy ${label} vào bộ nhớ tạm!`, "success")).catch(() => fallbackCopy(text, label));
+        } else {
+          fallbackCopy(text, label);
+        }
+      }
+      function fallbackCopy(text, label) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast(`Đã copy ${label} vào bộ nhớ tạm!`, "success");
+      }
+      function downloadTextFile(filename, content) {
+        const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast(`Đã tải xuống ${filename}`, "success");
+      }
+
+      document.getElementById("btnCopySigma").addEventListener("click", () => {
+        copyTextWithFallback(document.getElementById("sigmaYamlEditor").value, "Sigma Rule (.yml)");
+      });
+      document.getElementById("btnCopyWazuh").addEventListener("click", () => {
+        copyTextWithFallback(document.getElementById("wazuhXmlViewer").textContent, "Wazuh XML (.xml)");
+      });
+      document.getElementById("btnDownloadSigma").addEventListener("click", () => {
+        const item = state.rules.find(r => r.wazuh_rule_id === state.selectedRuleId);
+        downloadTextFile(item ? item.sigma_file : "sigma_rule.yml", document.getElementById("sigmaYamlEditor").value);
+      });
+      document.getElementById("btnDownloadWazuh").addEventListener("click", () => {
+        const item = state.rules.find(r => r.wazuh_rule_id === state.selectedRuleId);
+        downloadTextFile(item ? item.wazuh_file : "ml_generated_rule.xml", document.getElementById("wazuhXmlViewer").textContent);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", initDashboard);
+  </script>
+</body>
+</html>

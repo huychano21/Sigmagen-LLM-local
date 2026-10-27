@@ -1,0 +1,20 @@
+title: Detect Real-Time Protection Disable Event
+id: 7e332ed7-f387-4165-96bd-162d320aacb7
+status: experimental
+description: Detects attempts to disable the Windows Defender Real-Time Protection
+  by modifying the registry.
+references: https://attack.mitre.org/techniques/T1097/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1097
+logsource:
+  product: windows
+  category: registry_set
+detection:
+  selection:
+    TargetObject|contains: DisableRealtimeMonitoring
+    Details|contains: '0x00000001'
+  condition: selection
+falsepositives: Legitimate administrative script execution.
+level: medium

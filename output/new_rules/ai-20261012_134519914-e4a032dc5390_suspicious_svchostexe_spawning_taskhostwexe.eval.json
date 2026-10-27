@@ -1,0 +1,143 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_134519.914-e4a032dc5390",
+    "rule_title": "Suspicious svchost.exe spawning taskhostw.exe",
+    "rule_id": "aa63dffb-2087-485f-8f3c-dd0546bbec25",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": false,
+    "q3_behavior_score": 81.3,
+    "tp": 1,
+    "fp": 1,
+    "fn": 0,
+    "tn": 9,
+    "precision": 0.5,
+    "recall": 1.0,
+    "f1_score": 0.6667,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.1,
+    "q3_errors": [
+      "Rule triggered 1 False Positive(s) on the benign background corpus (FP=1, TN=9). Add more specific selection criteria or a filter block."
+    ],
+    "replay_details": [
+      {
+        "event_id": "sysmon:52b82cbcb7d9a12af09a2481",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\taskhostw.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\svchost.exe')"
+        ]
+      },
+      {
+        "event_id": "benign-sysmon-1-taskhostw",
+        "role": "benign",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\taskhostw.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\svchost.exe')"
+        ]
+      }
+    ],
+    "confidence_score": 90.7,
+    "quality_gate": "WARN - NEEDS_TUNING",
+    "recommendation_reason": "Bắt được sự kiện gốc nhưng cần tinh chỉnh (Confidence=90.7%, Generalization=100%, FP=1). Xem chi tiết cảnh báo.",
+    "all_repair_issues": [
+      "[Q3-Behavior] Rule triggered 1 False Positive(s) on the benign background corpus (FP=1, TN=9). Add more specific selection criteria or a filter block."
+    ]
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100137,
+  "wazuh_xml_file": "ml_generated_100137.xml",
+  "sigma_yaml_file": "ai-20261012_134519914-e4a032dc5390_suspicious_svchostexe_spawning_taskhostwexe.yml",
+  "repair_attempts": 0,
+  "dashboard_item": {
+    "wazuh_rule_id": 100137,
+    "alert_id": "AI-20261012_134519.914-e4a032dc5390",
+    "evidence_id": "",
+    "source_format": "logdeep_v2",
+    "title": "Suspicious svchost.exe spawning taskhostw.exe",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_few', score=0.9951): Wazuh context rule : Suspicious Windows activity detected by LogDeep. Image=taskhostw.exe, ParentImage=svchost.exe, CommandLine=taskhostw.exe KEYROAMING, ParentCommandLine=C:\\Windows\\system32\\svchost.exe -k netsvcs -p.",
+    "severity": "medium",
+    "mitre_techniques": [
+      "T1059.001"
+    ],
+    "event_family": "sysmon",
+    "event_code": 1,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "process_creation"
+    },
+    "expected_wazuh_group": "sysmon_event1",
+    "sigma_fields": {
+      "Image": "C:\\Windows\\System32\\taskhostw.exe",
+      "CommandLine": "taskhostw.exe KEYROAMING",
+      "CurrentDirectory": "C:\\Windows\\system32\\",
+      "IntegrityLevel": "High",
+      "OriginalFileName": "taskhostw.exe",
+      "Description": "Host Process for Windows Tasks",
+      "Product": "Microsoft® Windows® Operating System",
+      "Company": "Microsoft Corporation",
+      "Hashes": "MD5=8BD7B08DA6BCA54DF9B595E4D9281BEB,SHA256=DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4,IMPHASH=9839C7FD9649496B162F72128209528A",
+      "ParentImage": "C:\\Windows\\System32\\svchost.exe",
+      "ParentCommandLine": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+      "ParentUser": "NT AUTHORITY\\SYSTEM",
+      "User": "HVAN\\Administrator",
+      "EventID": "1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [],
+    "raw_yaml": "title: Suspicious svchost.exe spawning taskhostw.exe\nid: aa63dffb-2087-485f-8f3c-dd0546bbec25\nstatus: experimental\ndescription: Detects the spawning of taskhostw.exe by svchost.exe, which may indicate\n  suspicious activity.\nreferences: https://attack.mitre.org/techniques/T1059/001/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1059.001\nlogsource:\n  product: windows\n  category: process_creation\ndetection:\n  selection:\n    Image|endswith: \\taskhostw.exe\n    ParentImage|endswith: \\svchost.exe\n  condition: selection\nfalsepositives:\n- Legitimate administrative tasks\nlevel: medium\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100137\" level=\"8\">\n    <if_group>sysmon_event1</if_group>\n    <field name=\"win.eventdata.image\" type=\"pcre2\">(?i)\\\\+taskhostw\\.exe$</field>\n    <field name=\"win.eventdata.parentImage\" type=\"pcre2\">(?i)\\\\+svchost\\.exe$</field>\n    <description>Suspicious svchost.exe spawning taskhostw.exe [Alert: AI-20261012_134519.914-e4a032dc5390]</description>\n    <mitre>\n      <id>T1059.001</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_134519914-e4a032dc5390_suspicious_svchostexe_spawning_taskhostwexe.yml",
+    "wazuh_file": "ml_generated_100137.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": false,
+      "q3_behavior_score": 81.3,
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "tn": 9,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1_score": 0.6667,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.1,
+      "confidence_score": 90.7,
+      "quality_gate": "WARN - NEEDS_TUNING",
+      "recommendation_reason": "Bắt được sự kiện gốc nhưng cần tinh chỉnh (Confidence=90.7%, Generalization=100%, FP=1). Xem chi tiết cảnh báo."
+    }
+  }
+}

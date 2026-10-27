@@ -1,0 +1,24 @@
+title: Suspicious PowerShell Spawned Process
+id: f3105aa6-cc0a-432f-aca4-95694188a4e2
+status: experimental
+description: Detects the spawning of a suspicious process (HOSTNAME.EXE) by PowerShell,
+  which is a common technique for executing arbitrary code.
+references:
+- https://attack.mitre.org/techniques/T1082/
+- https://attack.mitre.org/techniques/T1059/001/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1082
+- attack.t1059.001
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \hostname.exe
+    ParentImage|endswith: \powershell.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative script execution
+level: high

@@ -1,0 +1,114 @@
+{
+  "alert_id": "AI-20261012_133213.227-6077db78b13e",
+  "evidence_id": "EVID-c64bf93d4436",
+  "timestamp": "2026-10-12T13:32:13.227Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:d273960be56646b718c4eb1e",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>tasklist.exe|system32|tiny_single",
+  "anomaly_score": 0.7882983088493347,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.2117016762495041,
+  "observed_probability": 0.2117016762495041,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 2136,
+    "guid": "{7e4a5fee-e15d-6acc-3f02-000000001100}",
+    "image": "C:\\Windows\\System32\\tasklist.exe",
+    "command_line": "tasklist",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "B802C79BE392F3BFCC51CDA425BC94D2",
+      "sha256": "113C4D989A47B80905E92C06E48E03B24D44CADBF7BC7E86D948D7DA9DC98252",
+      "imphash": "DCE1F3B1BD09BBAD166CE65677E33EDB"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "Lists the current running tasks",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "tasklist.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 5816,
+    "guid": "{7e4a5fee-e15d-6acc-3d02-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c tasklist",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92032",
+    "rule_level": 3,
+    "rule_description": "Suspicious Windows cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1087",
+        "T1059.003"
+      ],
+      "tactic": [
+        "Discovery",
+        "Execution"
+      ],
+      "technique": [
+        "Account Discovery",
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.2117016762495041
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.14860102534294128
+    },
+    {
+      "token_id": 7,
+      "token": "sysmon|12|registry_object|wevtutil.exe|registry",
+      "probability": 0.05610714480280876
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.04995371028780937
+    },
+    {
+      "token_id": 81,
+      "token": "sysmon|1|process_create|services.exe>trustedinstaller.exe|windows|tiny_single",
+      "probability": 0.04288122430443764
+    }
+  ],
+  "incident_id": "INC-0002",
+  "incident_role": "root",
+  "use_for_rule_generation": true
+}

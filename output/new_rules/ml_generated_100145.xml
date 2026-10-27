@@ -1,0 +1,11 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100145" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+trustedinstaller\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+services\.exe$</field>
+    <description>Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe [Alert: AI-20261012_133138.795-da716c71ed88]</description>
+    <mitre>
+      <id>T1082</id>
+    </mitre>
+  </rule>
+</group>

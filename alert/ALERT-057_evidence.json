@@ -1,0 +1,657 @@
+{
+  "evidence_id": "EVID-6c1ff2dd7366",
+  "alert_id": "AI-20261012_135318.067-68ce5058735d",
+  "window_size": 10,
+  "context_events": [
+    {
+      "event_uid": "sysmon:ff36bb90c7af1f3ff74ae322",
+      "timestamp": "2026-10-12T13:36:41.997Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|net.exe>net1.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 3020,
+        "guid": "{7e4a5fee-e269-6acc-7102-000000001100}",
+        "image": "C:\\Windows\\System32\\net1.exe",
+        "command_line": "C:\\Windows\\system32\\net1  time \\\\localhost",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "63DD4523677E62A73A8A7494DB321EA2",
+          "sha256": "C687157FD58EAA51757CDA87D06C30953A31F03F5356B9F5A9C004FA4BAD4BF5",
+          "imphash": "41DBA1AF77E1A2260F0CE46D59ADCB5E"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net1.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 2988,
+        "guid": "{7e4a5fee-e269-6acc-7002-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  time \\\\localhost",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:60f2bbb462b6311090fe8340",
+      "timestamp": "2026-10-12T13:36:42.039Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>w32tm.exe|system32|tiny_few",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5556,
+        "guid": "{7e4a5fee-e26a-6acc-7202-000000001100}",
+        "image": "C:\\Windows\\System32\\w32tm.exe",
+        "command_line": "w32tm  /tz",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "EB05B99953C30E25B4CA97F903A0DEA9",
+          "sha256": "A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B",
+          "imphash": "386119C6C0099E2C065ADCD2AA770E11"
+        },
+        "file_version": "10.0.17763.1490 (WinBuild.160101.0800)",
+        "description": "Windows Time Service Diagnostic Tool",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "w32time.dll",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 5760,
+        "guid": "{7e4a5fee-e269-6acc-6e02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:a9a94917f95844f305bccdb9",
+      "timestamp": "2026-10-12T13:37:13.625Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5636,
+        "guid": "{7e4a5fee-e289-6acc-7302-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:c0737ba720f18e05cd0e23da",
+      "timestamp": "2026-10-12T13:37:13.642Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 5852,
+        "guid": "{7e4a5fee-e289-6acc-7402-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:32ce83f5c6bbbc2df19fe9e6",
+      "timestamp": "2026-10-12T13:45:19.799Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|winlogon.exe>logonui.exe|system32|tiny_few",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 3876,
+        "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+        "image": "C:\\Windows\\System32\\LogonUI.exe",
+        "command_line": "\"LogonUI.exe\" /flags:0x0 /state0:0xa3813855 /state1:0x41c64e6d",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "System",
+        "hashes": {
+          "md5": "33F89DD9629CB0422A2C17268376232D",
+          "sha256": "9358EF8CB7FB08581D74274005263BD8FA2E6E0FC443930B25FD345CF6CE9071",
+          "imphash": "B9B0B64B08B38276711093CA94348D39"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Windows Logon User Interface Host",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "logonui.exe",
+        "logon_id": "0x3e7",
+        "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 620,
+        "guid": "{7e4a5fee-fd2e-6ac5-0a00-000000001100}",
+        "image": "C:\\Windows\\System32\\winlogon.exe",
+        "command_line": "winlogon.exe",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:52b82cbcb7d9a12af09a2481",
+      "timestamp": "2026-10-12T13:45:19.914Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_few",
+      "process_role": "task_host",
+      "path_class": "system32",
+      "process": {
+        "pid": 2200,
+        "guid": "{7e4a5fee-e46f-6acc-7802-000000001100}",
+        "image": "C:\\Windows\\System32\\taskhostw.exe",
+        "command_line": "taskhostw.exe KEYROAMING",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "8BD7B08DA6BCA54DF9B595E4D9281BEB",
+          "sha256": "DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4",
+          "imphash": "9839C7FD9649496B162F72128209528A"
+        },
+        "file_version": "10.0.17763.1852 (WinBuild.160101.0800)",
+        "description": "Host Process for Windows Tasks",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "taskhostw.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 344,
+        "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+        "image": "C:\\Windows\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:0e1a34543be92bddf4b10010",
+      "timestamp": "2026-10-12T13:48:32.630Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 12,
+      "event_type": "registry_object",
+      "event_token": "sysmon|12|registry_object|logonui.exe|registry",
+      "process_role": "other_executable",
+      "path_class": "registry",
+      "process": {
+        "pid": 3876,
+        "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+        "image": "C:\\Windows\\system32\\LogonUI.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "HKU\\.DEFAULT\\Keyboard Layout\\Preload\\1",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:aa9d02e26a3c4e28e96a1fc4",
+      "timestamp": "2026-10-12T13:48:32.630Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 13,
+      "event_type": "registry_value",
+      "event_token": "sysmon|13|registry_value|logonui.exe|registry",
+      "process_role": "other_executable",
+      "path_class": "registry",
+      "process": {
+        "pid": 3876,
+        "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+        "image": "C:\\Windows\\system32\\LogonUI.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "HKU\\.DEFAULT\\Keyboard Layout\\Preload\\1",
+        "creation_time": "",
+        "details": "00000409"
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:ef8240d7d104cab7c0fcd030",
+      "timestamp": "2026-10-12T13:48:38.822Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 13,
+      "event_type": "registry_value",
+      "event_token": "sysmon|13|registry_value|logonui.exe|registry",
+      "process_role": "other_executable",
+      "path_class": "registry",
+      "process": {
+        "pid": 3876,
+        "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+        "image": "C:\\Windows\\system32\\LogonUI.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\LastLoggedOnUser",
+        "creation_time": "",
+        "details": "HVAN\\Administrator"
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:027555f654915a72a656c408",
+      "timestamp": "2026-10-12T13:48:38.932Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_few",
+      "process_role": "task_host",
+      "path_class": "system32",
+      "process": {
+        "pid": 5500,
+        "guid": "{7e4a5fee-e536-6acc-7902-000000001100}",
+        "image": "C:\\Windows\\System32\\taskhostw.exe",
+        "command_line": "taskhostw.exe KEYROAMING",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "8BD7B08DA6BCA54DF9B595E4D9281BEB",
+          "sha256": "DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4",
+          "imphash": "9839C7FD9649496B162F72128209528A"
+        },
+        "file_version": "10.0.17763.1852 (WinBuild.160101.0800)",
+        "description": "Host Process for Windows Tasks",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "taskhostw.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 344,
+        "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+        "image": "C:\\Windows\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    }
+  ],
+  "target_event": {
+    "schema_version": "windows-sysmon-v1",
+    "event_uid": "sysmon:39bd59350ac6630af40394ca",
+    "timestamp": "2026-10-12T13:53:18.067Z",
+    "host": "WIN-5J23U7CAV7V.hvan.vn",
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 13,
+    "event_type": "registry_value",
+    "event_record_id": 10472,
+    "system_data": {
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "event_id": "13",
+      "version": "2",
+      "level": "4",
+      "task": "13",
+      "opcode": "0",
+      "keywords": "0x8000000000000000",
+      "system_time": "2026-10-12T13:53:18.069261000Z",
+      "event_record_id": "10472",
+      "process_id": "2832",
+      "thread_id": "4936",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "computer": "WIN-5J23U7CAV7V.hvan.vn",
+      "severity_value": "INFORMATION",
+      "message": "\"Registry value set:\r\nRuleName: T1089,Tamper-Defender\r\nEventType: SetValue\r\nUtcTime: 2026-10-12 13:53:18.067\r\nProcessGuid: {7e4a5fee-fd43-6ac5-3600-000000001100}\r\nProcessId: 3004\r\nImage: C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe\r\nTargetObject: HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring\r\nDetails: DWORD (0x00000001)\r\nUser: NT AUTHORITY\\SYSTEM\""
+    },
+    "event_data": {
+      "rule_name": "T1089,Tamper-Defender",
+      "event_type": "SetValue",
+      "utc_time": "2026-10-12 13:53:18.067",
+      "process_guid": "{7e4a5fee-fd43-6ac5-3600-000000001100}",
+      "process_id": "3004",
+      "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe",
+      "target_object": "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring",
+      "details": "DWORD (0x00000001)",
+      "user": "NT AUTHORITY\\SYSTEM"
+    },
+    "process": {
+      "pid": 3004,
+      "guid": "{7e4a5fee-fd43-6ac5-3600-000000001100}",
+      "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe",
+      "command_line": "",
+      "current_directory": "",
+      "integrity_level": "",
+      "hashes": {},
+      "file_version": "",
+      "description": "",
+      "product": "",
+      "company": "",
+      "original_file_name": "",
+      "logon_id": "",
+      "logon_guid": "",
+      "terminal_session_id": ""
+    },
+    "parent_process": {
+      "pid": null,
+      "guid": "",
+      "image": "",
+      "command_line": "",
+      "user": ""
+    },
+    "user": "NT AUTHORITY\\SYSTEM",
+    "file": {
+      "target_filename": "",
+      "target_object": "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring",
+      "creation_time": "",
+      "details": "DWORD (0x00000001)"
+    },
+    "network": {
+      "source_ip": "",
+      "source_port": null,
+      "destination_ip": "",
+      "destination_port": null,
+      "protocol": "",
+      "query_name": "",
+      "query_status": "",
+      "query_results": ""
+    },
+    "source_metadata": {
+      "kind": "wazuh_archive",
+      "source_file": "archives.json",
+      "line_number": 1158,
+      "wazuh_id": "1791813198.2247113",
+      "wazuh_agent": {
+        "id": "001",
+        "name": "DC-01",
+        "ip": "10.212.106.167"
+      },
+      "wazuh_manager": {
+        "name": "wazuh.manager"
+      },
+      "wazuh_decoder": {
+        "name": "windows_eventchannel"
+      },
+      "wazuh_location": "EventChannel",
+      "wazuh_rule": {},
+      "wazuh_outer_timestamp": "2026-10-12T13:53:18.690+0000",
+      "agent_name": "DC-01",
+      "agent_id": "001",
+      "agent_ip": "10.212.106.167"
+    },
+    "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"13\",\"version\":\"2\",\"level\":\"4\",\"task\":\"13\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:53:18.069261000Z\",\"eventRecordID\":\"10472\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Registry value set:\\r\\nRuleName: T1089,Tamper-Defender\\r\\nEventType: SetValue\\r\\nUtcTime: 2026-10-12 13:53:18.067\\r\\nProcessGuid: {7e4a5fee-fd43-6ac5-3600-000000001100}\\r\\nProcessId: 3004\\r\\nImage: C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.26080.4-0\\\\MsMpEng.exe\\r\\nTargetObject: HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows Defender\\\\Real-Time Protection\\\\DisableRealtimeMonitoring\\r\\nDetails: DWORD (0x00000001)\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"ruleName\":\"T1089,Tamper-Defender\",\"eventType\":\"SetValue\",\"utcTime\":\"2026-10-12 13:53:18.067\",\"processGuid\":\"{7e4a5fee-fd43-6ac5-3600-000000001100}\",\"processId\":\"3004\",\"image\":\"C:\\\\\\\\ProgramData\\\\\\\\Microsoft\\\\\\\\Windows Defender\\\\\\\\platform\\\\\\\\4.18.26080.4-0\\\\\\\\MsMpEng.exe\",\"targetObject\":\"HKLM\\\\\\\\SOFTWARE\\\\\\\\Microsoft\\\\\\\\Windows Defender\\\\\\\\Real-Time Protection\\\\\\\\DisableRealtimeMonitoring\",\"details\":\"DWORD (0x00000001)\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+    "process_role": "other_executable",
+    "path_class": "registry",
+    "command_shape": "missing",
+    "event_token": "sysmon|13|registry_value|msmpeng.exe|registry"
+  },
+  "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"13\",\"version\":\"2\",\"level\":\"4\",\"task\":\"13\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:53:18.069261000Z\",\"eventRecordID\":\"10472\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Registry value set:\\r\\nRuleName: T1089,Tamper-Defender\\r\\nEventType: SetValue\\r\\nUtcTime: 2026-10-12 13:53:18.067\\r\\nProcessGuid: {7e4a5fee-fd43-6ac5-3600-000000001100}\\r\\nProcessId: 3004\\r\\nImage: C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.26080.4-0\\\\MsMpEng.exe\\r\\nTargetObject: HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows Defender\\\\Real-Time Protection\\\\DisableRealtimeMonitoring\\r\\nDetails: DWORD (0x00000001)\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"ruleName\":\"T1089,Tamper-Defender\",\"eventType\":\"SetValue\",\"utcTime\":\"2026-10-12 13:53:18.067\",\"processGuid\":\"{7e4a5fee-fd43-6ac5-3600-000000001100}\",\"processId\":\"3004\",\"image\":\"C:\\\\\\\\ProgramData\\\\\\\\Microsoft\\\\\\\\Windows Defender\\\\\\\\platform\\\\\\\\4.18.26080.4-0\\\\\\\\MsMpEng.exe\",\"targetObject\":\"HKLM\\\\\\\\SOFTWARE\\\\\\\\Microsoft\\\\\\\\Windows Defender\\\\\\\\Real-Time Protection\\\\\\\\DisableRealtimeMonitoring\",\"details\":\"DWORD (0x00000001)\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+  "incident_id": "INC-0013",
+  "incident_role": "root"
+}

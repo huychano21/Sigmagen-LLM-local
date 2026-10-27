@@ -1,0 +1,26 @@
+title: Suspicious Activity Detected (AI-20261012_133318.310-7df2e0c4630b)
+id: 07f3baec-93ef-49c3-9f22-b2539ab55afd
+status: experimental
+description: 'Suspicious cmd.exe spawning ipconfig.exe (Suspicious Windows cmd shell
+  execution) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|cmd.exe>ipconfig.exe|system32|tiny_few'',
+  score=0.6573): Wazuh context rule 92032: Suspicious Windows cmd she'
+references:
+- https://attack.mitre.org/techniques/T1087/
+- https://attack.mitre.org/techniques/T1059/003/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+- attack.t1059.003
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \ipconfig.exe
+    ParentImage|endswith: \cmd.exe
+    CommandLine|contains: /all
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

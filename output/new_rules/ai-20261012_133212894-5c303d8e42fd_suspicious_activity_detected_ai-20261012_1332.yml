@@ -1,0 +1,23 @@
+title: Suspicious Activity Detected (AI-20261012_133212.894-5c303d8e42fd)
+id: 85dd441c-c1dc-4ad2-8119-2f46730534f9
+status: experimental
+description: 'Suspicious powershell.exe spawning HOSTNAME.EXE (Suspicious Windows
+  activity detected by LogDeep) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence
+  anomaly (token=''sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single'',
+  score=0.9989): Wazuh context rule : Suspi'
+references:
+- https://attack.mitre.org/
+author: SigmaGen
+date: '2026-10-27'
+tags: []
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \HOSTNAME.EXE
+    ParentImage|endswith: \powershell.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

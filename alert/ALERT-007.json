@@ -1,0 +1,111 @@
+{
+  "alert_id": "AI-20261012_133213.176-c651951e8fc1",
+  "evidence_id": "EVID-c2e822984f80",
+  "timestamp": "2026-10-12T13:32:13.176Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:71dad98a0f4408d94b997f5f",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|tiny_few",
+  "anomaly_score": 0.9995827078819275,
+  "scored_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|tiny_few",
+  "scored_target_probability": 0.0004172730550635606,
+  "observed_probability": 0.0004172730550635606,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 5816,
+    "guid": "{7e4a5fee-e15d-6acc-3d02-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c tasklist",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "911D039E71583A07320B32BDE22F8E22",
+      "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+      "imphash": "272245E2988E1E430500B852C4FB5E18"
+    },
+    "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+    "description": "Windows Command Processor",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "Cmd.Exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4788,
+    "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92052",
+    "rule_level": 4,
+    "rule_description": "Windows command prompt started by an abnormal process",
+    "mitre": {
+      "id": [
+        "T1059.003"
+      ],
+      "tactic": [
+        "Execution"
+      ],
+      "technique": [
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.1940096765756607
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.1477469503879547
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.11986454576253891
+    },
+    {
+      "token_id": 52,
+      "token": "sysmon|1|process_create|powershell.exe>gpresult.exe|system32|tiny_few",
+      "probability": 0.0965692400932312
+    },
+    {
+      "token_id": 124,
+      "token": "sysmon|8|remote_thread|unknown",
+      "probability": 0.0426192432641983
+    }
+  ],
+  "incident_id": "INC-0002",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

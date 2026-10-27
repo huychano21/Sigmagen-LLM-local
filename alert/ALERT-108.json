@@ -1,0 +1,111 @@
+{
+  "alert_id": "AI-20261012_140019.631-f0c9a6c01548",
+  "evidence_id": "EVID-6c358682b634",
+  "timestamp": "2026-10-12T14:00:19.631Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:ea0896db13b866038ad60686",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few",
+  "anomaly_score": 0.6196776628494263,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.38032233715057373,
+  "observed_probability": 0.38032233715057373,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 4732,
+    "guid": "{7e4a5fee-e7f3-6acc-bb02-000000001100}",
+    "image": "C:\\Windows\\System32\\net.exe",
+    "command_line": "net  view",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "AE61D8F04BCDE8158304067913160B31",
+      "sha256": "25C8266D2BC1D5626DCDF72419838B397D28D44D00AC09F02FF4E421B43EC369",
+      "imphash": "57F0C47AE2A1A2C06C8B987372AB0B07"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "Net Command",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "net.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4652,
+    "guid": "{7e4a5fee-e7ee-6acc-b802-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c net view /domain & net view",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92034",
+    "rule_level": 3,
+    "rule_description": "Discovery activity spawned via cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1135"
+      ],
+      "tactic": [
+        "Discovery"
+      ],
+      "technique": [
+        "Network Share Discovery"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.38032233715057373
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.19014538824558258
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.07138194888830185
+    },
+    {
+      "token_id": 102,
+      "token": "sysmon|1|process_create|svchost.exe>tiworker.exe|windows|short_few",
+      "probability": 0.034475747495889664
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.03338148817420006
+    }
+  ],
+  "incident_id": "INC-0023",
+  "incident_role": "unseen",
+  "use_for_rule_generation": true
+}

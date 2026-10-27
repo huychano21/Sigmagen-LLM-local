@@ -1,0 +1,626 @@
+{
+  "evidence_id": "EVID-6ec15625dba2",
+  "alert_id": "AI-20261007_093357.439-6a856f15996c",
+  "window_size": 10,
+  "context_events": [
+    {
+      "event_uid": "sysmon:0e462d1b3358aacf849056d4",
+      "timestamp": "2026-10-07T09:18:55.382Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:e9e8b38ae5474513525f05e1",
+      "timestamp": "2026-10-07T09:23:48.394Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|lsass.exe",
+      "process_role": "security_host",
+      "path_class": "system32",
+      "process": {
+        "pid": 672,
+        "guid": "{7e4a5fee-fd2e-6ac5-0c00-000000001100}",
+        "image": "C:\\Windows\\System32\\lsass.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:127.0.0.1;"
+      }
+    },
+    {
+      "event_uid": "sysmon:75fd3c9a5dd700b53d0e70be",
+      "timestamp": "2026-10-07T09:23:56.295Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:ece575760916fbe0b46bb341",
+      "timestamp": "2026-10-07T09:23:56.408Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V.hvan.vn",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:4efc0f4eae8dd95d9f50cd1d",
+      "timestamp": "2026-10-07T09:23:56.430Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:1c0778b02ef20cc338f66c28",
+      "timestamp": "2026-10-07T09:23:56.538Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:ca238042af270fbac2617d8c",
+      "timestamp": "2026-10-07T09:28:56.874Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V.hvan.vn",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:1cf56298e2fcb014e1c3cca9",
+      "timestamp": "2026-10-07T09:28:56.899Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:0db313979e138a89612936e1",
+      "timestamp": "2026-10-07T09:28:57.008Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|dfsrs.exe",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5384,
+        "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+        "image": "C:\\Windows\\system32\\DFSRs.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    },
+    {
+      "event_uid": "sysmon:a42bc013b781d8dd850d0889",
+      "timestamp": "2026-10-07T09:31:28.595Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 22,
+      "event_type": "dns_query",
+      "event_token": "sysmon|22|dns_query|&lt;unknown process&gt;",
+      "process_role": "other_executable",
+      "path_class": "other",
+      "process": {
+        "pid": 3452,
+        "guid": "{00000000-0000-0000-0000-000000000000}",
+        "image": "&lt;unknown process&gt;",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "WIN-5J23U7CAV7V.hvan.vn",
+        "query_status": "0",
+        "query_results": "::1;::ffff:10.212.106.167;"
+      }
+    }
+  ],
+  "target_event": {
+    "schema_version": "windows-sysmon-v1",
+    "event_uid": "sysmon:2837f11e69700df906763cea",
+    "timestamp": "2026-10-07T09:33:57.439Z",
+    "host": "WIN-5J23U7CAV7V.hvan.vn",
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 22,
+    "event_type": "dns_query",
+    "event_record_id": 10555,
+    "system_data": {
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "event_id": "22",
+      "version": "5",
+      "level": "4",
+      "task": "22",
+      "opcode": "0",
+      "keywords": "0x8000000000000000",
+      "system_time": "2026-10-12T14:12:39.926551500Z",
+      "event_record_id": "10555",
+      "process_id": "2832",
+      "thread_id": "4968",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "computer": "WIN-5J23U7CAV7V.hvan.vn",
+      "severity_value": "INFORMATION",
+      "message": "\"Dns query:\r\nRuleName: -\r\nUtcTime: 2026-10-07 09:33:57.439\r\nProcessGuid: {7e4a5fee-da61-6acc-5301-000000001100}\r\nProcessId: 5384\r\nQueryName: WIN-5J23U7CAV7V.hvan.vn\r\nQueryStatus: 0\r\nQueryResults: ::1;::ffff:10.212.106.167;\r\nImage: C:\\Windows\\system32\\DFSRs.exe\r\nUser: NT AUTHORITY\\SYSTEM\""
+    },
+    "event_data": {
+      "utc_time": "2026-10-07 09:33:57.439",
+      "process_guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+      "process_id": "5384",
+      "query_name": "WIN-5J23U7CAV7V.hvan.vn",
+      "query_status": "0",
+      "query_results": "::1;::ffff:10.212.106.167;",
+      "image": "C:\\Windows\\system32\\DFSRs.exe",
+      "user": "NT AUTHORITY\\SYSTEM"
+    },
+    "process": {
+      "pid": 5384,
+      "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+      "image": "C:\\Windows\\system32\\DFSRs.exe",
+      "command_line": "",
+      "current_directory": "",
+      "integrity_level": "",
+      "hashes": {},
+      "file_version": "",
+      "description": "",
+      "product": "",
+      "company": "",
+      "original_file_name": "",
+      "logon_id": "",
+      "logon_guid": "",
+      "terminal_session_id": ""
+    },
+    "parent_process": {
+      "pid": null,
+      "guid": "",
+      "image": "",
+      "command_line": "",
+      "user": ""
+    },
+    "user": "NT AUTHORITY\\SYSTEM",
+    "file": {
+      "target_filename": "",
+      "target_object": "",
+      "creation_time": "",
+      "details": ""
+    },
+    "network": {
+      "source_ip": "",
+      "source_port": null,
+      "destination_ip": "",
+      "destination_port": null,
+      "protocol": "",
+      "query_name": "WIN-5J23U7CAV7V.hvan.vn",
+      "query_status": "0",
+      "query_results": "::1;::ffff:10.212.106.167;"
+    },
+    "source_metadata": {
+      "kind": "wazuh_archive",
+      "source_file": "archives.json",
+      "line_number": 1512,
+      "wazuh_id": "1791814360.2795773",
+      "wazuh_agent": {
+        "id": "002",
+        "name": "WIN-5J23U7CAV7V",
+        "ip": "10.212.106.167"
+      },
+      "wazuh_manager": {
+        "name": "wazuh.manager"
+      },
+      "wazuh_decoder": {
+        "name": "windows_eventchannel"
+      },
+      "wazuh_location": "EventChannel",
+      "wazuh_rule": {},
+      "wazuh_outer_timestamp": "2026-10-12T14:12:40.321+0000",
+      "agent_name": "WIN-5J23U7CAV7V",
+      "agent_id": "002",
+      "agent_ip": "10.212.106.167"
+    },
+    "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"22\",\"version\":\"5\",\"level\":\"4\",\"task\":\"22\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:12:39.926551500Z\",\"eventRecordID\":\"10555\",\"processID\":\"2832\",\"threadID\":\"4968\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Dns query:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-07 09:33:57.439\\r\\nProcessGuid: {7e4a5fee-da61-6acc-5301-000000001100}\\r\\nProcessId: 5384\\r\\nQueryName: WIN-5J23U7CAV7V.hvan.vn\\r\\nQueryStatus: 0\\r\\nQueryResults: ::1;::ffff:10.212.106.167;\\r\\nImage: C:\\\\Windows\\\\system32\\\\DFSRs.exe\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-07 09:33:57.439\",\"processGuid\":\"{7e4a5fee-da61-6acc-5301-000000001100}\",\"processId\":\"5384\",\"queryName\":\"WIN-5J23U7CAV7V.hvan.vn\",\"queryStatus\":\"0\",\"queryResults\":\"::1;::ffff:10.212.106.167;\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\DFSRs.exe\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+    "process_role": "other_executable",
+    "path_class": "system32",
+    "command_shape": "missing",
+    "event_token": "sysmon|22|dns_query|dfsrs.exe"
+  },
+  "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"22\",\"version\":\"5\",\"level\":\"4\",\"task\":\"22\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:12:39.926551500Z\",\"eventRecordID\":\"10555\",\"processID\":\"2832\",\"threadID\":\"4968\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Dns query:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-07 09:33:57.439\\r\\nProcessGuid: {7e4a5fee-da61-6acc-5301-000000001100}\\r\\nProcessId: 5384\\r\\nQueryName: WIN-5J23U7CAV7V.hvan.vn\\r\\nQueryStatus: 0\\r\\nQueryResults: ::1;::ffff:10.212.106.167;\\r\\nImage: C:\\\\Windows\\\\system32\\\\DFSRs.exe\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-07 09:33:57.439\",\"processGuid\":\"{7e4a5fee-da61-6acc-5301-000000001100}\",\"processId\":\"5384\",\"queryName\":\"WIN-5J23U7CAV7V.hvan.vn\",\"queryStatus\":\"0\",\"queryResults\":\"::1;::ffff:10.212.106.167;\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\DFSRs.exe\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}"
+}

@@ -1,0 +1,21 @@
+title: Detect suspicious net.exe spawning net1.exe
+id: 80000001-0000-0000-0000-000000000001
+status: experimental
+description: Detects the spawning of net1.exe by net.exe, which is a potential indicator
+  of discovery activity.
+references: https://attack.mitre.org/techniques/T1087/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \net1.exe
+    ParentImage|endswith: \net.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative script execution
+level: medium

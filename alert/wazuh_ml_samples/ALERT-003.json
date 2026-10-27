@@ -1,0 +1,98 @@
+{
+  "alert_id": "ALERT-003",
+  "title": "PowerShell repeatedly spawns hostname.exe + whoami.exe back-to-back (host/user discovery)",
+  "severity": "medium",
+  "confidence": "medium",
+  "mitre_attack": [
+    "T1033",
+    "T1082"
+  ],
+  "tactic": "Discovery",
+  "source": "ML-style review of Wazuh archives.json (events with no corresponding alerts.json entry)",
+  "agent": [
+    "DC-01"
+  ],
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "user": [
+    "HVAN\\\\Administrator"
+  ],
+  "first_seen_utc": "2026-10-12T13:30:28.591976400Z",
+  "last_seen_utc": "2026-10-12T14:01:28.146485700Z",
+  "primary_event_count": 48,
+  "context_event_count": 0,
+  "occurrences_by_atomic_run": {
+    "0": 0,
+    "1": 24,
+    "2": 24
+  },
+  "sysmon_record_ids": [
+    "10390",
+    "10391",
+    "10394",
+    "10395",
+    "10396",
+    "10397",
+    "10403",
+    "10404",
+    "10410",
+    "10411",
+    "10414",
+    "10415",
+    "10424",
+    "10425",
+    "10431",
+    "10432",
+    "10437",
+    "10438",
+    "10441",
+    "10442",
+    "10446",
+    "10447",
+    "10452",
+    "10453",
+    "10476",
+    "10477",
+    "10480",
+    "10481",
+    "10482",
+    "10483",
+    "10489",
+    "10490",
+    "10493",
+    "10494",
+    "10497",
+    "10498",
+    "10509",
+    "10510",
+    "10517",
+    "10518",
+    "10523",
+    "10524",
+    "10527",
+    "10528",
+    "10532",
+    "10533",
+    "10538",
+    "10539"
+  ],
+  "description": "48 Sysmon EID 1 events: powershell.exe (HVAN\\Administrator) launches HOSTNAME.EXE then whoami.exe within <1 s, repeated once per atomic test (every ~30-40 s). It is the Invoke-AtomicRedTeam test-logging prologue but, from a detection view, is a recurring discovery pair run by an interactive PowerShell with no associated alert. Note the separate `cmd /c whoami /all` was alerted (92032) but plain whoami.exe launched directly by powershell.exe was not.",
+  "why_wazuh_missed": "Wazuh 92xxx rules only fire for whoami/hostname when wrapped by cmd.exe; direct PowerShell child process of these LOLBins is not covered. Likely also low-severity/noisy so no default rule.",
+  "detection_hints_for_rule": [
+    "Sysmon EID 1: parentImage endswith \\powershell.exe AND image endswith \\whoami.exe (commandLine without cmd.exe wrapper)",
+    "Sysmon EID 1: image endswith \\HOSTNAME.EXE with parentImage endswith \\powershell.exe",
+    "Correlation: HOSTNAME.EXE and whoami.exe with same parentProcessGuid within 2 s, >=3 occurrences in 10 min (frequency / timeframe rule)"
+  ],
+  "evidence_file": "evidence/ALERT-003_evidence.json",
+  "atomic_runs": {
+    "1": {
+      "start_utc": "2026-10-12T13:30:28Z",
+      "end_utc": "2026-10-12T13:37:13Z",
+      "defender": "ON (real-time protection enabled)"
+    },
+    "2": {
+      "start_utc": "2026-10-12T13:54:52Z",
+      "end_utc": "2026-10-12T14:01:28Z",
+      "defender": "OFF (DisableRealtimeMonitoring=1 set at 13:53:18Z)"
+    }
+  }
+}

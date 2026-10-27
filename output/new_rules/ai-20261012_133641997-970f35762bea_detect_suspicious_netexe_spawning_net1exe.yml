@@ -1,0 +1,22 @@
+title: Detect suspicious net.exe spawning net1.exe
+id: 854a389f-fc0a-4ff5-ba36-650e12c3e17b
+status: experimental
+description: Detects a suspicious process creation where net.exe spawns net1.exe,
+  which is a known technique for command and control.
+references: https://attack.mitre.org/techniques/T1087/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \net1.exe
+    ParentImage|endswith: \net.exe
+    CommandLine|contains: time \localhost
+  condition: selection
+falsepositives:
+- Legitimate administrative tasks
+level: medium

@@ -1,0 +1,8 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100136" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+LogonUI\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)/flags:0x0</field>
+    <description>Suspicious Activity Detected (AI-20261012_134519.799-9b598bb8573a) [Alert: AI-20261012_134519.799-9b598bb8573a]</description>
+  </rule>
+</group>

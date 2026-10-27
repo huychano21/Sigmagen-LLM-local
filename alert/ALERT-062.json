@@ -1,0 +1,107 @@
+{
+  "alert_id": "AI-20261012_135452.958-d82644ce2195",
+  "evidence_id": "EVID-51c0caa8af42",
+  "timestamp": "2026-10-12T13:54:52.958Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:08b69182554fca1e4a58b261",
+  "event_id": 11,
+  "event_type": "file_create",
+  "event_token": "sysmon|11|file_create|powershell.exe|temp",
+  "anomaly_score": 0.9903540015220642,
+  "scored_token": "sysmon|11|file_create|powershell.exe|temp",
+  "scored_target_probability": 0.00964602641761303,
+  "observed_probability": 0.00964602641761303,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 6132,
+    "guid": "{7e4a5fee-e6ac-6acc-7f02-000000001100}",
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "",
+    "current_directory": "",
+    "integrity_level": "",
+    "hashes": {},
+    "file_version": "",
+    "description": "",
+    "product": "",
+    "company": "",
+    "original_file_name": "",
+    "logon_id": "",
+    "logon_guid": "",
+    "terminal_session_id": ""
+  },
+  "parent_process": {
+    "pid": null,
+    "guid": "",
+    "image": "",
+    "command_line": "",
+    "user": ""
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\__PSScriptPolicyTest_fyb3fimx.hl2.ps1",
+    "target_object": "",
+    "creation_time": "2026-10-12 13:54:52.958",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92213",
+    "rule_level": 15,
+    "rule_description": "Executable file dropped in folder commonly used by malware",
+    "mitre": {
+      "id": [
+        "T1105"
+      ],
+      "tactic": [
+        "Command and Control"
+      ],
+      "technique": [
+        "Ingress Tool Transfer"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.266899049282074
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.1351556032896042
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.10540861636400223
+    },
+    {
+      "token_id": 83,
+      "token": "sysmon|1|process_create|smss.exe>csrss.exe|system32|medium_many",
+      "probability": 0.06847278773784637
+    },
+    {
+      "token_id": 17,
+      "token": "sysmon|13|registry_value|svchost.exe|registry",
+      "probability": 0.04493096470832825
+    }
+  ],
+  "incident_id": "INC-0014",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

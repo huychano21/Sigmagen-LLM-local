@@ -1,0 +1,94 @@
+{
+  "alert_id": "AI-20261007_093357.461-695ddc4a5cb2",
+  "evidence_id": "EVID-bce76de92a01",
+  "timestamp": "2026-10-07T09:33:57.461Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:e5e21a9e3716a8a88c7d618c",
+  "event_id": 22,
+  "event_type": "dns_query",
+  "event_token": "sysmon|22|dns_query|dfsrs.exe",
+  "anomaly_score": 0.9884812235832214,
+  "scored_token": "sysmon|22|dns_query|dfsrs.exe",
+  "scored_target_probability": 0.011518769897520542,
+  "observed_probability": 0.011518769897520542,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 5384,
+    "guid": "{7e4a5fee-da61-6acc-5301-000000001100}",
+    "image": "C:\\Windows\\system32\\DFSRs.exe",
+    "command_line": "",
+    "current_directory": "",
+    "integrity_level": "",
+    "hashes": {},
+    "file_version": "",
+    "description": "",
+    "product": "",
+    "company": "",
+    "original_file_name": "",
+    "logon_id": "",
+    "logon_guid": "",
+    "terminal_session_id": ""
+  },
+  "parent_process": {
+    "pid": null,
+    "guid": "",
+    "image": "",
+    "command_line": "",
+    "user": ""
+  },
+  "user": "NT AUTHORITY\\SYSTEM",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "WIN-5J23U7CAV7V",
+    "query_status": "0",
+    "query_results": "::1;::ffff:10.212.106.167;"
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.23919782042503357
+    },
+    {
+      "token_id": 114,
+      "token": "sysmon|22|dns_query|lsass.exe",
+      "probability": 0.22919310629367828
+    },
+    {
+      "token_id": 119,
+      "token": "sysmon|22|dns_query|svchost.exe",
+      "probability": 0.16336175799369812
+    },
+    {
+      "token_id": 113,
+      "token": "sysmon|22|dns_query|iexplore.exe",
+      "probability": 0.08627117425203323
+    },
+    {
+      "token_id": 108,
+      "token": "sysmon|22|dns_query|<unknown process>",
+      "probability": 0.04767303168773651
+    }
+  ]
+}

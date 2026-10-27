@@ -1,0 +1,12 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100151" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+tasklist\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+cmd\.exe$</field>
+    <description>Running Process Enumeration via Tasklist [Alert: AI-20261012_133213.227-6077db78b13e]</description>
+    <mitre>
+      <id>T1087</id>
+      <id>T1059.003</id>
+    </mitre>
+  </rule>
+</group>

@@ -1,0 +1,682 @@
+{
+  "evidence_id": "EVID-a33405bad5d5",
+  "alert_id": "AI-20261012_135558.831-e934d1b73f19",
+  "window_size": 10,
+  "context_events": [
+    {
+      "event_uid": "sysmon:9d99f8868752787839595737",
+      "timestamp": "2026-10-12T13:54:52.664Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 2740,
+        "guid": "{7e4a5fee-e6ac-6acc-7d02-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:b434f0c654d897df53359dc4",
+      "timestamp": "2026-10-12T13:54:52.680Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 4420,
+        "guid": "{7e4a5fee-e6ac-6acc-7e02-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:d85c5c00fac9db893638a492",
+      "timestamp": "2026-10-12T13:54:52.888Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>powershell.exe|system32|short_few",
+      "process_role": "powershell",
+      "path_class": "system32",
+      "process": {
+        "pid": 6132,
+        "guid": "{7e4a5fee-e6ac-6acc-7f02-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" & {Start-Process \\\"\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1059.003_script.bat\\\"\"}",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7353F60B1739074EB17C5F4DDDEFE239",
+          "sha256": "DE96A6E69944335375DC1AC238336066889D9FFC7D73628EF4FE1B1B160AB32C",
+          "imphash": "741776AACCFC5B71FF59832DCDCACE0F"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Windows PowerShell",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "PowerShell.EXE",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:08b69182554fca1e4a58b261",
+      "timestamp": "2026-10-12T13:54:52.958Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 11,
+      "event_type": "file_create",
+      "event_token": "sysmon|11|file_create|powershell.exe|temp",
+      "process_role": "powershell",
+      "path_class": "temp",
+      "process": {
+        "pid": 6132,
+        "guid": "{7e4a5fee-e6ac-6acc-7f02-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\__PSScriptPolicyTest_fyb3fimx.hl2.ps1",
+        "target_object": "",
+        "creation_time": "2026-10-12 13:54:52.958",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:9f1a0ba99ae390f3ecc9fd11",
+      "timestamp": "2026-10-12T13:55:24.838Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 4700,
+        "guid": "{7e4a5fee-e6cc-6acc-8102-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:7918b1c8a96fbdfcc22ea055",
+      "timestamp": "2026-10-12T13:55:24.852Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 2212,
+        "guid": "{7e4a5fee-e6cc-6acc-8202-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:235a5930c59245463cf6c613",
+      "timestamp": "2026-10-12T13:55:56.183Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 5160,
+        "guid": "{7e4a5fee-e6ec-6acc-8502-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:4a094c5489acd93caefabb5e",
+      "timestamp": "2026-10-12T13:55:56.197Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 5780,
+        "guid": "{7e4a5fee-e6ec-6acc-8602-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:f98680f3ddc39948884f7099",
+      "timestamp": "2026-10-12T13:55:56.666Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|short_many",
+      "process_role": "cmd",
+      "path_class": "system32",
+      "process": {
+        "pid": 2520,
+        "guid": "{7e4a5fee-e6ec-6acc-8702-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "911D039E71583A07320B32BDE22F8E22",
+          "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+          "imphash": "272245E2988E1E430500B852C4FB5E18"
+        },
+        "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+        "description": "Windows Command Processor",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "Cmd.Exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:6d3c1d17c5a2897978dd7a3f",
+      "timestamp": "2026-10-12T13:55:56.700Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>systeminfo.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 3272,
+        "guid": "{7e4a5fee-e6ec-6acc-8902-000000001100}",
+        "image": "C:\\Windows\\System32\\systeminfo.exe",
+        "command_line": "systeminfo",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "F2D7816271A27223945E8AE24B6F81F7",
+          "sha256": "1084ADF2DDBE903BD71A496720B0D6616882F120D1B3FFEAE8D47FEB0D9CC123",
+          "imphash": "C5985EAB8C1ED292344936A4595C1438"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Displays system information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "sysinfo.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 2520,
+        "guid": "{7e4a5fee-e6ec-6acc-8702-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    }
+  ],
+  "target_event": {
+    "schema_version": "windows-sysmon-v1",
+    "event_uid": "sysmon:fb6e5a66eb02860cda54a619",
+    "timestamp": "2026-10-12T13:55:58.831Z",
+    "host": "WIN-5J23U7CAV7V.hvan.vn",
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 1,
+    "event_type": "process_create",
+    "event_record_id": 10486,
+    "system_data": {
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "event_id": "1",
+      "version": "5",
+      "level": "4",
+      "task": "1",
+      "opcode": "0",
+      "keywords": "0x8000000000000000",
+      "system_time": "2026-10-12T13:55:58.832598800Z",
+      "event_record_id": "10486",
+      "process_id": "2832",
+      "thread_id": "4936",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "computer": "WIN-5J23U7CAV7V.hvan.vn",
+      "severity_value": "INFORMATION",
+      "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 13:55:58.831\r\nProcessGuid: {7e4a5fee-e6ee-6acc-8a02-000000001100}\r\nProcessId: 4172\r\nImage: C:\\Windows\\servicing\\TrustedInstaller.exe\r\nFileVersion: 10.0.17763.1098 (WinBuild.160101.0800)\r\nDescription: Windows Modules Installer\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: TrustedInstaller.exe\r\nCommandLine: C:\\Windows\\servicing\\TrustedInstaller.exe\r\nCurrentDirectory: C:\\Windows\\system32\\\r\nUser: NT AUTHORITY\\SYSTEM\r\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843\r\nParentProcessGuid: {7e4a5fee-fd2e-6ac5-0b00-000000001100}\r\nParentProcessId: 660\r\nParentImage: C:\\Windows\\System32\\services.exe\r\nParentCommandLine: C:\\Windows\\system32\\services.exe\r\nParentUser: NT AUTHORITY\\SYSTEM\""
+    },
+    "event_data": {
+      "utc_time": "2026-10-12 13:55:58.831",
+      "process_guid": "{7e4a5fee-e6ee-6acc-8a02-000000001100}",
+      "process_id": "4172",
+      "image": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "file_version": "10.0.17763.1098 (WinBuild.160101.0800)",
+      "description": "Windows Modules Installer",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "TrustedInstaller.exe",
+      "command_line": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "current_directory": "C:\\Windows\\system32\\",
+      "user": "NT AUTHORITY\\SYSTEM",
+      "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+      "logon_id": "0x3e7",
+      "terminal_session_id": "0",
+      "integrity_level": "System",
+      "hashes": "MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843",
+      "parent_process_guid": "{7e4a5fee-fd2e-6ac5-0b00-000000001100}",
+      "parent_process_id": "660",
+      "parent_image": "C:\\Windows\\System32\\services.exe",
+      "parent_command_line": "C:\\Windows\\system32\\services.exe",
+      "parent_user": "NT AUTHORITY\\SYSTEM"
+    },
+    "process": {
+      "pid": 4172,
+      "guid": "{7e4a5fee-e6ee-6acc-8a02-000000001100}",
+      "image": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "command_line": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "current_directory": "C:\\Windows\\system32\\",
+      "integrity_level": "System",
+      "hashes": {
+        "md5": "83F09DC8EA0615A80E5204E07001C7FF",
+        "sha256": "E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A",
+        "imphash": "5A5A505BA4F93DA92EB564DA19258843"
+      },
+      "file_version": "10.0.17763.1098 (WinBuild.160101.0800)",
+      "description": "Windows Modules Installer",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "TrustedInstaller.exe",
+      "logon_id": "0x3e7",
+      "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+      "terminal_session_id": "0"
+    },
+    "parent_process": {
+      "pid": 660,
+      "guid": "{7e4a5fee-fd2e-6ac5-0b00-000000001100}",
+      "image": "C:\\Windows\\System32\\services.exe",
+      "command_line": "C:\\Windows\\system32\\services.exe",
+      "user": "NT AUTHORITY\\SYSTEM"
+    },
+    "user": "NT AUTHORITY\\SYSTEM",
+    "file": {
+      "target_filename": "",
+      "target_object": "",
+      "creation_time": "",
+      "details": ""
+    },
+    "network": {
+      "source_ip": "",
+      "source_port": null,
+      "destination_ip": "",
+      "destination_port": null,
+      "protocol": "",
+      "query_name": "",
+      "query_status": "",
+      "query_results": ""
+    },
+    "source_metadata": {
+      "kind": "wazuh_archive",
+      "source_file": "archives.json",
+      "line_number": 1207,
+      "wazuh_id": "1791813359.2310311",
+      "wazuh_agent": {
+        "id": "001",
+        "name": "DC-01",
+        "ip": "10.212.106.167"
+      },
+      "wazuh_manager": {
+        "name": "wazuh.manager"
+      },
+      "wazuh_decoder": {
+        "name": "windows_eventchannel"
+      },
+      "wazuh_location": "EventChannel",
+      "wazuh_rule": {},
+      "wazuh_outer_timestamp": "2026-10-12T13:55:59.215+0000",
+      "agent_name": "DC-01",
+      "agent_id": "001",
+      "agent_ip": "10.212.106.167"
+    },
+    "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:55:58.832598800Z\",\"eventRecordID\":\"10486\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:55:58.831\\r\\nProcessGuid: {7e4a5fee-e6ee-6acc-8a02-000000001100}\\r\\nProcessId: 4172\\r\\nImage: C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe\\r\\nFileVersion: 10.0.17763.1098 (WinBuild.160101.0800)\\r\\nDescription: Windows Modules Installer\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: TrustedInstaller.exe\\r\\nCommandLine: C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe\\r\\nCurrentDirectory: C:\\\\Windows\\\\system32\\\\\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\r\\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\\r\\nLogonId: 0x3E7\\r\\nTerminalSessionId: 0\\r\\nIntegrityLevel: System\\r\\nHashes: MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843\\r\\nParentProcessGuid: {7e4a5fee-fd2e-6ac5-0b00-000000001100}\\r\\nParentProcessId: 660\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\services.exe\\r\\nParentCommandLine: C:\\\\Windows\\\\system32\\\\services.exe\\r\\nParentUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:55:58.831\",\"processGuid\":\"{7e4a5fee-e6ee-6acc-8a02-000000001100}\",\"processId\":\"4172\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\servicing\\\\\\\\TrustedInstaller.exe\",\"fileVersion\":\"10.0.17763.1098 (WinBuild.160101.0800)\",\"description\":\"Windows Modules Installer\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"TrustedInstaller.exe\",\"commandLine\":\"C:\\\\\\\\Windows\\\\\\\\servicing\\\\\\\\TrustedInstaller.exe\",\"currentDirectory\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\",\"logonGuid\":\"{7e4a5fee-fd2f-6ac5-e703-000000000000}\",\"logonId\":\"0x3e7\",\"terminalSessionId\":\"0\",\"integrityLevel\":\"System\",\"hashes\":\"MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843\",\"parentProcessGuid\":\"{7e4a5fee-fd2e-6ac5-0b00-000000001100}\",\"parentProcessId\":\"660\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\services.exe\",\"parentCommandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\services.exe\",\"parentUser\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+    "process_role": "system_installer",
+    "path_class": "windows",
+    "command_shape": "tiny_single",
+    "event_token": "sysmon|1|process_create|services.exe>trustedinstaller.exe|windows|tiny_single"
+  },
+  "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T13:55:58.832598800Z\",\"eventRecordID\":\"10486\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 13:55:58.831\\r\\nProcessGuid: {7e4a5fee-e6ee-6acc-8a02-000000001100}\\r\\nProcessId: 4172\\r\\nImage: C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe\\r\\nFileVersion: 10.0.17763.1098 (WinBuild.160101.0800)\\r\\nDescription: Windows Modules Installer\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: TrustedInstaller.exe\\r\\nCommandLine: C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe\\r\\nCurrentDirectory: C:\\\\Windows\\\\system32\\\\\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\r\\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\\r\\nLogonId: 0x3E7\\r\\nTerminalSessionId: 0\\r\\nIntegrityLevel: System\\r\\nHashes: MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843\\r\\nParentProcessGuid: {7e4a5fee-fd2e-6ac5-0b00-000000001100}\\r\\nParentProcessId: 660\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\services.exe\\r\\nParentCommandLine: C:\\\\Windows\\\\system32\\\\services.exe\\r\\nParentUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 13:55:58.831\",\"processGuid\":\"{7e4a5fee-e6ee-6acc-8a02-000000001100}\",\"processId\":\"4172\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\servicing\\\\\\\\TrustedInstaller.exe\",\"fileVersion\":\"10.0.17763.1098 (WinBuild.160101.0800)\",\"description\":\"Windows Modules Installer\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"TrustedInstaller.exe\",\"commandLine\":\"C:\\\\\\\\Windows\\\\\\\\servicing\\\\\\\\TrustedInstaller.exe\",\"currentDirectory\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\",\"logonGuid\":\"{7e4a5fee-fd2f-6ac5-e703-000000000000}\",\"logonId\":\"0x3e7\",\"terminalSessionId\":\"0\",\"integrityLevel\":\"System\",\"hashes\":\"MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843\",\"parentProcessGuid\":\"{7e4a5fee-fd2e-6ac5-0b00-000000001100}\",\"parentProcessId\":\"660\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\services.exe\",\"parentCommandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\services.exe\",\"parentUser\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+  "incident_id": "INC-0016",
+  "incident_role": "follow_on"
+}

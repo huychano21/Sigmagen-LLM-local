@@ -1,0 +1,711 @@
+{
+  "evidence_id": "EVID-46f812af676f",
+  "alert_id": "AI-20261012_140056.665-fa18d2169194",
+  "window_size": 10,
+  "context_events": [
+    {
+      "event_uid": "sysmon:4613c3e19bd6dcbcd8f525e3",
+      "timestamp": "2026-10-12T14:00:13.871Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 3392,
+        "guid": "{7e4a5fee-e7ed-6acc-b602-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:325ca26f9bc7f1a0a3279b0b",
+      "timestamp": "2026-10-12T14:00:13.890Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 3276,
+        "guid": "{7e4a5fee-e7ed-6acc-b702-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:13b9ca3e18b5b157d5a318eb",
+      "timestamp": "2026-10-12T14:00:14.239Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|tiny_many",
+      "process_role": "cmd",
+      "path_class": "system32",
+      "process": {
+        "pid": 4652,
+        "guid": "{7e4a5fee-e7ee-6acc-b802-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net view /domain & net view",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "911D039E71583A07320B32BDE22F8E22",
+          "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+          "imphash": "272245E2988E1E430500B852C4FB5E18"
+        },
+        "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+        "description": "Windows Command Processor",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "Cmd.Exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:c03fb60aa5b83bbcaa7a25a1",
+      "timestamp": "2026-10-12T14:00:14.272Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 3460,
+        "guid": "{7e4a5fee-e7ee-6acc-ba02-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  view /domain",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "AE61D8F04BCDE8158304067913160B31",
+          "sha256": "25C8266D2BC1D5626DCDF72419838B397D28D44D00AC09F02FF4E421B43EC369",
+          "imphash": "57F0C47AE2A1A2C06C8B987372AB0B07"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4652,
+        "guid": "{7e4a5fee-e7ee-6acc-b802-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net view /domain & net view",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:ea0896db13b866038ad60686",
+      "timestamp": "2026-10-12T14:00:19.631Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 4732,
+        "guid": "{7e4a5fee-e7f3-6acc-bb02-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  view",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "AE61D8F04BCDE8158304067913160B31",
+          "sha256": "25C8266D2BC1D5626DCDF72419838B397D28D44D00AC09F02FF4E421B43EC369",
+          "imphash": "57F0C47AE2A1A2C06C8B987372AB0B07"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4652,
+        "guid": "{7e4a5fee-e7ee-6acc-b802-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net view /domain & net view",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:1ab78e8fc50a01311859532d",
+      "timestamp": "2026-10-12T14:00:56.425Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 4396,
+        "guid": "{7e4a5fee-e818-6acc-bc02-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:d3bb1916f975e0e910e05b4d",
+      "timestamp": "2026-10-12T14:00:56.439Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 4716,
+        "guid": "{7e4a5fee-e818-6acc-bd02-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:f5bbebb2231592dbb1e2d486",
+      "timestamp": "2026-10-12T14:00:56.603Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|tiny_many",
+      "process_role": "cmd",
+      "path_class": "system32",
+      "process": {
+        "pid": 4892,
+        "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "911D039E71583A07320B32BDE22F8E22",
+          "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+          "imphash": "272245E2988E1E430500B852C4FB5E18"
+        },
+        "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+        "description": "Windows Command Processor",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "Cmd.Exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:f7905f4641371017fbd0632a",
+      "timestamp": "2026-10-12T14:00:56.634Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 3836,
+        "guid": "{7e4a5fee-e818-6acc-c002-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  time \\\\localhost",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "AE61D8F04BCDE8158304067913160B31",
+          "sha256": "25C8266D2BC1D5626DCDF72419838B397D28D44D00AC09F02FF4E421B43EC369",
+          "imphash": "57F0C47AE2A1A2C06C8B987372AB0B07"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4892,
+        "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:54f3503b0fd13b089e6f2611",
+      "timestamp": "2026-10-12T14:00:56.643Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|net.exe>net1.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 2264,
+        "guid": "{7e4a5fee-e818-6acc-c102-000000001100}",
+        "image": "C:\\Windows\\System32\\net1.exe",
+        "command_line": "C:\\Windows\\system32\\net1  time \\\\localhost",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "63DD4523677E62A73A8A7494DB321EA2",
+          "sha256": "C687157FD58EAA51757CDA87D06C30953A31F03F5356B9F5A9C004FA4BAD4BF5",
+          "imphash": "41DBA1AF77E1A2260F0CE46D59ADCB5E"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net1.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 3836,
+        "guid": "{7e4a5fee-e818-6acc-c002-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  time \\\\localhost",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    }
+  ],
+  "target_event": {
+    "schema_version": "windows-sysmon-v1",
+    "event_uid": "sysmon:df2638ccf890fa6fa579eeb0",
+    "timestamp": "2026-10-12T14:00:56.665Z",
+    "host": "WIN-5J23U7CAV7V.hvan.vn",
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 1,
+    "event_type": "process_create",
+    "event_record_id": 10537,
+    "system_data": {
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "event_id": "1",
+      "version": "5",
+      "level": "4",
+      "task": "1",
+      "opcode": "0",
+      "keywords": "0x8000000000000000",
+      "system_time": "2026-10-12T14:00:56.666244800Z",
+      "event_record_id": "10537",
+      "process_id": "2832",
+      "thread_id": "4936",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "computer": "WIN-5J23U7CAV7V.hvan.vn",
+      "severity_value": "INFORMATION",
+      "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 14:00:56.665\r\nProcessGuid: {7e4a5fee-e818-6acc-c202-000000001100}\r\nProcessId: 2240\r\nImage: C:\\Windows\\System32\\w32tm.exe\r\nFileVersion: 10.0.17763.1490 (WinBuild.160101.0800)\r\nDescription: Windows Time Service Diagnostic Tool\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: w32time.dll\r\nCommandLine: w32tm  /tz\r\nCurrentDirectory: C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\\r\nUser: HVAN\\Administrator\r\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\r\nLogonId: 0x9F3E4\r\nTerminalSessionId: 1\r\nIntegrityLevel: High\r\nHashes: MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11\r\nParentProcessGuid: {7e4a5fee-e818-6acc-be02-000000001100}\r\nParentProcessId: 4892\r\nParentImage: C:\\Windows\\System32\\cmd.exe\r\nParentCommandLine: \"cmd.exe\" /c net time \\\\localhost & w32tm /tz\r\nParentUser: HVAN\\Administrator\""
+    },
+    "event_data": {
+      "utc_time": "2026-10-12 14:00:56.665",
+      "process_guid": "{7e4a5fee-e818-6acc-c202-000000001100}",
+      "process_id": "2240",
+      "image": "C:\\Windows\\System32\\w32tm.exe",
+      "file_version": "10.0.17763.1490 (WinBuild.160101.0800)",
+      "description": "Windows Time Service Diagnostic Tool",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "w32time.dll",
+      "command_line": "w32tm  /tz",
+      "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+      "user": "HVAN\\Administrator",
+      "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+      "logon_id": "0x9f3e4",
+      "terminal_session_id": "1",
+      "integrity_level": "High",
+      "hashes": "MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11",
+      "parent_process_guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+      "parent_process_id": "4892",
+      "parent_image": "C:\\Windows\\System32\\cmd.exe",
+      "parent_command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+      "parent_user": "HVAN\\Administrator"
+    },
+    "process": {
+      "pid": 2240,
+      "guid": "{7e4a5fee-e818-6acc-c202-000000001100}",
+      "image": "C:\\Windows\\System32\\w32tm.exe",
+      "command_line": "w32tm  /tz",
+      "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+      "integrity_level": "High",
+      "hashes": {
+        "md5": "EB05B99953C30E25B4CA97F903A0DEA9",
+        "sha256": "A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B",
+        "imphash": "386119C6C0099E2C065ADCD2AA770E11"
+      },
+      "file_version": "10.0.17763.1490 (WinBuild.160101.0800)",
+      "description": "Windows Time Service Diagnostic Tool",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "w32time.dll",
+      "logon_id": "0x9f3e4",
+      "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+      "terminal_session_id": "1"
+    },
+    "parent_process": {
+      "pid": 4892,
+      "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+      "image": "C:\\Windows\\System32\\cmd.exe",
+      "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+      "user": "HVAN\\Administrator"
+    },
+    "user": "HVAN\\Administrator",
+    "file": {
+      "target_filename": "",
+      "target_object": "",
+      "creation_time": "",
+      "details": ""
+    },
+    "network": {
+      "source_ip": "",
+      "source_port": null,
+      "destination_ip": "",
+      "destination_port": null,
+      "protocol": "",
+      "query_name": "",
+      "query_status": "",
+      "query_results": ""
+    },
+    "source_metadata": {
+      "kind": "wazuh_archive",
+      "source_file": "archives.json",
+      "line_number": 1311,
+      "wazuh_id": "1791813656.2548338",
+      "wazuh_agent": {
+        "id": "001",
+        "name": "DC-01",
+        "ip": "10.212.106.167"
+      },
+      "wazuh_manager": {
+        "name": "wazuh.manager"
+      },
+      "wazuh_decoder": {
+        "name": "windows_eventchannel"
+      },
+      "wazuh_location": "EventChannel",
+      "wazuh_rule": {
+        "level": 3,
+        "description": "Suspicious Windows cmd shell execution",
+        "id": "92032",
+        "mitre": {
+          "id": [
+            "T1087",
+            "T1059.003"
+          ],
+          "tactic": [
+            "Discovery",
+            "Execution"
+          ],
+          "technique": [
+            "Account Discovery",
+            "Windows Command Shell"
+          ]
+        },
+        "firedtimes": 1,
+        "mail": false,
+        "groups": [
+          "sysmon",
+          "sysmon_eid1_detections",
+          "windows"
+        ]
+      },
+      "wazuh_outer_timestamp": "2026-10-12T14:00:56.931+0000",
+      "agent_name": "DC-01",
+      "agent_id": "001",
+      "agent_ip": "10.212.106.167"
+    },
+    "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:00:56.666244800Z\",\"eventRecordID\":\"10537\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 14:00:56.665\\r\\nProcessGuid: {7e4a5fee-e818-6acc-c202-000000001100}\\r\\nProcessId: 2240\\r\\nImage: C:\\\\Windows\\\\System32\\\\w32tm.exe\\r\\nFileVersion: 10.0.17763.1490 (WinBuild.160101.0800)\\r\\nDescription: Windows Time Service Diagnostic Tool\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: w32time.dll\\r\\nCommandLine: w32tm  /tz\\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11\\r\\nParentProcessGuid: {7e4a5fee-e818-6acc-be02-000000001100}\\r\\nParentProcessId: 4892\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nParentCommandLine: \\\"cmd.exe\\\" /c net time \\\\\\\\localhost & w32tm /tz\\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 14:00:56.665\",\"processGuid\":\"{7e4a5fee-e818-6acc-c202-000000001100}\",\"processId\":\"2240\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\w32tm.exe\",\"fileVersion\":\"10.0.17763.1490 (WinBuild.160101.0800)\",\"description\":\"Windows Time Service Diagnostic Tool\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"w32time.dll\",\"commandLine\":\"w32tm  /tz\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11\",\"parentProcessGuid\":\"{7e4a5fee-e818-6acc-be02-000000001100}\",\"parentProcessId\":\"4892\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"parentCommandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c net time \\\\\\\\\\\\\\\\localhost &amp; w32tm /tz\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+    "process_role": "other_executable",
+    "path_class": "system32",
+    "command_shape": "tiny_few",
+    "event_token": "sysmon|1|process_create|cmd.exe>w32tm.exe|system32|tiny_few"
+  },
+  "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:00:56.666244800Z\",\"eventRecordID\":\"10537\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 14:00:56.665\\r\\nProcessGuid: {7e4a5fee-e818-6acc-c202-000000001100}\\r\\nProcessId: 2240\\r\\nImage: C:\\\\Windows\\\\System32\\\\w32tm.exe\\r\\nFileVersion: 10.0.17763.1490 (WinBuild.160101.0800)\\r\\nDescription: Windows Time Service Diagnostic Tool\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: w32time.dll\\r\\nCommandLine: w32tm  /tz\\r\\nCurrentDirectory: C:\\\\Users\\\\ADMINI~1\\\\AppData\\\\Local\\\\Temp\\\\\\r\\nUser: HVAN\\\\Administrator\\r\\nLogonGuid: {7e4a5fee-fd85-6ac5-e4f3-090000000000}\\r\\nLogonId: 0x9F3E4\\r\\nTerminalSessionId: 1\\r\\nIntegrityLevel: High\\r\\nHashes: MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11\\r\\nParentProcessGuid: {7e4a5fee-e818-6acc-be02-000000001100}\\r\\nParentProcessId: 4892\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\cmd.exe\\r\\nParentCommandLine: \\\"cmd.exe\\\" /c net time \\\\\\\\localhost & w32tm /tz\\r\\nParentUser: HVAN\\\\Administrator\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 14:00:56.665\",\"processGuid\":\"{7e4a5fee-e818-6acc-c202-000000001100}\",\"processId\":\"2240\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\w32tm.exe\",\"fileVersion\":\"10.0.17763.1490 (WinBuild.160101.0800)\",\"description\":\"Windows Time Service Diagnostic Tool\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"w32time.dll\",\"commandLine\":\"w32tm  /tz\",\"currentDirectory\":\"C:\\\\\\\\Users\\\\\\\\ADMINI~1\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\\",\"user\":\"HVAN\\\\\\\\Administrator\",\"logonGuid\":\"{7e4a5fee-fd85-6ac5-e4f3-090000000000}\",\"logonId\":\"0x9f3e4\",\"terminalSessionId\":\"1\",\"integrityLevel\":\"High\",\"hashes\":\"MD5=EB05B99953C30E25B4CA97F903A0DEA9,SHA256=A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B,IMPHASH=386119C6C0099E2C065ADCD2AA770E11\",\"parentProcessGuid\":\"{7e4a5fee-e818-6acc-be02-000000001100}\",\"parentProcessId\":\"4892\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\cmd.exe\",\"parentCommandLine\":\"\\\\\\\"cmd.exe\\\\\\\" /c net time \\\\\\\\\\\\\\\\localhost &amp; w32tm /tz\",\"parentUser\":\"HVAN\\\\\\\\Administrator\"}}}",
+  "incident_id": "INC-0024",
+  "incident_role": "unseen"
+}

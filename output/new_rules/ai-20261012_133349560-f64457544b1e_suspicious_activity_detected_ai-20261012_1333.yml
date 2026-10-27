@@ -1,0 +1,22 @@
+title: Suspicious Activity Detected (AI-20261012_133349.560-f64457544b1e)
+id: 47cbb199-3694-4b20-9e98-5cd775b1e8dd
+status: experimental
+description: 'Suspicious svchost.exe spawning rundll32.exe (Suspicious Windows activity
+  detected by LogDeep) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|svchost.exe>rundll32.exe|system32|tiny_few'',
+  score=1.0000): Wazuh context rule : Suspicious Win'
+references:
+- https://attack.mitre.org/
+author: SigmaGen
+date: '2026-10-27'
+tags: []
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \rundll32.exe
+    CommandLine|contains: acproxy.dll,PerformAutochkOperations
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

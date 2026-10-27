@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_133558.970-b2cea6d16e7c",
+  "evidence_id": "EVID-019089825917",
+  "timestamp": "2026-10-12T13:35:58.970Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:db1d20bfd48c3842c06e4d5d",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+  "anomaly_score": 0.9994288682937622,
+  "scored_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+  "scored_target_probability": 0.0005711598787456751,
+  "observed_probability": 0.0005711598787456751,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 4212,
+    "guid": "{7e4a5fee-e23e-6acc-6702-000000001100}",
+    "image": "C:\\Windows\\System32\\whoami.exe",
+    "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+    "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+      "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+      "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "whoami - displays logged on user information",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "whoami.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4788,
+    "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.25301453471183777
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.1404038667678833
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.09963509440422058
+    },
+    {
+      "token_id": 44,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|medium_many",
+      "probability": 0.07619346678256989
+    },
+    {
+      "token_id": 65,
+      "token": "sysmon|1|process_create|powershell.exe>sc.exe|system32|tiny_few",
+      "probability": 0.07600165903568268
+    }
+  ],
+  "incident_id": "INC-0008",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

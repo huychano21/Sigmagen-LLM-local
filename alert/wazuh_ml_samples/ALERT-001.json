@@ -1,0 +1,22 @@
+{
+  "alert_id": "ALERT-001",
+  "title": "Microsoft Defender real-time protection disabled (tampering)",
+  "severity": "high",
+  "confidence": "high",
+  "mitre_attack": [
+    "T1562.001"
+  ],
+  "tactic": "Defense Evasion",
+  "agent": [
+    "DC-01"
+  ],
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "user": [
+    "NT AUTHORITY\\NETWORK SERVICE",
+    "NT AUTHORITY\\SYSTEM"
+  ],
+  "first_seen_utc": "2026-10-12T13:53:18.069261000Z",
+  "last_seen_utc": "2026-10-12T13:53:18.677606800Z",
+  "description": "MsMpEng.exe (SYSTEM) wrote DisableRealtimeMonitoring=1 under HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection twice (13:53:18Z, 13:53:38Z); services.exe set WdNisDrv\\Start=3 (demand start); the Network Inspection Service stopped; MpCmdRun.exe was spawned by MsMpEng. This is the point where Defender goes OFF, right before atomic run 2 (13:54:52Z). Sysmon itself tagged the events (RuleName 'T1089,Tamper-Defender' / 'T1031,T1050') but Wazuh produced no alert.",
+  "evidence_file": "evidence.json"
+}

@@ -1,0 +1,27 @@
+title: Suspicious Activity Detected (AI-20261012_133641.983-06dc0abf57ac)
+id: 7a753b20-39a3-41eb-8bc2-aecb925f3d79
+status: experimental
+description: 'Suspicious cmd.exe spawning net.exe (A C:\\Windows\\System32\\net.exe
+  binary was started by a Windows cmd shell) - Host WIN-5J23U7CAV7V.hvan.vn triggered
+  sequence anomaly (token=''sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few'',
+  score=0.7287): Wazuh context rule 92036: '
+references:
+- https://attack.mitre.org/techniques/T1059/003/
+- https://attack.mitre.org/techniques/T1574/001/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1059.003
+- attack.t1574.001
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \net.exe
+    ParentImage|endswith: \cmd.exe
+    CommandLine|contains: \localhost
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

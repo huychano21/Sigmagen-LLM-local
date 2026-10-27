@@ -1,0 +1,114 @@
+{
+  "alert_id": "AI-20261012_133318.310-7df2e0c4630b",
+  "evidence_id": "EVID-a83879338191",
+  "timestamp": "2026-10-12T13:33:18.310Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:02839cbfd3060067160cd845",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>ipconfig.exe|system32|tiny_few",
+  "anomaly_score": 0.6573302745819092,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.34266969561576843,
+  "observed_probability": 0.34266969561576843,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 4136,
+    "guid": "{7e4a5fee-e19e-6acc-4902-000000001100}",
+    "image": "C:\\Windows\\System32\\ipconfig.exe",
+    "command_line": "ipconfig  /all",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "3D33188ECD39ECFEEA2E08996891C76E",
+      "sha256": "C5DBBDDD1193C7ADCA1E30CD17B8C7AF6A76C406DD84DC164BB959C135F1AA70",
+      "imphash": "15167A60983BFC39B2DA4F53B9B1F28C"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "IP Configuration Utility",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "ipconfig.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 308,
+    "guid": "{7e4a5fee-e19e-6acc-4702-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92032",
+    "rule_level": 3,
+    "rule_description": "Suspicious Windows cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1087",
+        "T1059.003"
+      ],
+      "tactic": [
+        "Discovery",
+        "Execution"
+      ],
+      "technique": [
+        "Account Discovery",
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.34266969561576843
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.06714633852243423
+    },
+    {
+      "token_id": 74,
+      "token": "sysmon|1|process_create|powershell.exe>wevtutil.exe|system32|tiny_many",
+      "probability": 0.055796436965465546
+    },
+    {
+      "token_id": 51,
+      "token": "sysmon|1|process_create|powershell.exe>driverquery.exe|system32|tiny_few",
+      "probability": 0.0533585324883461
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.042238302528858185
+    }
+  ],
+  "incident_id": "INC-0004",
+  "incident_role": "unseen",
+  "use_for_rule_generation": true
+}

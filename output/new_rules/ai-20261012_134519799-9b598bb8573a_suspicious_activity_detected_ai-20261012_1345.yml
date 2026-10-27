@@ -1,0 +1,22 @@
+title: Suspicious Activity Detected (AI-20261012_134519.799-9b598bb8573a)
+id: ca1e23d3-7f60-40d3-b7a0-37be1dad7ae6
+status: experimental
+description: 'Suspicious winlogon.exe spawning LogonUI.exe (Suspicious Windows activity
+  detected by LogDeep) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|winlogon.exe>logonui.exe|system32|tiny_few'',
+  score=0.8201): Wazuh context rule : Suspicious Win'
+references:
+- https://attack.mitre.org/
+author: SigmaGen
+date: '2026-10-27'
+tags: []
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \LogonUI.exe
+    CommandLine|contains: /flags:0x0
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: high

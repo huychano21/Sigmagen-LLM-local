@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_133245.141-1fed19131fa8",
+  "evidence_id": "EVID-a98946916f84",
+  "timestamp": "2026-10-12T13:32:45.141Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:23f4935802eaefda5d5081e9",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+  "anomaly_score": 0.9963324666023254,
+  "scored_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+  "scored_target_probability": 0.003667516401037574,
+  "observed_probability": 0.003667516401037574,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 4232,
+    "guid": "{7e4a5fee-e17d-6acc-4002-000000001100}",
+    "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+    "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+    "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+      "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+      "imphash": "5CD891320C666621E9783444DB8CBA78"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "Hostname APP",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "hostname.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4788,
+    "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.27105456590652466
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.25954803824424744
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.09438168257474899
+    },
+    {
+      "token_id": 81,
+      "token": "sysmon|1|process_create|services.exe>trustedinstaller.exe|windows|tiny_single",
+      "probability": 0.05666189640760422
+    },
+    {
+      "token_id": 65,
+      "token": "sysmon|1|process_create|powershell.exe>sc.exe|system32|tiny_few",
+      "probability": 0.051764193922281265
+    }
+  ],
+  "incident_id": "INC-0003",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

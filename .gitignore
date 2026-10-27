@@ -1,0 +1,41 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments (KHÔNG đẩy lên GitHub)
+.venv/
+venv/
+env/
+ENV/
+.sigma-cli-venv/
+
+# Environment variables (Chứa cấu hình riêng / API keys)
+.env
+
+# Large runtime databases & knowledge base caches (Tự tạo qua scripts/setup_kb.py)
+attack/
+chroma/
+datasets/
+data/attack/
+data/sigma/
+data/chroma/
+
+# Backup / temporary files
+*.bak
+*_OLD*.py
+*.tmp
+*.log
+
+# IDE & OS metadata
+.idea/
+.vscode/
+.pytest_cache/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

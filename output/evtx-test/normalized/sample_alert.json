@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "source": "hayabusa",
+  "timestamp": "2019-04-28 04:04:25.733 +07:00",
+  "title": "Important Log File Cleared",
+  "severity": "high",
+  "host": "DESKTOP-JR78RLP",
+  "channel": "Sys",
+  "event_id": 104,
+  "record_id": 9252,
+  "details": {
+    "Log": "System",
+    "User": "jwrig"
+  },
+  "extra_fields": {
+    "BackupPath": "",
+    "SubjectDomainName": "DESKTOP-JR78RLP"
+  },
+  "source_rule_id": "f481a1f3-969e-4187-b3a5-b47c272bfebd",
+  "raw": {
+    "Timestamp": "2019-04-28 04:04:25.733 +07:00",
+    "RuleTitle": "Important Log File Cleared",
+    "Level": "high",
+    "Computer": "DESKTOP-JR78RLP",
+    "Channel": "Sys",
+    "EventID": 104,
+    "RecordID": 9252,
+    "Details": {
+      "Log": "System",
+      "User": "jwrig"
+    },
+    "ExtraFieldInfo": {
+      "BackupPath": "",
+      "SubjectDomainName": "DESKTOP-JR78RLP"
+    },
+    "RuleID": "f481a1f3-969e-4187-b3a5-b47c272bfebd"
+  }
+}

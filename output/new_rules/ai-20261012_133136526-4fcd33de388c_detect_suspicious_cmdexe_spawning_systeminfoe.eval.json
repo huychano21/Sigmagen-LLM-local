@@ -1,0 +1,185 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_133136.526-4fcd33de388c",
+    "rule_title": "Detect Suspicious cmd.exe spawning systeminfo.exe",
+    "rule_id": "6de3070f-45fa-4358-986c-c2287992ceaa",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:4e181a0071787d003f53fd24",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\systeminfo.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\cmd.exe')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100144,
+  "wazuh_xml_file": "ml_generated_100144.xml",
+  "sigma_yaml_file": "ai-20261012_133136526-4fcd33de388c_detect_suspicious_cmdexe_spawning_systeminfoe.yml",
+  "repair_attempts": 0,
+  "dashboard_item": {
+    "wazuh_rule_id": 100144,
+    "alert_id": "AI-20261012_133136.526-4fcd33de388c",
+    "evidence_id": "EVID-7c0583033e77",
+    "source_format": "logdeep_v2",
+    "title": "Detect Suspicious cmd.exe spawning systeminfo.exe",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|1|process_create|cmd.exe>systeminfo.exe|system32|tiny_single', score=0.7470): Image=systeminfo.exe, ParentImage=cmd.exe, CommandLine=systeminfo, MITRE=T1087,T1059.003.",
+    "severity": "medium",
+    "mitre_techniques": [
+      "T1087",
+      "T1059.003"
+    ],
+    "event_family": "sysmon",
+    "event_code": 1,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "process_creation"
+    },
+    "expected_wazuh_group": "sysmon_event1",
+    "sigma_fields": {
+      "Image": "C:\\Windows\\System32\\systeminfo.exe",
+      "Description": "Displays system information",
+      "Product": "Microsoft® Windows® Operating System",
+      "Company": "Microsoft Corporation",
+      "OriginalFileName": "sysinfo.exe",
+      "CommandLine": "systeminfo",
+      "CurrentDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+      "User": "HVAN\\Administrator",
+      "IntegrityLevel": "High",
+      "Hashes": "MD5=F2D7816271A27223945E8AE24B6F81F7,SHA256=1084ADF2DDBE903BD71A496720B0D6616882F120D1B3FFEAE8D47FEB0D9CC123,IMPHASH=C5985EAB8C1ED292344936A4595C1438",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+      "ParentCommandLine": "\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum",
+      "ParentUser": "HVAN\\Administrator",
+      "UtcTime": "2026-10-12 13:31:36.526",
+      "ProcessGuid": "{7e4a5fee-e138-6acc-3602-000000001100}",
+      "ProcessId": "5400",
+      "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+      "LogonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+      "LogonId": "0x9f3e4",
+      "TerminalSessionId": "1",
+      "ParentProcessGuid": "{7e4a5fee-e138-6acc-3402-000000001100}",
+      "ParentProcessId": "4600",
+      "EventID": "1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [
+      {
+        "uid": "sysmon:28d8913a4420f6b45a52a869",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe, CommandLine=C:\\Windows\\winsxs\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe -Embedding, CurrentDirectory=C:\\Windows\\system32\\, IntegrityLevel=System"
+      },
+      {
+        "uid": "sysmon:5d12b9d8762dd8590d706f70",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:29469a0bd4035b4f4bdcc47c",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:284133d259a5ef3927dfdd47",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, CommandLine=\"powershell.exe\" & {Start-Process \\\"\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1059.003_script.bat\\\"\"}, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:1c2873b7a6a70a4bc5a41047",
+        "ecode": 11,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, TargetFilename=C:\\Users\\Administrator\\AppData\\Local\\Temp\\__PSScriptPolicyTest_0pocb0lt.lvn.ps1, User=HVAN\\Administrator, EventID=11"
+      },
+      {
+        "uid": "sysmon:7985ea8511353bbe56280dd9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:684021410360a1564a2ae2c9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:40efc8afecd6cbb7eeadfe35",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      }
+    ],
+    "raw_yaml": "title: Detect Suspicious cmd.exe spawning systeminfo.exe\nid: 6de3070f-45fa-4358-986c-c2287992ceaa\nstatus: experimental\ndescription: Detects a suspicious execution of systeminfo.exe spawned by cmd.exe,\n  which may indicate a lateral movement or information gathering activity.\nreferences:\n- https://attack.mitre.org/techniques/T1087/\n- https://attack.mitre.org/techniques/T1059/003/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1087\n- attack.t1059.003\nlogsource:\n  product: windows\n  category: process_creation\ndetection:\n  selection:\n    Image|endswith: \\systeminfo.exe\n    ParentImage|endswith: \\cmd.exe\n  condition: selection\nfalsepositives:\n- Legitimate administrative script execution\nlevel: medium\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100144\" level=\"8\">\n    <if_group>sysmon_event1</if_group>\n    <field name=\"win.eventdata.image\" type=\"pcre2\">(?i)\\\\+systeminfo\\.exe$</field>\n    <field name=\"win.eventdata.parentImage\" type=\"pcre2\">(?i)\\\\+cmd\\.exe$</field>\n    <description>Detect Suspicious cmd.exe spawning systeminfo.exe [Alert: AI-20261012_133136.526-4fcd33de388c]</description>\n    <mitre>\n      <id>T1087</id>\n      <id>T1059.003</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_133136526-4fcd33de388c_detect_suspicious_cmdexe_spawning_systeminfoe.yml",
+    "wazuh_file": "ml_generated_100144.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q1_warnings": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": true,
+      "q3_behavior_score": 100.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.0,
+      "confidence_score": 100.0,
+      "quality_gate": "PASS - RECOMMEND_ADD",
+      "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0)."
+    }
+  }
+}

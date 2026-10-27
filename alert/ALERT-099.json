@@ -1,0 +1,114 @@
+{
+  "alert_id": "AI-20261012_135849.607-ef1879c7ecc8",
+  "evidence_id": "EVID-81e59622e397",
+  "timestamp": "2026-10-12T13:58:49.607Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:92a1f7f90b6eff2cd36b667f",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>sc.exe|system32|tiny_few",
+  "anomaly_score": 0.5155755877494812,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.4844244122505188,
+  "observed_probability": 0.4844244122505188,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 5884,
+    "guid": "{7e4a5fee-e799-6acc-b002-000000001100}",
+    "image": "C:\\Windows\\System32\\sc.exe",
+    "command_line": "sc  query state= all",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "ABB56882148DE65D53ABFC55544A49A8",
+      "sha256": "78097C7CD0E57902536C60B7FA17528C313DB20869E5F944223A0BA4C801D39B",
+      "imphash": "35A7FFDE18D444A92D32C8B2879450FF"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "Service Control Manager Configuration Tool",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "sc.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 1116,
+    "guid": "{7e4a5fee-e799-6acc-ac02-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c tasklist.exe /svc & sc query & sc query state= all",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92032",
+    "rule_level": 3,
+    "rule_description": "Suspicious Windows cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1087",
+        "T1059.003"
+      ],
+      "tactic": [
+        "Discovery",
+        "Execution"
+      ],
+      "technique": [
+        "Account Discovery",
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.4844244122505188
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.11990093439817429
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.061068933457136154
+    },
+    {
+      "token_id": 44,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|medium_many",
+      "probability": 0.029733527451753616
+    },
+    {
+      "token_id": 65,
+      "token": "sysmon|1|process_create|powershell.exe>sc.exe|system32|tiny_few",
+      "probability": 0.028589721769094467
+    }
+  ],
+  "incident_id": "INC-0021",
+  "incident_role": "unseen",
+  "use_for_rule_generation": true
+}

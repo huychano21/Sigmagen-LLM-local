@@ -1,0 +1,56 @@
+[
+  {
+    "alert_id": "AI-20261012_133318.570-b8abaa5cdaa2",
+    "rule_title": "Detect Suspicious cmd.exe Spawning nbtstat.exe",
+    "rule_id": "b90e607c-c665-4968-8568-559184c77e67",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:5de2bb61fcc0a95092bcc26a",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\nbtstat.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\cmd.exe')",
+          "[selection] matched 'CommandLine' (actual='nbtstat  -n')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": [],
+    "wazuh_rule_id": 100300,
+    "sigma_yaml_file": "ai-20261012_133318570-b8abaa5cdaa2_detect_suspicious_cmdexe_spawning_nbtstatexe.yml",
+    "wazuh_xml_file": "ml_generated_100300.xml"
+  }
+]

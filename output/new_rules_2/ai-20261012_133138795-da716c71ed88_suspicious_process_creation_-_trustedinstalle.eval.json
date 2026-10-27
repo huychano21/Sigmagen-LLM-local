@@ -1,0 +1,57 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_133138.795-da716c71ed88",
+    "rule_title": "Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe",
+    "rule_id": "a468590e-42e5-43fd-8963-0068e3873e33",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:2cc070e2f35fb38244ca83e8",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\services.exe')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100300,
+  "wazuh_xml_file": "ml_generated_100300.xml",
+  "sigma_yaml_file": "ai-20261012_133138795-da716c71ed88_suspicious_process_creation_-_trustedinstalle.yml",
+  "repair_attempts": 0
+}

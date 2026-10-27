@@ -1,0 +1,117 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_135318.067-68ce5058735d",
+    "rule_title": "Detect Real-Time Protection Disable Event",
+    "rule_id": "7e332ed7-f387-4165-96bd-162d320aacb7",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:39bd59350ac6630af40394ca",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'TargetObject' (actual='HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows Defender\\\\Real-Time Protection\\\\DisableRealtimeMonitoring')",
+          "[selection] matched 'Details' (actual='DWORD (0x00000001)')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100141,
+  "wazuh_xml_file": "ml_generated_100141.xml",
+  "sigma_yaml_file": "ai-20261012_135318067-68ce5058735d_detect_real-time_protection_disable_event.yml",
+  "repair_attempts": 0,
+  "dashboard_item": {
+    "wazuh_rule_id": 100141,
+    "alert_id": "AI-20261012_135318.067-68ce5058735d",
+    "evidence_id": "",
+    "source_format": "logdeep_v2",
+    "title": "Detect Real-Time Protection Disable Event",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|13|registry_value|msmpeng.exe|registry', score=0.9935): Wazuh context rule : Suspicious Windows activity detected by LogDeep. Image=MsMpEng.exe, ParentImage=, CommandLine=, ParentCommandLine=.",
+    "severity": "medium",
+    "mitre_techniques": [
+      "T1097"
+    ],
+    "event_family": "sysmon",
+    "event_code": 13,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "registry_set"
+    },
+    "expected_wazuh_group": "sysmon_event_13",
+    "sigma_fields": {
+      "Image": "C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.26080.4-0\\MsMpEng.exe",
+      "TargetObject": "HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring",
+      "Details": "DWORD (0x00000001)",
+      "EventType": "registry_value",
+      "User": "NT AUTHORITY\\SYSTEM",
+      "EventID": "13",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [],
+    "raw_yaml": "title: Detect Real-Time Protection Disable Event\nid: 7e332ed7-f387-4165-96bd-162d320aacb7\nstatus: experimental\ndescription: Detects attempts to disable the Windows Defender Real-Time Protection\n  by modifying the registry.\nreferences: https://attack.mitre.org/techniques/T1097/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1097\nlogsource:\n  product: windows\n  category: registry_set\ndetection:\n  selection:\n    TargetObject|contains: DisableRealtimeMonitoring\n    Details|contains: '0x00000001'\n  condition: selection\nfalsepositives: Legitimate administrative script execution.\nlevel: medium\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100141\" level=\"8\">\n    <if_group>sysmon_event_13</if_group>\n    <field name=\"win.eventdata.targetObject\" type=\"pcre2\">(?i)DisableRealtimeMonitoring</field>\n    <field name=\"win.eventdata.details\" type=\"pcre2\">(?i)0x00000001</field>\n    <description>Detect Real-Time Protection Disable Event [Alert: AI-20261012_135318.067-68ce5058735d]</description>\n    <mitre>\n      <id>T1097</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_135318067-68ce5058735d_detect_real-time_protection_disable_event.yml",
+    "wazuh_file": "ml_generated_100141.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": true,
+      "q3_behavior_score": 100.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.0,
+      "confidence_score": 100.0,
+      "quality_gate": "PASS - RECOMMEND_ADD",
+      "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0)."
+    }
+  }
+}

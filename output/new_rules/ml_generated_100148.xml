@@ -1,0 +1,14 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100148" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+reg\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+cmd\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)query</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)Services\\+Disk\\+Enum</field>
+    <description>Registry Query of Disk Enum Hardware Key for VM Discovery [Alert: AI-20261012_133141.319-954b8af3146e]</description>
+    <mitre>
+      <id>T1012</id>
+      <id>T1059.003</id>
+    </mitre>
+  </rule>
+</group>

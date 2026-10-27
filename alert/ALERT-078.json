@@ -1,0 +1,114 @@
+{
+  "alert_id": "AI-20261012_135705.057-1ea71cb0c2fc",
+  "evidence_id": "EVID-4699780caf96",
+  "timestamp": "2026-10-12T13:57:05.057Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:8ed6f7da77c26d0b0360f2d2",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>whoami.exe|system32|tiny_few",
+  "anomaly_score": 0.8993704319000244,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.10062956064939499,
+  "observed_probability": 0.10062956064939499,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 5420,
+    "guid": "{7e4a5fee-e731-6acc-9602-000000001100}",
+    "image": "C:\\Windows\\System32\\whoami.exe",
+    "command_line": "whoami  /all",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+      "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+      "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "whoami - displays logged on user information",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "whoami.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4176,
+    "guid": "{7e4a5fee-e731-6acc-9402-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c whoami /all",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92032",
+    "rule_level": 3,
+    "rule_description": "Suspicious Windows cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1087",
+        "T1059.003"
+      ],
+      "tactic": [
+        "Discovery",
+        "Execution"
+      ],
+      "technique": [
+        "Account Discovery",
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 7,
+      "token": "sysmon|12|registry_object|wevtutil.exe|registry",
+      "probability": 0.12745735049247742
+    },
+    {
+      "token_id": 44,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|medium_many",
+      "probability": 0.10531673580408096
+    },
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.10062956064939499
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.08068758994340897
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.037900518625974655
+    }
+  ],
+  "incident_id": "INC-0018",
+  "incident_role": "root",
+  "use_for_rule_generation": true
+}

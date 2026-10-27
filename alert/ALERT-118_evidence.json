@@ -1,0 +1,682 @@
+{
+  "evidence_id": "EVID-bed79c23ba23",
+  "alert_id": "AI-20261012_141011.028-eb81524e255f",
+  "window_size": 10,
+  "context_events": [
+    {
+      "event_uid": "sysmon:f5bbebb2231592dbb1e2d486",
+      "timestamp": "2026-10-12T14:00:56.603Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|tiny_many",
+      "process_role": "cmd",
+      "path_class": "system32",
+      "process": {
+        "pid": 4892,
+        "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "911D039E71583A07320B32BDE22F8E22",
+          "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+          "imphash": "272245E2988E1E430500B852C4FB5E18"
+        },
+        "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+        "description": "Windows Command Processor",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "Cmd.Exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:f7905f4641371017fbd0632a",
+      "timestamp": "2026-10-12T14:00:56.634Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>net.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 3836,
+        "guid": "{7e4a5fee-e818-6acc-c002-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  time \\\\localhost",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "AE61D8F04BCDE8158304067913160B31",
+          "sha256": "25C8266D2BC1D5626DCDF72419838B397D28D44D00AC09F02FF4E421B43EC369",
+          "imphash": "57F0C47AE2A1A2C06C8B987372AB0B07"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4892,
+        "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:54f3503b0fd13b089e6f2611",
+      "timestamp": "2026-10-12T14:00:56.643Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|net.exe>net1.exe|system32|tiny_few",
+      "process_role": "net",
+      "path_class": "system32",
+      "process": {
+        "pid": 2264,
+        "guid": "{7e4a5fee-e818-6acc-c102-000000001100}",
+        "image": "C:\\Windows\\System32\\net1.exe",
+        "command_line": "C:\\Windows\\system32\\net1  time \\\\localhost",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "63DD4523677E62A73A8A7494DB321EA2",
+          "sha256": "C687157FD58EAA51757CDA87D06C30953A31F03F5356B9F5A9C004FA4BAD4BF5",
+          "imphash": "41DBA1AF77E1A2260F0CE46D59ADCB5E"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Net Command",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "net1.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 3836,
+        "guid": "{7e4a5fee-e818-6acc-c002-000000001100}",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "command_line": "net  time \\\\localhost",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:df2638ccf890fa6fa579eeb0",
+      "timestamp": "2026-10-12T14:00:56.665Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|cmd.exe>w32tm.exe|system32|tiny_few",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 2240,
+        "guid": "{7e4a5fee-e818-6acc-c202-000000001100}",
+        "image": "C:\\Windows\\System32\\w32tm.exe",
+        "command_line": "w32tm  /tz",
+        "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "EB05B99953C30E25B4CA97F903A0DEA9",
+          "sha256": "A6068FDD06A779798BE73420AE7E91544C23B96EB01D75A1BE86EAD8C0413E6B",
+          "imphash": "386119C6C0099E2C065ADCD2AA770E11"
+        },
+        "file_version": "10.0.17763.1490 (WinBuild.160101.0800)",
+        "description": "Windows Time Service Diagnostic Tool",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "w32time.dll",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4892,
+        "guid": "{7e4a5fee-e818-6acc-be02-000000001100}",
+        "image": "C:\\Windows\\System32\\cmd.exe",
+        "command_line": "\"cmd.exe\" /c net time \\\\localhost & w32tm /tz",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:15b24cc25a8feb0ef98a3ca9",
+      "timestamp": "2026-10-12T14:01:28.131Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>hostname.exe|system32|tiny_single",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 4152,
+        "guid": "{7e4a5fee-e838-6acc-c302-000000001100}",
+        "image": "C:\\Windows\\System32\\HOSTNAME.EXE",
+        "command_line": "\"C:\\Windows\\system32\\HOSTNAME.EXE\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "7F95220A65A5A5D4A98873E86EF2E549",
+          "sha256": "1BFF2907C456F99277F45F9B2A21B1B3F11F6C01587D9E6D6F0B2B5F1472FE92",
+          "imphash": "5CD891320C666621E9783444DB8CBA78"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "Hostname APP",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "hostname.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:8bbb67b62e696c9540a6500d",
+      "timestamp": "2026-10-12T14:01:28.145Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single",
+      "process_role": "whoami",
+      "path_class": "system32",
+      "process": {
+        "pid": 3116,
+        "guid": "{7e4a5fee-e838-6acc-c402-000000001100}",
+        "image": "C:\\Windows\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "current_directory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "43C2D3293AD939241DF61B3630A9D3B6",
+          "sha256": "1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A",
+          "imphash": "7FF0758B766F747CE57DFAC70743FB88"
+        },
+        "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+        "description": "whoami - displays logged on user information",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "whoami.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 4788,
+        "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+        "user": "HVAN\\Administrator"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:adbad71248008d298328a26a",
+      "timestamp": "2026-10-12T14:02:36.421Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 13,
+      "event_type": "registry_value",
+      "event_token": "sysmon|13|registry_value|svchost.exe|registry",
+      "process_role": "service_host",
+      "path_class": "registry",
+      "process": {
+        "pid": 896,
+        "guid": "{7e4a5fee-fd33-6ac5-1500-000000001100}",
+        "image": "C:\\Windows\\system32\\svchost.exe",
+        "command_line": "",
+        "current_directory": "",
+        "integrity_level": "",
+        "hashes": {},
+        "file_version": "",
+        "description": "",
+        "product": "",
+        "company": "",
+        "original_file_name": "",
+        "logon_id": "",
+        "logon_guid": "",
+        "terminal_session_id": ""
+      },
+      "parent_process": {
+        "pid": null,
+        "guid": "",
+        "image": "",
+        "command_line": "",
+        "user": ""
+      },
+      "user": "NT AUTHORITY\\LOCAL SERVICE",
+      "file": {
+        "target_filename": "",
+        "target_object": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles\\{9464FE10-D22C-486F-A6A3-9CF3851DBD16}\\DateLastConnected",
+        "creation_time": "",
+        "details": "Binary Data"
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:b7dddfd460e5288d7d8cb37d",
+      "timestamp": "2026-10-12T14:10:09.999Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|svchost.exe>dsregcmd.exe|system32|tiny_few",
+      "process_role": "other_executable",
+      "path_class": "system32",
+      "process": {
+        "pid": 3452,
+        "guid": "{7e4a5fee-ea41-6acc-c802-000000001100}",
+        "image": "C:\\Windows\\System32\\dsregcmd.exe",
+        "command_line": "C:\\Windows\\System32\\dsregcmd.exe $(Arg0) $(Arg1) $(Arg2)",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "System",
+        "hashes": {
+          "md5": "DAC4DE08394A34ECC1B6E8E4654075FA",
+          "sha256": "DF28EFCA1BF09C071F12C1FF8EC5C3FEDFFBEDDF3B4EE45F704E22E1B6B4106B",
+          "imphash": "382C77BFA0EEE2BA2BA8671D108AD9A3"
+        },
+        "file_version": "10.0.17763.2989 (WinBuild.160101.0800)",
+        "description": "DSREG commandline tool",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "dsregcmd.exe",
+        "logon_id": "0x3e7",
+        "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+        "terminal_session_id": "0"
+      },
+      "parent_process": {
+        "pid": 344,
+        "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+        "image": "C:\\Windows\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:3fe1f0b61f6a3c4cfb880c9f",
+      "timestamp": "2026-10-12T14:10:11.021Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "process_role": "task_host",
+      "path_class": "system32",
+      "process": {
+        "pid": 4012,
+        "guid": "{7e4a5fee-ea43-6acc-ca02-000000001100}",
+        "image": "C:\\Windows\\System32\\taskhostw.exe",
+        "command_line": "taskhostw.exe",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "System",
+        "hashes": {
+          "md5": "8BD7B08DA6BCA54DF9B595E4D9281BEB",
+          "sha256": "DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4",
+          "imphash": "9839C7FD9649496B162F72128209528A"
+        },
+        "file_version": "10.0.17763.1852 (WinBuild.160101.0800)",
+        "description": "Host Process for Windows Tasks",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "taskhostw.exe",
+        "logon_id": "0x3e7",
+        "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+        "terminal_session_id": "0"
+      },
+      "parent_process": {
+        "pid": 344,
+        "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+        "image": "C:\\Windows\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "NT AUTHORITY\\SYSTEM",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    },
+    {
+      "event_uid": "sysmon:3424450ed9077b5c0f9efb17",
+      "timestamp": "2026-10-12T14:10:11.025Z",
+      "host": "WIN-5J23U7CAV7V.hvan.vn",
+      "event_id": 1,
+      "event_type": "process_create",
+      "event_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "process_role": "task_host",
+      "path_class": "system32",
+      "process": {
+        "pid": 4076,
+        "guid": "{7e4a5fee-ea43-6acc-cb02-000000001100}",
+        "image": "C:\\Windows\\System32\\taskhostw.exe",
+        "command_line": "taskhostw.exe",
+        "current_directory": "C:\\Windows\\system32\\",
+        "integrity_level": "High",
+        "hashes": {
+          "md5": "8BD7B08DA6BCA54DF9B595E4D9281BEB",
+          "sha256": "DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4",
+          "imphash": "9839C7FD9649496B162F72128209528A"
+        },
+        "file_version": "10.0.17763.1852 (WinBuild.160101.0800)",
+        "description": "Host Process for Windows Tasks",
+        "product": "Microsoft® Windows® Operating System",
+        "company": "Microsoft Corporation",
+        "original_file_name": "taskhostw.exe",
+        "logon_id": "0x9f3e4",
+        "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+        "terminal_session_id": "1"
+      },
+      "parent_process": {
+        "pid": 344,
+        "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+        "image": "C:\\Windows\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+        "user": "NT AUTHORITY\\SYSTEM"
+      },
+      "user": "HVAN\\Administrator",
+      "file": {
+        "target_filename": "",
+        "target_object": "",
+        "creation_time": "",
+        "details": ""
+      },
+      "network": {
+        "source_ip": "",
+        "source_port": null,
+        "destination_ip": "",
+        "destination_port": null,
+        "protocol": "",
+        "query_name": "",
+        "query_status": "",
+        "query_results": ""
+      }
+    }
+  ],
+  "target_event": {
+    "schema_version": "windows-sysmon-v1",
+    "event_uid": "sysmon:77250d495135a3c6891a3e63",
+    "timestamp": "2026-10-12T14:10:11.028Z",
+    "host": "WIN-5J23U7CAV7V.hvan.vn",
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 1,
+    "event_type": "process_create",
+    "event_record_id": 10553,
+    "system_data": {
+      "provider_name": "Microsoft-Windows-Sysmon",
+      "provider_guid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+      "event_id": "1",
+      "version": "5",
+      "level": "4",
+      "task": "1",
+      "opcode": "0",
+      "keywords": "0x8000000000000000",
+      "system_time": "2026-10-12T14:10:11.031478100Z",
+      "event_record_id": "10553",
+      "process_id": "2832",
+      "thread_id": "4936",
+      "channel": "Microsoft-Windows-Sysmon/Operational",
+      "computer": "WIN-5J23U7CAV7V.hvan.vn",
+      "severity_value": "INFORMATION",
+      "message": "\"Process Create:\r\nRuleName: -\r\nUtcTime: 2026-10-12 14:10:11.028\r\nProcessGuid: {7e4a5fee-ea43-6acc-cc02-000000001100}\r\nProcessId: 2920\r\nImage: C:\\Windows\\System32\\lpremove.exe\r\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\r\nDescription: MUI Language pack cleanup\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: lpremove.exe\r\nCommandLine: C:\\Windows\\system32\\lpremove.exe\r\nCurrentDirectory: C:\\Windows\\system32\\\r\nUser: NT AUTHORITY\\SYSTEM\r\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\r\nLogonId: 0x3E7\r\nTerminalSessionId: 0\r\nIntegrityLevel: System\r\nHashes: MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769\r\nParentProcessGuid: {7e4a5fee-fd33-6ac5-1100-000000001100}\r\nParentProcessId: 344\r\nParentImage: C:\\Windows\\System32\\svchost.exe\r\nParentCommandLine: C:\\Windows\\system32\\svchost.exe -k netsvcs -p\r\nParentUser: NT AUTHORITY\\SYSTEM\""
+    },
+    "event_data": {
+      "utc_time": "2026-10-12 14:10:11.028",
+      "process_guid": "{7e4a5fee-ea43-6acc-cc02-000000001100}",
+      "process_id": "2920",
+      "image": "C:\\Windows\\System32\\lpremove.exe",
+      "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+      "description": "MUI Language pack cleanup",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "lpremove.exe",
+      "command_line": "C:\\Windows\\system32\\lpremove.exe",
+      "current_directory": "C:\\Windows\\system32\\",
+      "user": "NT AUTHORITY\\SYSTEM",
+      "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+      "logon_id": "0x3e7",
+      "terminal_session_id": "0",
+      "integrity_level": "System",
+      "hashes": "MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769",
+      "parent_process_guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+      "parent_process_id": "344",
+      "parent_image": "C:\\Windows\\System32\\svchost.exe",
+      "parent_command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+      "parent_user": "NT AUTHORITY\\SYSTEM"
+    },
+    "process": {
+      "pid": 2920,
+      "guid": "{7e4a5fee-ea43-6acc-cc02-000000001100}",
+      "image": "C:\\Windows\\System32\\lpremove.exe",
+      "command_line": "C:\\Windows\\system32\\lpremove.exe",
+      "current_directory": "C:\\Windows\\system32\\",
+      "integrity_level": "System",
+      "hashes": {
+        "md5": "C1C6A67FA093B4218E20D7339039F09C",
+        "sha256": "148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF",
+        "imphash": "BC8B53A40E2042348C46E384FDE1F769"
+      },
+      "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+      "description": "MUI Language pack cleanup",
+      "product": "Microsoft® Windows® Operating System",
+      "company": "Microsoft Corporation",
+      "original_file_name": "lpremove.exe",
+      "logon_id": "0x3e7",
+      "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+      "terminal_session_id": "0"
+    },
+    "parent_process": {
+      "pid": 344,
+      "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+      "image": "C:\\Windows\\System32\\svchost.exe",
+      "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+      "user": "NT AUTHORITY\\SYSTEM"
+    },
+    "user": "NT AUTHORITY\\SYSTEM",
+    "file": {
+      "target_filename": "",
+      "target_object": "",
+      "creation_time": "",
+      "details": ""
+    },
+    "network": {
+      "source_ip": "",
+      "source_port": null,
+      "destination_ip": "",
+      "destination_port": null,
+      "protocol": "",
+      "query_name": "",
+      "query_status": "",
+      "query_results": ""
+    },
+    "source_metadata": {
+      "kind": "wazuh_archive",
+      "source_file": "archives.json",
+      "line_number": 1436,
+      "wazuh_id": "1791814211.2766444",
+      "wazuh_agent": {
+        "id": "002",
+        "name": "WIN-5J23U7CAV7V",
+        "ip": "10.212.106.167"
+      },
+      "wazuh_manager": {
+        "name": "wazuh.manager"
+      },
+      "wazuh_decoder": {
+        "name": "windows_eventchannel"
+      },
+      "wazuh_location": "EventChannel",
+      "wazuh_rule": {},
+      "wazuh_outer_timestamp": "2026-10-12T14:10:11.447+0000",
+      "agent_name": "WIN-5J23U7CAV7V",
+      "agent_id": "002",
+      "agent_ip": "10.212.106.167"
+    },
+    "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:10:11.031478100Z\",\"eventRecordID\":\"10553\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 14:10:11.028\\r\\nProcessGuid: {7e4a5fee-ea43-6acc-cc02-000000001100}\\r\\nProcessId: 2920\\r\\nImage: C:\\\\Windows\\\\System32\\\\lpremove.exe\\r\\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\\r\\nDescription: MUI Language pack cleanup\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: lpremove.exe\\r\\nCommandLine: C:\\\\Windows\\\\system32\\\\lpremove.exe\\r\\nCurrentDirectory: C:\\\\Windows\\\\system32\\\\\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\r\\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\\r\\nLogonId: 0x3E7\\r\\nTerminalSessionId: 0\\r\\nIntegrityLevel: System\\r\\nHashes: MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769\\r\\nParentProcessGuid: {7e4a5fee-fd33-6ac5-1100-000000001100}\\r\\nParentProcessId: 344\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\svchost.exe\\r\\nParentCommandLine: C:\\\\Windows\\\\system32\\\\svchost.exe -k netsvcs -p\\r\\nParentUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 14:10:11.028\",\"processGuid\":\"{7e4a5fee-ea43-6acc-cc02-000000001100}\",\"processId\":\"2920\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\lpremove.exe\",\"fileVersion\":\"10.0.17763.1 (WinBuild.160101.0800)\",\"description\":\"MUI Language pack cleanup\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"lpremove.exe\",\"commandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\lpremove.exe\",\"currentDirectory\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\",\"logonGuid\":\"{7e4a5fee-fd2f-6ac5-e703-000000000000}\",\"logonId\":\"0x3e7\",\"terminalSessionId\":\"0\",\"integrityLevel\":\"System\",\"hashes\":\"MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769\",\"parentProcessGuid\":\"{7e4a5fee-fd33-6ac5-1100-000000001100}\",\"parentProcessId\":\"344\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\svchost.exe\",\"parentCommandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\svchost.exe -k netsvcs -p\",\"parentUser\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+    "process_role": "other_executable",
+    "path_class": "system32",
+    "command_shape": "tiny_single",
+    "event_token": "sysmon|1|process_create|svchost.exe>lpremove.exe|system32|tiny_single"
+  },
+  "raw_event": "{\"win\":{\"system\":{\"providerName\":\"Microsoft-Windows-Sysmon\",\"providerGuid\":\"{5770385f-c22a-43e0-bf4c-06f5698ffbd9}\",\"eventID\":\"1\",\"version\":\"5\",\"level\":\"4\",\"task\":\"1\",\"opcode\":\"0\",\"keywords\":\"0x8000000000000000\",\"systemTime\":\"2026-10-12T14:10:11.031478100Z\",\"eventRecordID\":\"10553\",\"processID\":\"2832\",\"threadID\":\"4936\",\"channel\":\"Microsoft-Windows-Sysmon/Operational\",\"computer\":\"WIN-5J23U7CAV7V.hvan.vn\",\"severityValue\":\"INFORMATION\",\"message\":\"\\\"Process Create:\\r\\nRuleName: -\\r\\nUtcTime: 2026-10-12 14:10:11.028\\r\\nProcessGuid: {7e4a5fee-ea43-6acc-cc02-000000001100}\\r\\nProcessId: 2920\\r\\nImage: C:\\\\Windows\\\\System32\\\\lpremove.exe\\r\\nFileVersion: 10.0.17763.1 (WinBuild.160101.0800)\\r\\nDescription: MUI Language pack cleanup\\r\\nProduct: Microsoft® Windows® Operating System\\r\\nCompany: Microsoft Corporation\\r\\nOriginalFileName: lpremove.exe\\r\\nCommandLine: C:\\\\Windows\\\\system32\\\\lpremove.exe\\r\\nCurrentDirectory: C:\\\\Windows\\\\system32\\\\\\r\\nUser: NT AUTHORITY\\\\SYSTEM\\r\\nLogonGuid: {7e4a5fee-fd2f-6ac5-e703-000000000000}\\r\\nLogonId: 0x3E7\\r\\nTerminalSessionId: 0\\r\\nIntegrityLevel: System\\r\\nHashes: MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769\\r\\nParentProcessGuid: {7e4a5fee-fd33-6ac5-1100-000000001100}\\r\\nParentProcessId: 344\\r\\nParentImage: C:\\\\Windows\\\\System32\\\\svchost.exe\\r\\nParentCommandLine: C:\\\\Windows\\\\system32\\\\svchost.exe -k netsvcs -p\\r\\nParentUser: NT AUTHORITY\\\\SYSTEM\\\"\"},\"eventdata\":{\"utcTime\":\"2026-10-12 14:10:11.028\",\"processGuid\":\"{7e4a5fee-ea43-6acc-cc02-000000001100}\",\"processId\":\"2920\",\"image\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\lpremove.exe\",\"fileVersion\":\"10.0.17763.1 (WinBuild.160101.0800)\",\"description\":\"MUI Language pack cleanup\",\"product\":\"Microsoft® Windows® Operating System\",\"company\":\"Microsoft Corporation\",\"originalFileName\":\"lpremove.exe\",\"commandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\lpremove.exe\",\"currentDirectory\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\\",\"user\":\"NT AUTHORITY\\\\\\\\SYSTEM\",\"logonGuid\":\"{7e4a5fee-fd2f-6ac5-e703-000000000000}\",\"logonId\":\"0x3e7\",\"terminalSessionId\":\"0\",\"integrityLevel\":\"System\",\"hashes\":\"MD5=C1C6A67FA093B4218E20D7339039F09C,SHA256=148B7B678FE8E74F8D92412B14EFF11496D7B1AB7B8A548B327594F806DF77AF,IMPHASH=BC8B53A40E2042348C46E384FDE1F769\",\"parentProcessGuid\":\"{7e4a5fee-fd33-6ac5-1100-000000001100}\",\"parentProcessId\":\"344\",\"parentImage\":\"C:\\\\\\\\Windows\\\\\\\\System32\\\\\\\\svchost.exe\",\"parentCommandLine\":\"C:\\\\\\\\Windows\\\\\\\\system32\\\\\\\\svchost.exe -k netsvcs -p\",\"parentUser\":\"NT AUTHORITY\\\\\\\\SYSTEM\"}}}",
+  "incident_id": "INC-0027",
+  "incident_role": "root"
+}

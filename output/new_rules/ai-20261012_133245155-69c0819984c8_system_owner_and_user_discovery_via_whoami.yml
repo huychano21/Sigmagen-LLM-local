@@ -1,0 +1,25 @@
+title: System Owner and User Discovery via Whoami
+id: 5c2c75e9-f998-4951-8df4-55b92d2716a8
+status: experimental
+description: 'Suspicious Process Creation: powershell.exe Spawning whoami.exe - Host
+  WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single'',
+  score=0.9987): Image=whoami.exe, ParentImage=powershell.exe, CommandLine="C:\'
+references:
+- https://attack.mitre.org/techniques/T1033/
+- https://attack.mitre.org/techniques/T1059/001/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1033
+- attack.t1059.001
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \whoami.exe
+    ParentImage|endswith: \powershell.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: medium

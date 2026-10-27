@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "alert": {
+    "alert_id": "ML-000001",
+    "timestamp": "2026-10-07T10:20:00Z",
+    "agent_id": "001",
+    "agent_name": "WIN-001",
+    "anomaly_score": 0.97,
+    "description": "Abnormal PowerShell execution spawned by Office application"
+  },
+  "evidence": [
+    {
+      "event_id": "event-1001",
+      "timestamp": "2026-10-07T10:19:58Z",
+      "sysmon_event_id": 1,
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "parentImage": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "commandLine": "powershell.exe -NoProfile -WindowStyle Hidden -enc JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwA="
+    },
+    {
+      "event_id": "event-1002",
+      "timestamp": "2026-10-07T10:20:01Z",
+      "sysmon_event_id": 3,
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "destinationIp": "203.0.113.50",
+      "destinationPort": "443"
+    }
+  ]
+}

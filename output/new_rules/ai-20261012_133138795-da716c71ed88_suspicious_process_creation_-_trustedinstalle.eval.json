@@ -1,0 +1,184 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_133138.795-da716c71ed88",
+    "rule_title": "Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe",
+    "rule_id": "a67059ce-96bc-43a8-a2ec-b74887f66f00",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:2cc070e2f35fb38244ca83e8",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\services.exe')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100145,
+  "wazuh_xml_file": "ml_generated_100145.xml",
+  "sigma_yaml_file": "ai-20261012_133138795-da716c71ed88_suspicious_process_creation_-_trustedinstalle.yml",
+  "repair_attempts": 0,
+  "dashboard_item": {
+    "wazuh_rule_id": 100145,
+    "alert_id": "AI-20261012_133138.795-da716c71ed88",
+    "evidence_id": "EVID-d47f6a994c0c",
+    "source_format": "logdeep_v2",
+    "title": "Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|1|process_create|services.exe>trustedinstaller.exe|windows|tiny_single', score=0.9897): Image=TrustedInstaller.exe, ParentImage=services.exe, CommandLine=C:\\Windows\\servicing\\TrustedInstaller.exe, MITRE=T1082.",
+    "severity": "high",
+    "mitre_techniques": [
+      "T1082"
+    ],
+    "event_family": "sysmon",
+    "event_code": 1,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "process_creation"
+    },
+    "expected_wazuh_group": "sysmon_event1",
+    "sigma_fields": {
+      "Image": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "Description": "Windows Modules Installer",
+      "Product": "Microsoft® Windows® Operating System",
+      "Company": "Microsoft Corporation",
+      "OriginalFileName": "TrustedInstaller.exe",
+      "CommandLine": "C:\\Windows\\servicing\\TrustedInstaller.exe",
+      "CurrentDirectory": "C:\\Windows\\system32\\",
+      "User": "NT AUTHORITY\\SYSTEM",
+      "IntegrityLevel": "System",
+      "Hashes": "MD5=83F09DC8EA0615A80E5204E07001C7FF,SHA256=E9EA26B1F8413C724A0E4CA0533171A60F4E2A1180A48DC1F117BF155BEE831A,IMPHASH=5A5A505BA4F93DA92EB564DA19258843",
+      "ParentImage": "C:\\Windows\\System32\\services.exe",
+      "ParentCommandLine": "C:\\Windows\\system32\\services.exe",
+      "ParentUser": "NT AUTHORITY\\SYSTEM",
+      "UtcTime": "2026-10-12 13:31:38.795",
+      "ProcessGuid": "{7e4a5fee-e13a-6acc-3802-000000001100}",
+      "ProcessId": "988",
+      "FileVersion": "10.0.17763.1098 (WinBuild.160101.0800)",
+      "LogonGuid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+      "LogonId": "0x3e7",
+      "TerminalSessionId": "0",
+      "ParentProcessGuid": "{7e4a5fee-fd2e-6ac5-0b00-000000001100}",
+      "ParentProcessId": "660",
+      "EventID": "1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [
+      {
+        "uid": "sysmon:5d12b9d8762dd8590d706f70",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:29469a0bd4035b4f4bdcc47c",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:284133d259a5ef3927dfdd47",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, CommandLine=\"powershell.exe\" & {Start-Process \\\"\"C:\\AtomicRedTeam\\atomics\\..\\ExternalPayloads\\T1059.003_script.bat\\\"\"}, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:1c2873b7a6a70a4bc5a41047",
+        "ecode": 11,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe, TargetFilename=C:\\Users\\Administrator\\AppData\\Local\\Temp\\__PSScriptPolicyTest_0pocb0lt.lvn.ps1, User=HVAN\\Administrator, EventID=11"
+      },
+      {
+        "uid": "sysmon:7985ea8511353bbe56280dd9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:684021410360a1564a2ae2c9",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:40efc8afecd6cbb7eeadfe35",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:3ce79f2beef659ba3effb66c",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      }
+    ],
+    "raw_yaml": "title: Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe\nid: a67059ce-96bc-43a8-a2ec-b74887f66f00\nstatus: experimental\ndescription: Detects the spawning of TrustedInstaller.exe by services.exe, which may\n  indicate a lateral movement or privilege escalation attempt.\nreferences: https://attack.mitre.org/techniques/T1082/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1082\nlogsource:\n  product: windows\n  category: process_creation\ndetection:\n  selection:\n    Image|endswith: \\trustedinstaller.exe\n    ParentImage|endswith: \\services.exe\n  condition: selection\nfalsepositives:\n- Legitimate administrative actions\nlevel: high\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100145\" level=\"12\">\n    <if_group>sysmon_event1</if_group>\n    <field name=\"win.eventdata.image\" type=\"pcre2\">(?i)\\\\+trustedinstaller\\.exe$</field>\n    <field name=\"win.eventdata.parentImage\" type=\"pcre2\">(?i)\\\\+services\\.exe$</field>\n    <description>Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe [Alert: AI-20261012_133138.795-da716c71ed88]</description>\n    <mitre>\n      <id>T1082</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_133138795-da716c71ed88_suspicious_process_creation_-_trustedinstalle.yml",
+    "wazuh_file": "ml_generated_100145.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q1_warnings": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": true,
+      "q3_behavior_score": 100.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.0,
+      "confidence_score": 100.0,
+      "quality_gate": "PASS - RECOMMEND_ADD",
+      "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0)."
+    }
+  }
+}

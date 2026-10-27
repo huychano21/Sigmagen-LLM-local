@@ -1,0 +1,26 @@
+title: System Network Configuration Discovery via Ipconfig
+id: 617ee472-a6c3-4029-9fdf-66c1b8704438
+status: experimental
+description: 'Suspicious cmd.exe Spawning ipconfig.exe (Suspicious Windows cmd shell
+  execution) - Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|cmd.exe>ipconfig.exe|system32|tiny_few'',
+  score=0.6573): Image=ipconfig.exe, ParentImage=cmd.exe, CommandLine'
+references:
+- https://attack.mitre.org/techniques/T1087/
+- https://attack.mitre.org/techniques/T1059/003/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+- attack.t1059.003
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \ipconfig.exe
+    ParentImage|endswith: \cmd.exe
+    CommandLine|contains: /all
+  condition: selection
+falsepositives:
+- Legitimate administrative activity
+level: medium

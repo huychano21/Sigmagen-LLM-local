@@ -1,0 +1,13 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100153" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+whoami\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+cmd\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)whoami\ \ /all</field>
+    <description>Detect Suspicious cmd.exe Spawning whoami.exe [Alert: AI-20261012_133246.047-940982ec4fa0]</description>
+    <mitre>
+      <id>T1087</id>
+      <id>T1059.003</id>
+    </mitre>
+  </rule>
+</group>

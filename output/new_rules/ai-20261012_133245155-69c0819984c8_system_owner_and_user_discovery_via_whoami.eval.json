@@ -1,0 +1,185 @@
+{
+  "verification_report": {
+    "alert_id": "AI-20261012_133245.155-69c0819984c8",
+    "rule_title": "System Owner and User Discovery via Whoami",
+    "rule_id": "5c2c75e9-f998-4951-8df4-55b92d2716a8",
+    "q1_syntax_valid": true,
+    "q1_syntax_score": 100.0,
+    "q1_errors": [],
+    "q1_warnings": [],
+    "q2_data_match_valid": true,
+    "q2_data_linkage_score": 100.0,
+    "q2_logsource_matched": true,
+    "q2_all_fields_present_in_event": true,
+    "q2_mitre_linked": true,
+    "q2_overfit_warnings": [],
+    "q2_errors": [],
+    "q3_behavior_valid": true,
+    "q3_behavior_score": 100.0,
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "tn": 10,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "generalization_hits": 3,
+    "generalization_total": 3,
+    "generalization_rate": 1.0,
+    "false_positive_rate": 0.0,
+    "q3_errors": [],
+    "replay_details": [
+      {
+        "event_id": "sysmon:217267d064032d6b70cb0a7c",
+        "role": "primary",
+        "matched": true,
+        "logsource_ok": true,
+        "condition_ok": true,
+        "block_results": {
+          "selection": true
+        },
+        "diagnostics": [
+          "[selection] matched 'Image' (actual='C:\\\\Windows\\\\System32\\\\whoami.exe')",
+          "[selection] matched 'ParentImage' (actual='C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe')"
+        ]
+      }
+    ],
+    "confidence_score": 100.0,
+    "quality_gate": "PASS - RECOMMEND_ADD",
+    "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0).",
+    "all_repair_issues": []
+  },
+  "wazuh_xml_valid": true,
+  "wazuh_rule_id": 100147,
+  "wazuh_xml_file": "ml_generated_100147.xml",
+  "sigma_yaml_file": "ai-20261012_133245155-69c0819984c8_system_owner_and_user_discovery_via_whoami.yml",
+  "repair_attempts": 3,
+  "dashboard_item": {
+    "wazuh_rule_id": 100147,
+    "alert_id": "AI-20261012_133245.155-69c0819984c8",
+    "evidence_id": "EVID-22d39caca4b4",
+    "source_format": "logdeep_v2",
+    "title": "System Owner and User Discovery via Whoami",
+    "description": "Host WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token='sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single', score=0.9987): Image=whoami.exe, ParentImage=powershell.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", MITRE=T1033,T1059.001.",
+    "severity": "medium",
+    "mitre_techniques": [
+      "T1033",
+      "T1059.001"
+    ],
+    "event_family": "sysmon",
+    "event_code": 1,
+    "expected_logsource": {
+      "product": "windows",
+      "category": "process_creation"
+    },
+    "expected_wazuh_group": "sysmon_event1",
+    "sigma_fields": {
+      "Image": "C:\\Windows\\System32\\whoami.exe",
+      "Description": "whoami - displays logged on user information",
+      "Product": "Microsoft® Windows® Operating System",
+      "Company": "Microsoft Corporation",
+      "OriginalFileName": "whoami.exe",
+      "CommandLine": "\"C:\\Windows\\system32\\whoami.exe\"",
+      "CurrentDirectory": "C:\\AtomicRedTeam\\invoke-atomicredteam\\",
+      "User": "HVAN\\Administrator",
+      "IntegrityLevel": "High",
+      "Hashes": "MD5=43C2D3293AD939241DF61B3630A9D3B6,SHA256=1D5491E3C468EE4B4EF6EDFF4BBC7D06EE83180F6F0B1576763EA2EFE049493A,IMPHASH=7FF0758B766F747CE57DFAC70743FB88",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "ParentCommandLine": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+      "ParentUser": "HVAN\\Administrator",
+      "UtcTime": "2026-10-12 13:32:45.155",
+      "ProcessGuid": "{7e4a5fee-e17d-6acc-4102-000000001100}",
+      "ProcessId": "1888",
+      "FileVersion": "10.0.17763.1 (WinBuild.160101.0800)",
+      "LogonGuid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+      "LogonId": "0x9f3e4",
+      "TerminalSessionId": "1",
+      "ParentProcessGuid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+      "ParentProcessId": "4788",
+      "EventID": "1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "context_events": [
+      {
+        "uid": "sysmon:acf88a61ea1eb267b9696a29",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\cmd.exe, CommandLine=\"cmd.exe\" /c systeminfo & reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:4e181a0071787d003f53fd24",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\systeminfo.exe, CommandLine=systeminfo, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:2cc070e2f35fb38244ca83e8",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\servicing\\TrustedInstaller.exe, CommandLine=C:\\Windows\\servicing\\TrustedInstaller.exe, CurrentDirectory=C:\\Windows\\system32\\, IntegrityLevel=System"
+      },
+      {
+        "uid": "sysmon:c4ff335c65e73c5926dda295",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\WinSxS\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe, CommandLine=C:\\Windows\\winsxs\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.17763.3641_none_56cfe33d992f2729\\TiWorker.exe -Embedding, CurrentDirectory=C:\\Windows\\system32\\, IntegrityLevel=System"
+      },
+      {
+        "uid": "sysmon:9a1b4e2584f10d544ece8404",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\reg.exe, CommandLine=reg  query HKLM\\SYSTEM\\CurrentControlSet\\Services\\Disk\\Enum, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:c2b1fe20503db3fccbdf68fc",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\HOSTNAME.EXE, CommandLine=\"C:\\Windows\\system32\\HOSTNAME.EXE\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:fcac3fb5fa09adee221146c8",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\whoami.exe, CommandLine=\"C:\\Windows\\system32\\whoami.exe\", CurrentDirectory=C:\\AtomicRedTeam\\invoke-atomicredteam\\, IntegrityLevel=High"
+      },
+      {
+        "uid": "sysmon:71dad98a0f4408d94b997f5f",
+        "ecode": 1,
+        "family": "sysmon",
+        "summary": "Image=C:\\Windows\\System32\\cmd.exe, CommandLine=\"cmd.exe\" /c tasklist, CurrentDirectory=C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\, IntegrityLevel=High"
+      }
+    ],
+    "raw_yaml": "title: System Owner and User Discovery via Whoami\nid: 5c2c75e9-f998-4951-8df4-55b92d2716a8\nstatus: experimental\ndescription: 'Suspicious Process Creation: powershell.exe Spawning whoami.exe - Host\n  WIN-5J23U7CAV7V.hvan.vn triggered sequence anomaly (token=''sysmon|1|process_create|powershell.exe>whoami.exe|system32|tiny_single'',\n  score=0.9987): Image=whoami.exe, ParentImage=powershell.exe, CommandLine=\"C:\\'\nreferences:\n- https://attack.mitre.org/techniques/T1033/\n- https://attack.mitre.org/techniques/T1059/001/\nauthor: SigmaGen\ndate: '2026-10-27'\ntags:\n- attack.t1033\n- attack.t1059.001\nlogsource:\n  product: windows\n  category: process_creation\ndetection:\n  selection:\n    Image|endswith: \\whoami.exe\n    ParentImage|endswith: \\powershell.exe\n  condition: selection\nfalsepositives:\n- Legitimate administrative activity\nlevel: medium\n",
+    "wazuh_xml": "<group name=\"ml_generated,sysmon,\">\n  <rule id=\"100147\" level=\"8\">\n    <if_group>sysmon_event1</if_group>\n    <field name=\"win.eventdata.image\" type=\"pcre2\">(?i)\\\\+whoami\\.exe$</field>\n    <field name=\"win.eventdata.parentImage\" type=\"pcre2\">(?i)\\\\+powershell\\.exe$</field>\n    <description>System Owner and User Discovery via Whoami [Alert: AI-20261012_133245.155-69c0819984c8]</description>\n    <mitre>\n      <id>T1033</id>\n      <id>T1059.001</id>\n    </mitre>\n  </rule>\n</group>",
+    "sigma_file": "ai-20261012_133245155-69c0819984c8_system_owner_and_user_discovery_via_whoami.yml",
+    "wazuh_file": "ml_generated_100147.xml",
+    "report": {
+      "q1_syntax_valid": true,
+      "q1_syntax_score": 100.0,
+      "q1_errors": [],
+      "q1_warnings": [],
+      "q2_data_match_valid": true,
+      "q2_data_linkage_score": 100.0,
+      "q2_logsource_matched": true,
+      "q2_all_fields_present": true,
+      "q2_errors": [],
+      "q2_warnings": [],
+      "q3_behavior_valid": true,
+      "q3_behavior_score": 100.0,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 10,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "generalization_hits": 3,
+      "generalization_total": 3,
+      "generalization_rate": 1.0,
+      "fpr": 0.0,
+      "confidence_score": 100.0,
+      "quality_gate": "PASS - RECOMMEND_ADD",
+      "recommendation_reason": "Đạt chuẩn triển khai Wazuh (Confidence=100.0%, F1=1.00, Generalization=100%, FP=0)."
+    }
+  }
+}

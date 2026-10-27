@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_133349.560-f64457544b1e",
+  "evidence_id": "EVID-66464b516f1f",
+  "timestamp": "2026-10-12T13:33:49.560Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:63129e843ec91f01bfacfaaf",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|svchost.exe>rundll32.exe|system32|tiny_few",
+  "anomaly_score": 0.9999933838844299,
+  "scored_token": "sysmon|1|process_create|svchost.exe>rundll32.exe|system32|tiny_few",
+  "scored_target_probability": 6.642028438363923e-06,
+  "observed_probability": 6.642028438363923e-06,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 5340,
+    "guid": "{7e4a5fee-e1bd-6acc-4f02-000000001100}",
+    "image": "C:\\Windows\\System32\\rundll32.exe",
+    "command_line": "C:\\Windows\\system32\\rundll32.exe /d acproxy.dll,PerformAutochkOperations",
+    "current_directory": "C:\\Windows\\system32\\",
+    "integrity_level": "System",
+    "hashes": {
+      "md5": "80F8E0C26028E83F1EF371D7B44DE3DF",
+      "sha256": "9F1E56A3BF293AC536CF4B8DAD57040797D62DBB0CA19C4ED9683B5565549481",
+      "imphash": "F27A7FC3A53E74F45BE370131953896A"
+    },
+    "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+    "description": "Windows host process (Rundll32)",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "RUNDLL32.EXE",
+    "logon_id": "0x3e7",
+    "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+    "terminal_session_id": "0"
+  },
+  "parent_process": {
+    "pid": 344,
+    "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+    "image": "C:\\Windows\\System32\\svchost.exe",
+    "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+    "user": "NT AUTHORITY\\SYSTEM"
+  },
+  "user": "NT AUTHORITY\\SYSTEM",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.3133291006088257
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.2649089992046356
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.11222656816244125
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.03688834235072136
+    },
+    {
+      "token_id": 52,
+      "token": "sysmon|1|process_create|powershell.exe>gpresult.exe|system32|tiny_few",
+      "probability": 0.02800944820046425
+    }
+  ],
+  "incident_id": "INC-0005",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

@@ -1,0 +1,111 @@
+{
+  "alert_id": "AI-20261012_135930.339-21240041bc69",
+  "evidence_id": "EVID-9d6429ec1207",
+  "timestamp": "2026-10-12T13:59:30.339Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:23209ae4a9de4384dca567a8",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|powershell.exe>cmd.exe|system32|medium_very_many",
+  "anomaly_score": 0.8191348910331726,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.1808651089668274,
+  "observed_probability": 0.1808651089668274,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 3308,
+    "guid": "{7e4a5fee-e7c2-6acc-b302-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c dir /s c:\\ >> %%temp%%\\T1083Test1.txt & dir /s \"c:\\Documents and Settings\" >> %%temp%%\\T1083Test1.txt & dir /s \"c:\\Program Files\\\" >> %%temp%%\\T1083Test1.txt & dir \"%%systemdrive%%\\Users\\*.*\" >> %%temp%%\\T1083Test1.txt & dir \"%%userprofile%%\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\*.*\" >> %%temp%%\\T1083Test1.txt & dir \"%%userprofile%%\\Desktop\\*.*\" >> %%temp%%\\T1083Test1.txt & tree /F >> %%temp%%\\T1083Test1.txt",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "911D039E71583A07320B32BDE22F8E22",
+      "sha256": "BC866CFCDDA37E24DC2634DC282C7A0E6F55209DA17A8FA105B07414C0E7C527",
+      "imphash": "272245E2988E1E430500B852C4FB5E18"
+    },
+    "file_version": "10.0.17763.1697 (WinBuild.160101.0800)",
+    "description": "Windows Command Processor",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "Cmd.Exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4788,
+    "guid": "{7e4a5fee-fdea-6ac5-0601-000000001100}",
+    "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\"",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92052",
+    "rule_level": 4,
+    "rule_description": "Windows command prompt started by an abnormal process",
+    "mitre": {
+      "id": [
+        "T1059.003"
+      ],
+      "tactic": [
+        "Execution"
+      ],
+      "technique": [
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.2974061965942383
+    },
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.1808651089668274
+    },
+    {
+      "token_id": 74,
+      "token": "sysmon|1|process_create|powershell.exe>wevtutil.exe|system32|tiny_many",
+      "probability": 0.07078322768211365
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.04901433363556862
+    },
+    {
+      "token_id": 65,
+      "token": "sysmon|1|process_create|powershell.exe>sc.exe|system32|tiny_few",
+      "probability": 0.0420050211250782
+    }
+  ],
+  "incident_id": "INC-0022",
+  "incident_role": "root",
+  "use_for_rule_generation": true
+}

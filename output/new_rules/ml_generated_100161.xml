@@ -1,0 +1,11 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100161" level="12">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+rundll32\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)acproxy\.dll,PerformAutochkOperations</field>
+    <description>Detect Suspicious Process Creation with rundll32.exe [Alert: AI-20261012_133349.560-f64457544b1e]</description>
+    <mitre>
+      <id>T1218.011</id>
+    </mitre>
+  </rule>
+</group>

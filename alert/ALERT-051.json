@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_134519.799-9b598bb8573a",
+  "evidence_id": "EVID-a347cd47fcfb",
+  "timestamp": "2026-10-12T13:45:19.799Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:32ce83f5c6bbbc2df19fe9e6",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|winlogon.exe>logonui.exe|system32|tiny_few",
+  "anomaly_score": 0.8200859427452087,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.17991407215595245,
+  "observed_probability": 0.17991407215595245,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 3876,
+    "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+    "image": "C:\\Windows\\System32\\LogonUI.exe",
+    "command_line": "\"LogonUI.exe\" /flags:0x0 /state0:0xa3813855 /state1:0x41c64e6d",
+    "current_directory": "C:\\Windows\\system32\\",
+    "integrity_level": "System",
+    "hashes": {
+      "md5": "33F89DD9629CB0422A2C17268376232D",
+      "sha256": "9358EF8CB7FB08581D74274005263BD8FA2E6E0FC443930B25FD345CF6CE9071",
+      "imphash": "B9B0B64B08B38276711093CA94348D39"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "Windows Logon User Interface Host",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "logonui.exe",
+    "logon_id": "0x3e7",
+    "logon_guid": "{7e4a5fee-fd2f-6ac5-e703-000000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 620,
+    "guid": "{7e4a5fee-fd2e-6ac5-0a00-000000001100}",
+    "image": "C:\\Windows\\System32\\winlogon.exe",
+    "command_line": "winlogon.exe",
+    "user": "NT AUTHORITY\\SYSTEM"
+  },
+  "user": "NT AUTHORITY\\SYSTEM",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.2776845097541809
+    },
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.17991407215595245
+    },
+    {
+      "token_id": 74,
+      "token": "sysmon|1|process_create|powershell.exe>wevtutil.exe|system32|tiny_many",
+      "probability": 0.06492327153682709
+    },
+    {
+      "token_id": 45,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|short_few",
+      "probability": 0.05427057296037674
+    },
+    {
+      "token_id": 65,
+      "token": "sysmon|1|process_create|powershell.exe>sc.exe|system32|tiny_few",
+      "probability": 0.048156436532735825
+    }
+  ],
+  "incident_id": "INC-0011",
+  "incident_role": "root",
+  "use_for_rule_generation": true
+}

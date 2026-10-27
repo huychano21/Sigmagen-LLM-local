@@ -1,0 +1,21 @@
+title: Suspicious Process Creation - TrustedInstaller.exe Spawned by services.exe
+id: a67059ce-96bc-43a8-a2ec-b74887f66f00
+status: experimental
+description: Detects the spawning of TrustedInstaller.exe by services.exe, which may
+  indicate a lateral movement or privilege escalation attempt.
+references: https://attack.mitre.org/techniques/T1082/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1082
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \trustedinstaller.exe
+    ParentImage|endswith: \services.exe
+  condition: selection
+falsepositives:
+- Legitimate administrative actions
+level: high

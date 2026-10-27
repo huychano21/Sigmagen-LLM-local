@@ -1,0 +1,101 @@
+{
+  "alert_id": "AI-20261012_134838.932-9c42717aa1d3",
+  "evidence_id": "EVID-6e2d054265ff",
+  "timestamp": "2026-10-12T13:48:38.932Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:027555f654915a72a656c408",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_few",
+  "anomaly_score": 0.9895904660224915,
+  "scored_token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_few",
+  "scored_target_probability": 0.010409537702798843,
+  "observed_probability": 0.010409537702798843,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 5500,
+    "guid": "{7e4a5fee-e536-6acc-7902-000000001100}",
+    "image": "C:\\Windows\\System32\\taskhostw.exe",
+    "command_line": "taskhostw.exe KEYROAMING",
+    "current_directory": "C:\\Windows\\system32\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "8BD7B08DA6BCA54DF9B595E4D9281BEB",
+      "sha256": "DE85F29A8BC7219F10A4AC88654C3901ABC329D7505B21CD95CBF780D1EBCCF4",
+      "imphash": "9839C7FD9649496B162F72128209528A"
+    },
+    "file_version": "10.0.17763.1852 (WinBuild.160101.0800)",
+    "description": "Host Process for Windows Tasks",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "taskhostw.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 344,
+    "guid": "{7e4a5fee-fd33-6ac5-1100-000000001100}",
+    "image": "C:\\Windows\\System32\\svchost.exe",
+    "command_line": "C:\\Windows\\system32\\svchost.exe -k netsvcs -p",
+    "user": "NT AUTHORITY\\SYSTEM"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.5267324447631836
+    },
+    {
+      "token_id": 14,
+      "token": "sysmon|13|registry_value|msmpeng.exe|registry",
+      "probability": 0.04948502406477928
+    },
+    {
+      "token_id": 16,
+      "token": "sysmon|13|registry_value|svchost.exe|other",
+      "probability": 0.04450681805610657
+    },
+    {
+      "token_id": 44,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|medium_many",
+      "probability": 0.034565094858407974
+    },
+    {
+      "token_id": 15,
+      "token": "sysmon|13|registry_value|services.exe|registry",
+      "probability": 0.030494296923279762
+    }
+  ],
+  "incident_id": "INC-0012",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

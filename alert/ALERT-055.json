@@ -1,0 +1,97 @@
+{
+  "alert_id": "AI-20261012_134838.822-7db7c3128395",
+  "evidence_id": "EVID-a0fe735ffd31",
+  "timestamp": "2026-10-12T13:48:38.822Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:ef8240d7d104cab7c0fcd030",
+  "event_id": 13,
+  "event_type": "registry_value",
+  "event_token": "sysmon|13|registry_value|logonui.exe|registry",
+  "anomaly_score": 0.9942602515220642,
+  "scored_token": "sysmon|13|registry_value|logonui.exe|registry",
+  "scored_target_probability": 0.005739768501371145,
+  "observed_probability": 0.005739768501371145,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": false,
+  "reason_codes": [
+    "next_event_probability_below_baseline_threshold"
+  ],
+  "process": {
+    "pid": 3876,
+    "guid": "{7e4a5fee-e46f-6acc-7602-000000001100}",
+    "image": "C:\\Windows\\system32\\LogonUI.exe",
+    "command_line": "",
+    "current_directory": "",
+    "integrity_level": "",
+    "hashes": {},
+    "file_version": "",
+    "description": "",
+    "product": "",
+    "company": "",
+    "original_file_name": "",
+    "logon_id": "",
+    "logon_guid": "",
+    "terminal_session_id": ""
+  },
+  "parent_process": {
+    "pid": null,
+    "guid": "",
+    "image": "",
+    "command_line": "",
+    "user": ""
+  },
+  "user": "NT AUTHORITY\\SYSTEM",
+  "file": {
+    "target_filename": "",
+    "target_object": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\LastLoggedOnUser",
+    "creation_time": "",
+    "details": "HVAN\\Administrator"
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "",
+    "rule_level": "",
+    "rule_description": "",
+    "mitre": {}
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.56559818983078
+    },
+    {
+      "token_id": 44,
+      "token": "sysmon|1|process_create|msmpeng.exe>wevtutil.exe|system32|medium_many",
+      "probability": 0.043126728385686874
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.04160647466778755
+    },
+    {
+      "token_id": 41,
+      "token": "sysmon|1|process_create|iexplore.exe>iexplore.exe|program_files_x86|short_few",
+      "probability": 0.03668847680091858
+    },
+    {
+      "token_id": 119,
+      "token": "sysmon|22|dns_query|svchost.exe",
+      "probability": 0.03087291121482849
+    }
+  ],
+  "incident_id": "INC-0012",
+  "incident_role": "follow_on",
+  "use_for_rule_generation": false
+}

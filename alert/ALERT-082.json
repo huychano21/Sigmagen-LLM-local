@@ -1,0 +1,114 @@
+{
+  "alert_id": "AI-20261012_135737.146-0401062b8b15",
+  "evidence_id": "EVID-66a3735bf0bc",
+  "timestamp": "2026-10-12T13:57:37.146Z",
+  "host": "WIN-5J23U7CAV7V.hvan.vn",
+  "event_uid": "sysmon:ab9babe0bdfcd0398bea458e",
+  "event_id": 1,
+  "event_type": "process_create",
+  "event_token": "sysmon|1|process_create|cmd.exe>arp.exe|system32|tiny_few",
+  "anomaly_score": 0.5073344707489014,
+  "scored_token": "__UNK__",
+  "scored_target_probability": 0.49266552925109863,
+  "observed_probability": 0.49266552925109863,
+  "threshold": 0.986619524359703,
+  "threshold_domain": "anomaly_score",
+  "out_of_vocabulary": true,
+  "reason_codes": [
+    "event_token_not_in_trained_vocabulary"
+  ],
+  "process": {
+    "pid": 1364,
+    "guid": "{7e4a5fee-e751-6acc-9d02-000000001100}",
+    "image": "C:\\Windows\\System32\\ARP.EXE",
+    "command_line": "arp  -a",
+    "current_directory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\",
+    "integrity_level": "High",
+    "hashes": {
+      "md5": "4ACDF3F896F2E34FBBB4BBA816E89B3E",
+      "sha256": "F0B2969246808AAA41DC74FE8138A542560564474DFBA79DA329B44A951CC574",
+      "imphash": "02E80B21355ED722444F540585E82D1D"
+    },
+    "file_version": "10.0.17763.1 (WinBuild.160101.0800)",
+    "description": "TCP/IP Arp Command",
+    "product": "Microsoft® Windows® Operating System",
+    "company": "Microsoft Corporation",
+    "original_file_name": "arp.exe",
+    "logon_id": "0x9f3e4",
+    "logon_guid": "{7e4a5fee-fd85-6ac5-e4f3-090000000000}",
+    "terminal_session_id": "1"
+  },
+  "parent_process": {
+    "pid": 4232,
+    "guid": "{7e4a5fee-e750-6acc-9902-000000001100}",
+    "image": "C:\\Windows\\System32\\cmd.exe",
+    "command_line": "\"cmd.exe\" /c ipconfig /all & netsh interface show interface & arp -a & nbtstat -n & net config",
+    "user": "HVAN\\Administrator"
+  },
+  "user": "HVAN\\Administrator",
+  "file": {
+    "target_filename": "",
+    "target_object": "",
+    "creation_time": "",
+    "details": ""
+  },
+  "network": {
+    "source_ip": "",
+    "source_port": null,
+    "destination_ip": "",
+    "destination_port": null,
+    "protocol": "",
+    "query_name": "",
+    "query_status": "",
+    "query_results": ""
+  },
+  "wazuh_context": {
+    "rule_id": "92032",
+    "rule_level": 3,
+    "rule_description": "Suspicious Windows cmd shell execution",
+    "mitre": {
+      "id": [
+        "T1087",
+        "T1059.003"
+      ],
+      "tactic": [
+        "Discovery",
+        "Execution"
+      ],
+      "technique": [
+        "Account Discovery",
+        "Windows Command Shell"
+      ]
+    }
+  },
+  "top_predictions": [
+    {
+      "token_id": 125,
+      "token": "__UNK__",
+      "probability": 0.49266552925109863
+    },
+    {
+      "token_id": 51,
+      "token": "sysmon|1|process_create|powershell.exe>driverquery.exe|system32|tiny_few",
+      "probability": 0.07172494381666183
+    },
+    {
+      "token_id": 101,
+      "token": "sysmon|1|process_create|svchost.exe>taskhostw.exe|system32|tiny_single",
+      "probability": 0.05537552759051323
+    },
+    {
+      "token_id": 80,
+      "token": "sysmon|1|process_create|services.exe>svchost.exe|system32|tiny_few",
+      "probability": 0.04111660271883011
+    },
+    {
+      "token_id": 108,
+      "token": "sysmon|22|dns_query|<unknown process>",
+      "probability": 0.03393419831991196
+    }
+  ],
+  "incident_id": "INC-0019",
+  "incident_role": "unseen",
+  "use_for_rule_generation": true
+}

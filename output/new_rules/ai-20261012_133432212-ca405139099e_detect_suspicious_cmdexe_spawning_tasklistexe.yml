@@ -1,0 +1,20 @@
+title: Detect Suspicious cmd.exe spawning tasklist.exe
+id: 90b3e4a2-5f6b-4e2a-bc1d-7f8c9d0e1a2b
+status: experimental
+description: Detects the spawning of tasklist.exe from cmd.exe, which may indicate
+  suspicious Windows cmd shell execution.
+references: https://attack.mitre.org/techniques/T1087/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1087
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \tasklist.exe
+    ParentImage|endswith: \cmd.exe
+  condition: selection
+falsepositives: Legitimate administrative script execution
+level: medium

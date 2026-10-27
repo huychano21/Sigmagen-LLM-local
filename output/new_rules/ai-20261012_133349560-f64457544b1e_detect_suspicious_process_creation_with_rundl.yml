@@ -1,0 +1,21 @@
+title: Detect Suspicious Process Creation with rundll32.exe
+id: 3b281054-f4b9-474e-801d-cf96c94a484f
+status: experimental
+description: Detects process creation events where svchost.exe spawns rundll32.exe
+  with specific command line arguments, indicative of T1218.011.
+references: https://attack.mitre.org/techniques/T1218/011/
+author: SigmaGen
+date: '2026-10-27'
+tags:
+- attack.t1218.011
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: \rundll32.exe
+    CommandLine|contains: acproxy.dll,PerformAutochkOperations
+  condition: selection
+falsepositives:
+- Legitimate administrative script execution
+level: high

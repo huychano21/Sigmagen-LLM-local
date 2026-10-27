@@ -1,0 +1,12 @@
+<group name="ml_generated,sysmon,">
+  <rule id="100147" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\+whoami\.exe$</field>
+    <field name="win.eventdata.parentImage" type="pcre2">(?i)\\+powershell\.exe$</field>
+    <description>System Owner and User Discovery via Whoami [Alert: AI-20261012_133245.155-69c0819984c8]</description>
+    <mitre>
+      <id>T1033</id>
+      <id>T1059.001</id>
+    </mitre>
+  </rule>
+</group>
